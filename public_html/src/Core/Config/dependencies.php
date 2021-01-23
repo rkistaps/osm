@@ -2,6 +2,9 @@
 
 use League\Plates\Engine;
 use OSM\Core\Factories\TemplateEngineFactory;
+use OSM\Core\Interfaces\SessionInterface;
+use OSM\Frontend\Services\SessionService;
+use Psr\Container\ContainerInterface;
 use TheApp\Components\CommandRunner;
 use TheApp\Factories\CommandRunnerFactory;
 use TheApp\Factories\ConfigFactory;
@@ -14,4 +17,5 @@ return [
     RouterInterface::class => fn(RouterFactory $routerFactory, ConfigInterface $config) => $routerFactory->buildFromConfig($config),
     CommandRunner::class => fn(CommandRunnerFactory $commandRunnerFactory, ConfigInterface $config) => $commandRunnerFactory->fromConfig($config),
     Engine::class => fn(TemplateEngineFactory $factory, ConfigInterface $config) => $factory->fromConfig($config),
+    SessionInterface::class => fn(ContainerInterface $container) => $container->get(SessionService::class),
 ];

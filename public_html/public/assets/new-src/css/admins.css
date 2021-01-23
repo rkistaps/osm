@@ -1,0 +1,83 @@
+#tablist{
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#tablist li a{
+  display:block;
+  text-decoration: none;
+  padding: 3px 5px;
+  outline: none;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#tablist li a:hover,#tablist li a.active{
+  color: white;
+}
+
+#tablist li:hover a,#tablist li a.active{
+  background: seagreen;
+}
+
+#tablist li{
+  float:left;
+  background: tan;
+  border: 1px solid black;
+  border-bottom: none;
+  margin-right: 5px;
+  display: block;
+
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#tabcontent{
+  clear: both;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#admins_wrapper table.bigLinks input[type="submit"]{
+  height: 40px;
+}
+
+#tabcontent .table_wrapper{
+  width:80%;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+#tabcontent table.styled td{
+
+}
+
+#translationTable textarea{
+  width: 200px;
+}
+
+#translationTable td:first-child{
+  width: 300px;
+}
+
+.bigLinks input{
+
+  float: left;
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  height: 50px;
+
+
+}
+
+

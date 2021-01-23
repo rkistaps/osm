@@ -1,0 +1,44 @@
+.Col{
+	margin-right:10px;
+	border: 1px solid black;
+	width:29%;
+	float: left;
+}
+
+table{
+  width:100%;
+}
+
+.blockLevel{
+margin-bottom:10px;
+clear:both;
+overflow:auto;
+}
+
+
+.box table.statsTable{
+  margin-left:5px;
+  margin-right:5px;
+}
+
+.box table.statsTable td:first-child{ font-weight: bold; }
+
+
+.statsMenu a{
+	background-color: #2E8B57 ;
+	border: 0.1em solid black;
+	font: bold 10px verdana;
+	color: white;
+	padding: 5px;
+  display: block;
+	margin-bottom: 2px;
+	margin-top: 2px;
+  float: left;
+  margin-right: 10px;
+}
+
+.statsMenu a:hover{
+  text-decoration: none;
+  background: tan;
+  color: black;
+}
