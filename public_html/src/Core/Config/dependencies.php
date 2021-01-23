@@ -22,12 +22,10 @@ return [
     SessionInterface::class => fn(ContainerInterface $container) => $container->get(SessionService::class),
     Database::class => function (ConfigInterface $config) {
         $connection = new Connection(
-            'mysql:host=' . $config->get('db.host') . ';dbname=' . $config->get('db.name'),
-            $config->get('db.username'),
-            $config->get('db.password')
+            'mysql:host=' . $config->get('database.host') . ';dbname=' . $config->get('database.name'),
+            $config->get('database.username'),
+            $config->get('database.password')
         );
-
-        dd($config->get('database'));
 
         return new Database($connection);
     },
