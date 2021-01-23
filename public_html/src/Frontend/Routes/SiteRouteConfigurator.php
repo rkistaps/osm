@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OSM\Core\Routes;
+namespace OSM\Frontend\Routes;
 
 use OSM\Frontend\Modules\Site\Handlers\IndexRequestHandler;
 use TheApp\Components\Router;
