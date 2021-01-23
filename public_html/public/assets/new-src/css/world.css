@@ -1,0 +1,52 @@
+#wcMenu  td{
+  background: tan;
+  padding:0px;
+  margin:0px;
+  text-align: center;
+  font-size:15px;
+}
+
+#wcMenu  td a{
+display: block;
+padding: 3px;
+}
+
+#wcMenu  td a:hover{
+color: white;
+background: seagreen;
+}
+
+.group{
+	width: 348px;
+  margin-bottom: 23px;
+}
+
+.group table{ width: 100%; }
+
+.middle_col .group .title{
+  background: url("../img/html/group_title.png");
+  margin-bottom: 0px;
+}
+
+.middle_col .group .content{ background: white; }
+
+.middle_col .group .bottom{
+  background: url("../img/html/group_bottom.png");
+  height: 8px;
+}
+
+.playoffBox{
+	float: left;
+	height: 200px;
+	width: 150px;
+	margin: 3px 10px 10px 0px;
+	vertical-align: middle;
+}
+
+.round .first, .round .third{width: 40%;}
+.round .result{text-align:center;}
+
+.round .first{
+  text-align: right;
+}
+

@@ -1,0 +1,30 @@
+.profile_menu a{
+	display: block;
+	float: left;
+	padding:10px 15px 10px 15px;
+	border: 0px solid black;
+	border-right: 1px solid white;
+	border-left: 1px solid white;
+	font-size: 10px;
+	margin-left:10px;
+}
+
+.profile_menu a:hover{
+	background: tan;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+}
+
+.profile_menu{
+	display: block;
+	height: 32px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	clear: both;
+	margin-bottom: 10px;
+}
+
+#about_me{
+  padding: 10px 0px;
+
+}

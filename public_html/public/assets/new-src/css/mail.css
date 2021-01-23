@@ -1,0 +1,50 @@
+#mail .unseen td,#mail .unseen a{
+  font-weight: bold;
+}
+
+/*-----View MESSAGES --------*/
+#action a{
+  display: block;
+  float: left;
+  padding: 10px;
+}
+
+#action{
+  display: block;
+  margin-top: 10px;
+  border-top: 1px solid #DEDEDE ;
+
+}
+
+.title{
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.title img{
+  width: 25px;
+  vertical-align: text-bottom;
+  line-height: 39px;
+  margin-right: 10px;
+}
+
+.message_title a{
+  display: block;
+}
+
+#mail td a{text-decoration: none;}
+
+th#title a{
+  color:white;
+  font-weight:bold;
+  font-size:13px;
+}
+
+
+#mail .actions{
+  text-align: center;
+}
+
+#mail .icon,#action img{
+  width: 20px;
+}

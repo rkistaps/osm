@@ -1,0 +1,36 @@
+.input_wrapper{
+  clear: both;
+  margin-bottom: 10px;
+}
+
+.input_wrapper label{
+  float: left;
+  width: 150px;
+  display: block;
+}
+
+h2{
+  margin-top: 15px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid tan;
+}
+
+.input_wrapper input[type='submit']{
+  margin: auto;
+  display: block;
+}
+
+#cc_password_form{
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.cc_type{
+  float: left;
+  background: green;
+  color: white;
+  font-weight: bold;
+  padding: 3px 5px;
+}
+
+.cost{ font-weight: bold; }

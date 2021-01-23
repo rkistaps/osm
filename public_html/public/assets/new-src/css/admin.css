@@ -1,0 +1,59 @@
+/* form  elements */
+input{
+	background: white;
+	border: 1px solid black;
+	font: 13px verdana;
+	padding: 1px;
+	text-align: center;
+	width: 200px;
+}
+
+input[type="submit"]{
+	background-color: #2E8B57 ;
+	border: 0.1em solid black;
+	font: bold 10px verdana;
+	color: white;
+	padding: 2px 5px 2px 5px;
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+input[type="submit"]:hover{
+	background: #D2B48C ;
+	color: black;
+	cursor: pointer;
+}
+
+input[type="checkbox"]{
+	margin-left:2px;
+	width:12px;
+	height: 12px;
+}
+
+select{
+	background: white;
+	border: 1px solid black;
+}
+
+input.remove{
+	border: 1px solid black;
+	width: 15px;
+	height:15px;
+	padding: 0px;
+	text-align: center;
+	font-size: 10px;
+	font-weight: bold;
+	font-family: verdana;
+	margin: auto;
+}
+input.tight{
+width: 75px;
+
+}
+
+input[type="radio"]{
+width:12px;
+height:12px;
+margin-right: 5px;
+}
+

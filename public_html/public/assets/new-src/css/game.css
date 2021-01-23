@@ -1,0 +1,73 @@
+
+#scoreBoard td{
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold; 
+}
+
+#scoreBoard{ text-align: center; margin-top: 10px; }
+
+#scoreBoard .title{padding: 0px;}
+
+#scoreBoard a{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+#scoreBoard .small a{ font-size: 15px; font-weight: normal; }
+.ht,.at{width: 45%}
+.firstcol,.thirdcol{width: 25%;}
+.firstcol{text-align: right;}
+.seccol{width: 10%; text-align:center;font-weight: bold; padding: 0px 5px;}
+.secoundRow .firstcol{text-align: center}
+
+.r{text-align:right}
+.l{text-align:left}
+
+.table_wrapper_75 .firstcol,.table_wrapper_75 .thirdcol{width: 20%;} 
+
+#progress_bar{
+  width: 465px;
+  margin: auto;
+  position: relative;
+  border: 1px solid black;
+  height: 17px;
+
+}
+
+#fill{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: lightgreen;
+  height: 17px;
+}
+
+#min{
+  position: absolute;
+  width: 465px;
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  font-weight: bold;
+  height: 17px;
+}
+
+#report .ht,#report .ht a{
+  color: #933;
+}
+
+#report .at, #report .at a{
+  color: #669;
+}
+
+.red,.red a{
+  color: #999999;
+}
+
+span.rand{
+  font-size: 10px;
+  color: grey
+}
+

@@ -1,0 +1,77 @@
+#lineup_table{
+  width: 100%;
+}
+
+#lineup_table td{
+  padding: 4px 0px;
+}
+
+th.viewplayer,th a{
+	font-size:15px;
+	color: white;
+	text-decoration: none;
+
+}
+
+#field{
+  height: 566px;
+  width:387px;
+  margin: auto;
+  background: url("../img/pitch.png");
+}
+
+#playersList div.player{
+  cursor: pointer;
+  padding: 3px 5px;
+  border-bottom: 1px solid grey;
+}
+
+#playersList div.player:hover{
+  background: grey;
+  color: white;
+}
+
+div.skill{
+	width:103px;
+  height: 103px;
+	text-align:center;
+	margin: 20px auto 10px;
+  font: bold 38px/103px "Open Sans";
+	color: white;
+  background: url("../img/html/skill_bg.png");
+}
+
+.logo{
+ vertical-align:middle;
+ text-align: center;
+}
+
+#tacticSelect{
+  width: 100%;
+}
+
+#nat_player{
+  font-weight: bold;
+  color: green;
+  text-align: center;
+  margin: 5px 0px;
+}
+
+tr.lineup{
+  background: #dedede;
+}
+
+#lineup_table tr:hover{
+  background: #bebebe;
+}
+
+
+.subs select{
+  width: 125px;
+  overflow: hidden;
+}
+
+.tactics select{
+  width: 75px;
+  overflow: hidden;
+}

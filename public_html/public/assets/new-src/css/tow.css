@@ -1,0 +1,42 @@
+#field{
+	background: url(../img/pitch.png) no-repeat center center;
+	border: 1px solid black;
+	width:387px;
+	height:566px;
+	margin-left:75px;
+}
+
+.playerBox{
+width: 85px;
+height: 75px;
+border: 1px solid black;
+margin-left: 5px;
+float: left;
+}
+
+.defs{
+clear:left;
+position: absolute;
+top: 525px;
+margin-left: 6px;
+}
+.mids{
+clear:left;
+position: absolute;
+top: 375px;
+margin-left: 27px;
+
+}
+.for{
+clear:left;
+position: absolute;
+top: 225px;
+margin-left: 108.5px;
+
+}
+.gk{
+position: absolute;
+top: 625px;
+margin-left: 150px;
+
+}
