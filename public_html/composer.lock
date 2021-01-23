@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0c841189f8876c544b0e573483de870",
+    "content-hash": "da22b05d249858a31c183a1acb75af9a",
     "packages": [
         {
             "name": "filp/whoops",
@@ -305,6 +305,72 @@
                 "source": "https://github.com/opis/closure/tree/3.6.1"
             },
             "time": "2020-11-07T02:01:34+00:00"
+        },
+        {
+            "name": "opis/database",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opis/database.git",
+                "reference": "729a48f250407ccdf5c8ec728041706105cb3b9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/opis/database/zipball/729a48f250407ccdf5c8ec728041706105cb3b9f",
+                "reference": "729a48f250407ccdf5c8ec728041706105cb3b9f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5 || ^7.0",
+                "symfony/yaml": "^3.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Opis\\Database\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Marius Sarca",
+                    "email": "marius.sarca@gmail.com"
+                },
+                {
+                    "name": "Sorin Sarca",
+                    "email": "sarca_sorin@hotmail.com"
+                }
+            ],
+            "description": "A database abstraction layer over PDO, that provides a powerful and intuitive query builder, bundled with an easy to use schema builder",
+            "homepage": "https://opis.io/database",
+            "keywords": [
+                "Abstraction Layer",
+                "database",
+                "mysql",
+                "postgre",
+                "query",
+                "query builder",
+                "schema builder",
+                "sql",
+                "sqlite"
+            ],
+            "support": {
+                "issues": "https://github.com/opis/database/issues",
+                "source": "https://github.com/opis/database/tree/4.2.0"
+            },
+            "time": "2020-05-24T20:22:00+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -897,7 +963,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

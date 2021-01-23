@@ -1,6 +1,8 @@
 <?php
 
 use League\Plates\Engine;
+use Opis\Database\Connection;
+use Opis\Database\Database;
 use OSM\Core\Factories\TemplateEngineFactory;
 use OSM\Core\Interfaces\SessionInterface;
 use OSM\Frontend\Services\SessionService;
@@ -18,4 +20,15 @@ return [
     CommandRunner::class => fn(CommandRunnerFactory $commandRunnerFactory, ConfigInterface $config) => $commandRunnerFactory->fromConfig($config),
     Engine::class => fn(TemplateEngineFactory $factory, ConfigInterface $config) => $factory->fromConfig($config),
     SessionInterface::class => fn(ContainerInterface $container) => $container->get(SessionService::class),
+    Database::class => function (ConfigInterface $config) {
+        $connection = new Connection(
+            'mysql:host=' . $config->get('db.host') . ';dbname=' . $config->get('db.name'),
+            $config->get('db.username'),
+            $config->get('db.password')
+        );
+
+        dd($config->get('database'));
+
+        return new Database($connection);
+    },
 ];
