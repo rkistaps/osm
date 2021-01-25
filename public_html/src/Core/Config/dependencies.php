@@ -2,11 +2,13 @@
 
 use AutoMapperPlus\AutoMapper;
 use League\Plates\Engine;
-use Opis\Database\Connection;
 use Opis\Database\Database;
 use OSM\Core\Factories\AutomapperFactory;
+use OSM\Core\Factories\DatabaseFactory;
 use OSM\Core\Factories\TemplateEngineFactory;
+use OSM\Core\Interfaces\ModelDataHydratorInterface;
 use OSM\Core\Interfaces\SessionInterface;
+use OSM\Core\Services\ModelDataHydratorService;
 use OSM\Frontend\Services\SessionService;
 use Psr\Container\ContainerInterface;
 use TheApp\Components\CommandRunner;
@@ -22,14 +24,7 @@ return [
     CommandRunner::class => fn(CommandRunnerFactory $commandRunnerFactory, ConfigInterface $config) => $commandRunnerFactory->fromConfig($config),
     Engine::class => fn(TemplateEngineFactory $factory, ConfigInterface $config) => $factory->fromConfig($config),
     SessionInterface::class => fn(ContainerInterface $container) => $container->get(SessionService::class),
-    Database::class => function (ConfigInterface $config) {
-        $connection = new Connection(
-            'mysql:host=' . $config->get('database.host') . ';dbname=' . $config->get('database.name'),
-            $config->get('database.username'),
-            $config->get('database.password')
-        );
-
-        return new Database($connection);
-    },
+    Database::class => fn(DatabaseFactory $factory, ConfigInterface $config) => $factory->fromConfig($config),
     AutoMapper::class => fn(ConfigInterface $config, AutoMapperFactory $autoMapperFactory) => $autoMapperFactory->fromConfig($config),
+    ModelDataHydratorInterface::class => fn(ContainerInterface $container) => $container->get(ModelDataHydratorService::class),
 ];

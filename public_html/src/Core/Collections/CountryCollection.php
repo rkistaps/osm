@@ -8,7 +8,7 @@ use OSM\Core\Models\CountryModel;
 
 class CountryCollection extends AbstractModelCollection
 {
-    public static function getModelClassName(): string
+    public function getModelClassName(): string
     {
         return CountryModel::class;
     }
