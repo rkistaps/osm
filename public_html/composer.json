@@ -4,7 +4,10 @@
     "ext-json": "*",
     "rkistaps/the-app": "v0.3.8.1",
     "league/plates": "^3.4",
-    "opis/database": "^4.2"
+    "opis/database": "^4.2",
+    "tightenco/collect": "^8.19",
+    "mark-gerarts/auto-mapper-plus": "2.0.x-dev",
+    "samdark/hydrator": "^1.0"
   },
   "autoload": {
     "psr-4": {

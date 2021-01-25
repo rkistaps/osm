@@ -1,8 +1,10 @@
 <?php
 
+use AutoMapperPlus\AutoMapper;
 use League\Plates\Engine;
 use Opis\Database\Connection;
 use Opis\Database\Database;
+use OSM\Core\Factories\AutomapperFactory;
 use OSM\Core\Factories\TemplateEngineFactory;
 use OSM\Core\Interfaces\SessionInterface;
 use OSM\Frontend\Services\SessionService;
@@ -29,4 +31,5 @@ return [
 
         return new Database($connection);
     },
+    AutoMapper::class => fn(ConfigInterface $config, AutoMapperFactory $autoMapperFactory) => $autoMapperFactory->fromConfig($config),
 ];

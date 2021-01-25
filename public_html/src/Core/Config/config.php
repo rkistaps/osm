@@ -21,4 +21,8 @@ return $localConfig + [
                 \OSM\Console\Commands\SiteCommandConfigurator::class,
             ],
         ],
+        'automapper' => [],
+        'repositories' => [
+            \OSM\Core\Repositories\CountryRepository::class,
+        ],
     ];
