@@ -18,8 +18,10 @@ class SiteCommandConfigurator implements CommandConfiguratorInterface
 
             var_dump($countries);
 
-            $countries = $countries->all();
+            $lv = $repository->findOne(['short_name' => 'lv']);
+            var_dump($lv);
 
+            $countries = $countries->all();
             $data = $hydrator->extract($countries[0]);
             dd($data);
         });

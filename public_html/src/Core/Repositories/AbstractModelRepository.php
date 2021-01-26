@@ -8,6 +8,7 @@ use Opis\Database\Database;
 use Opis\Database\ResultSet;
 use OSM\Core\Collections\AbstractModelCollection;
 use OSM\Core\Interfaces\ModelDataHydratorInterface;
+use OSM\Core\Models\AbstractModel;
 
 abstract class AbstractModelRepository
 {
@@ -45,6 +46,20 @@ abstract class AbstractModelRepository
         }
 
         return $collection;
+    }
+
+    public function findOne(array $condition = []): ?AbstractModel
+    {
+        $row = $this->buildSelect($condition)->fetchAssoc()->first();
+
+        if (!$row) {
+            return null;
+        }
+
+        $modelClass = $this->getModelClassName();
+        $model = new $modelClass;
+
+        return $this->hydrator->hydrate($model, $row);
     }
 
     protected function buildSelect(array $conditions = []): ResultSet
