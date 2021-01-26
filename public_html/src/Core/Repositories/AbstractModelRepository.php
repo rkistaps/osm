@@ -31,14 +31,13 @@ abstract class AbstractModelRepository
 
     public function findAll(array $condition = []): AbstractModelCollection
     {
-        $rows = $this->buildSelect($condition)->fetchAssoc()->all();
-
         $modelClassName = $this->getModelClassName();
         $collectionClassName = $this->getCollectionClassName();
 
         /** @var AbstractModelCollection $collection */
         $collection = new $collectionClassName;
 
+        $rows = $this->buildSelect($condition)->fetchAssoc()->all();
         foreach ($rows as $row) {
             $model = $this->hydrator->hydrate(new $modelClassName, $row);
 
@@ -51,7 +50,6 @@ abstract class AbstractModelRepository
     public function findOne(array $condition = []): ?AbstractModel
     {
         $row = $this->buildSelect($condition)->fetchAssoc()->first();
-
         if (!$row) {
             return null;
         }
@@ -62,6 +60,11 @@ abstract class AbstractModelRepository
         return $this->hydrator->hydrate($model, $row);
     }
 
+    public function findById(int $id): ?AbstractModel
+    {
+        return $this->findOne(['id' => $id]);
+    }
+
     protected function buildSelect(array $conditions = []): ResultSet
     {
         $query = $this
@@ -69,7 +72,11 @@ abstract class AbstractModelRepository
             ->from($this->getTableName());
 
         foreach ($conditions as $key => $value) {
-            $query->andWhere($key)->is($value);
+            if (is_array($value)) {
+                $query->andWhere($key)->in($value);
+            } else {
+                $query->andWhere($key)->is($value);
+            }
         }
 
         return $query->select();
