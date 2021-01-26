@@ -135,10 +135,12 @@ abstract class AbstractModelRepository
     {
         $data = $this->hydrator->extract($model);
 
-        return $this
-            ->database
-            ->insert($data)
-            ->into($this->getTableName());
+        return $this->insert($data);
+    }
+
+    protected function insert(array $data): bool
+    {
+        return $this->database->insert($data)->into($this->getTableName());
     }
 
     protected function addConditionsToStatement(BaseStatement $statement, array $conditions = [])
