@@ -14,11 +14,6 @@ class SiteCommandConfigurator implements CommandConfiguratorInterface
     public function configureCommands(CommandRunner $commandRunner)
     {
         $commandRunner->addCommand('test', function (CountryRepository $repository, ModelDataHydratorInterface $hydrator) {
-            $model = $repository->findOne(['short_name' => 'll']);
-
-            $model->shortName = 'lv';
-            $repository->saveModel($model);
-
             dd($repository->findAll());
         });
     }

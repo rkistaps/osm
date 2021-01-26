@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OSM\Core\Models;
 
+use OSM\Core\Helpers\StringHelper;
+
 abstract class AbstractModel
 {
     public function getPrimaryKey(): array
@@ -16,19 +18,14 @@ abstract class AbstractModel
         return !$this->id;
     }
 
-    /**
-     * Hydrate model with data
-     * @param array $data
-     */
-    public function hydrate(array $data)
+    public function __set($name, $value)
     {
-    }
+        $nameCandidate = StringHelper::toCamelCase($name);
+        if (property_exists($this, $nameCandidate)) {
+            $this->$nameCandidate = $value;
+            return;
+        }
 
-    /**
-     * Expose model data
-     * @return array
-     */
-    public function expose(): array
-    {
+        $this->$name = $value;
     }
 }

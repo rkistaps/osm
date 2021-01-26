@@ -33,33 +33,19 @@ abstract class AbstractModelRepository
 
     public function findAll(array $condition = []): AbstractModelCollection
     {
-        $modelClassName = $this->getModelClassName();
         $collectionClassName = $this->getCollectionClassName();
 
-        /** @var AbstractModelCollection $collection */
-        $collection = new $collectionClassName;
+        $models = $this
+            ->buildSelect($condition)
+            ->fetchClass($this->getModelClassName())
+            ->all();
 
-        $rows = $this->buildSelect($condition)->fetchAssoc()->all();
-        foreach ($rows as $row) {
-            $model = $this->hydrator->hydrate(new $modelClassName, $row);
-
-            $collection->add($model);
-        }
-
-        return $collection;
+        return new $collectionClassName($models);
     }
 
     public function findOne(array $condition = []): ?AbstractModel
     {
-        $row = $this->buildSelect($condition)->fetchAssoc()->first();
-        if (!$row) {
-            return null;
-        }
-
-        $modelClass = $this->getModelClassName();
-        $model = new $modelClass;
-
-        return $this->hydrator->hydrate($model, $row);
+        return $this->buildSelect($condition)->fetchClass($this->getModelClassName())->first();
     }
 
     public function findById(int $id): ?AbstractModel
