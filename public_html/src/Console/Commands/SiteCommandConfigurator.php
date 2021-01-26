@@ -14,16 +14,12 @@ class SiteCommandConfigurator implements CommandConfiguratorInterface
     public function configureCommands(CommandRunner $commandRunner)
     {
         $commandRunner->addCommand('test', function (CountryRepository $repository, ModelDataHydratorInterface $hydrator) {
-            $countries = $repository->findAll();
+            $model = $repository->findOne(['short_name' => 'll']);
 
-            var_dump($countries);
+            $model->shortName = 'lv';
+            $repository->saveModel($model);
 
-            $lv = $repository->findOne(['short_name' => 'lv']);
-            var_dump($lv);
-
-            $countries = $countries->all();
-            $data = $hydrator->extract($countries[0]);
-            dd($data);
+            dd($repository->findAll());
         });
     }
 }
