@@ -11,13 +11,7 @@ use OSM\Modules\MatchEngine\Structures\Player;
  */
 class LineupHelper
 {
-    /**
-     * @param Lineup $lineup
-     * @param $position
-     * @param $minute
-     * @return Player|null
-     */
-    public static function getRandomPlayerInPosition(Lineup $lineup, $position, $minute): ?Player
+    public static function getRandomPlayerInPosition(Lineup $lineup, string $position, int $minute): ?Player
     {
         $players = self::getPlayersInPosition($lineup, $minute, $position);
 
@@ -43,15 +37,12 @@ class LineupHelper
             ->all();
     }
 
-    /**
-     * @param Lineup $lineup
-     * @param int $minute
-     * @param array $positionOrder
-     * @param int|null $excludeId
-     * @return Player|null
-     */
-    public static function getRandomPlayerByPositions(Lineup $lineup, int $minute, array $positionOrder, $excludeId = null): ?Player
-    {
+    public static function getRandomPlayerByPositions(
+        Lineup $lineup,
+        int $minute,
+        array $positionOrder,
+        int $excludeId = null
+    ): ?Player {
         // loop through positions and try to find a player in exact position
         foreach ($positionOrder as $position) {
             $players = LineupHelper::getPlayersInPosition($lineup, $minute, $position);
