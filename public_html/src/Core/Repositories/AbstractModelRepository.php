@@ -106,7 +106,7 @@ abstract class AbstractModelRepository
      * @param array $properties
      * @return AbstractModel
      */
-    public function saveModel(AbstractModel $model, array $properties = []): ?AbstractModel
+    public function saveModel(AbstractModel $model, array $properties = []): AbstractModel
     {
         return $model->isNew()
             ? $this->insertModel($model)
@@ -141,7 +141,7 @@ abstract class AbstractModelRepository
         return $model;
     }
 
-    protected function insertModel(AbstractModel $model): ?AbstractModel
+    protected function insertModel(AbstractModel $model): AbstractModel
     {
         $data = $this->hydrator->extract($model);
 
