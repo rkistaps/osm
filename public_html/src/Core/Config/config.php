@@ -19,6 +19,7 @@ return $localConfig + [
         'command' => [
             'configurators' => [
                 \OSM\Console\Commands\SiteCommandConfigurator::class,
+                \OSM\Console\Commands\UserCommandConfigurator::class,
             ],
         ],
         'automapper' => [],

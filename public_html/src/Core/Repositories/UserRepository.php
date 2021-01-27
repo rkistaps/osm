@@ -7,6 +7,11 @@ namespace OSM\Core\Repositories;
 use OSM\Core\Collections\UserCollection;
 use OSM\Core\Models\User;
 
+/**
+ * @method User findOne(array $condition = [])
+ * @method UserCollection findAll(array $condition = [])
+ * @method User createModel(array $properties = [], bool $persistent = false)
+ */
 class UserRepository extends AbstractModelRepository
 {
     protected function getTableName(): string
@@ -22,5 +27,10 @@ class UserRepository extends AbstractModelRepository
     protected function getCollectionClassName(): string
     {
         return UserCollection::class;
+    }
+
+    public function findByUsername(string $username): ?User
+    {
+        return $this->findOne(['username' => $username]);
     }
 }
