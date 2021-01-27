@@ -145,22 +145,21 @@ abstract class AbstractModelRepository
     {
         $data = $this->hydrator->extract($model);
 
-        $id = $this->insert($data);
-
-        if ($id) {
-            $model->id = $id;
+        if ($this->insert($data)) {
+            $model->id = $this->getLastInsertId();
         }
 
         return $model;
     }
 
-    protected function insert(array $data): ?int
+    protected function getLastInsertId(): int
     {
-        $result = $this->database->insert($data)->into($this->getTableName());
+        return (int)$this->database->getConnection()->getPDO()->lastInsertId();
+    }
 
-        return $result
-            ? (int)$this->database->getConnection()->getPDO()->lastInsertId()
-            : null;
+    protected function insert(array $data): bool
+    {
+        return $this->database->insert($data)->into($this->getTableName());
     }
 
     protected function addConditionsToStatement(BaseStatement $statement, array $conditions = [])
