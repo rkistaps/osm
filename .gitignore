@@ -1,6 +1,5 @@
 /public_html/vendor
 /public_html/logs
 /public_html/.env
-/public_html/composer.json
-/public_html/src/Core/Config/config.php
+/public_html/src/Core/Config/config-local.php
 .idea
