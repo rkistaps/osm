@@ -23,9 +23,6 @@ abstract class AbstractModel
         $nameCandidate = StringHelper::toCamelCase($name);
         if (property_exists($this, $nameCandidate)) {
             $this->$nameCandidate = $value;
-            return;
         }
-
-        $this->$name = $value;
     }
 }
