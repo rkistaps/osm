@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OSM\Core\Repositories;
 
 use OSM\Core\Collections\CountryCollection;
-use OSM\Core\Models\CountryModel;
+use OSM\Core\Models\Country;
 
 class CountryRepository extends AbstractModelRepository
 {
@@ -16,7 +16,7 @@ class CountryRepository extends AbstractModelRepository
 
     protected function getModelClassName(): string
     {
-        return CountryModel::class;
+        return Country::class;
     }
 
     protected function getTableName(): string

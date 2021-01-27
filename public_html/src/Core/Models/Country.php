@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Core\Models;
 
-class CountryModel extends AbstractModel
+class Country extends AbstractModel
 {
     public ?int $id;
     public string $name;

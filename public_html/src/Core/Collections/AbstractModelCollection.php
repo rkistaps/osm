@@ -4,19 +4,12 @@ declare(strict_types=1);
 
 namespace OSM\Core\Collections;
 
+use OSM\Core\Abstracts\AbstractCollection;
 use OSM\Core\Exceptions\InvalidArgumentException;
 use OSM\Core\Models\AbstractModel;
-use Tightenco\Collect\Support\Collection;
 
-abstract class AbstractModelCollection
+abstract class AbstractModelCollection extends AbstractCollection
 {
-    private Collection $collection;
-
-    public function __construct(array $data = [])
-    {
-        $this->collection = collect($data);
-    }
-
     /**
      * @param array $data
      * @return self
