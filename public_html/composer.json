@@ -15,6 +15,9 @@
   "autoload": {
     "psr-4": {
       "OSM\\": "src/"
-    }
+    },
+    "files": [
+      "src/Core/Library/functions.php"
+    ]
   }
 }
