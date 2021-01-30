@@ -12,7 +12,7 @@ class OptionValueService
     private OptionRepository $repository;
     private OptionGroupRepository $groupRepository;
 
-    private $optionValues = [];
+    private array $optionValues = [];
 
     public function __construct(
         OptionGroupRepository $groupRepository,
