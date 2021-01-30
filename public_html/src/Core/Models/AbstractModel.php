@@ -8,6 +8,8 @@ use OSM\Core\Helpers\StringHelper;
 
 abstract class AbstractModel
 {
+    public ?int $id;
+
     public function getPrimaryKey(): array
     {
         return ['id'];
@@ -15,7 +17,7 @@ abstract class AbstractModel
 
     public function isNew(): bool
     {
-        return !$this->id;
+        return !isset($this->id) || !$this->id;
     }
 
     public function __set($name, $value)

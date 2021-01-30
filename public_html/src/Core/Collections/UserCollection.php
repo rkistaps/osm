@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OSM\Core\Collections;
 
-use OSM\Core\Models\Country;
+use OSM\Core\Models\User;
 
-class CountryCollection extends AbstractModelCollection
+class UserCollection extends AbstractModelCollection
 {
     public function getModelClassName(): string
     {
-        return Country::class;
+        return User::class;
     }
 }

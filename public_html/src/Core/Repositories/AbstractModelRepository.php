@@ -31,6 +31,26 @@ abstract class AbstractModelRepository
 
     abstract protected function getCollectionClassName(): string;
 
+    public function createModel(array $properties = [], bool $persistent = false): AbstractModel
+    {
+        $model = $this->createBlankModel();
+
+        $this->hydrator->hydrate($model, $properties);
+
+        if ($persistent) {
+            $this->saveModel($model);
+        }
+
+        return $model;
+    }
+
+    protected function createBlankModel(): AbstractModel
+    {
+        $modelClass = $this->getModelClassName();
+
+        return new $modelClass;
+    }
+
     public function findAll(array $condition = []): AbstractModelCollection
     {
         $collectionClassName = $this->getCollectionClassName();
@@ -45,7 +65,9 @@ abstract class AbstractModelRepository
 
     public function findOne(array $condition = []): ?AbstractModel
     {
-        return $this->buildSelect($condition)->fetchClass($this->getModelClassName())->first();
+        $result = $this->buildSelect($condition)->fetchClass($this->getModelClassName())->first();
+
+        return $result ?: null;
     }
 
     public function findById(int $id): ?AbstractModel
@@ -69,7 +91,7 @@ abstract class AbstractModelRepository
         return $query;
     }
 
-    protected function delete(array $conditions = []): int
+    public function delete(array $conditions = []): int
     {
         return $this->buildQuery($conditions)->delete();
     }
@@ -82,16 +104,16 @@ abstract class AbstractModelRepository
     /**
      * @param AbstractModel $model
      * @param array $properties
-     * @return bool|int
+     * @return AbstractModel
      */
-    public function saveModel(AbstractModel $model, array $properties = [])
+    public function saveModel(AbstractModel $model, array $properties = []): AbstractModel
     {
         return $model->isNew()
             ? $this->insertModel($model)
             : $this->updateModel($model, $properties);
     }
 
-    protected function updateModel(AbstractModel $model, array $properties = []): int
+    protected function updateModel(AbstractModel $model, array $properties = []): AbstractModel
     {
         $modelData = $this->hydrator->extract($model);
 
@@ -114,14 +136,25 @@ abstract class AbstractModelRepository
             }
         }
 
-        return $query->set($updateData);
+        $query->set($updateData);
+
+        return $model;
     }
 
-    protected function insertModel(AbstractModel $model): bool
+    protected function insertModel(AbstractModel $model): AbstractModel
     {
         $data = $this->hydrator->extract($model);
 
-        return $this->insert($data);
+        if ($this->insert($data)) {
+            $model->id = $this->getLastInsertId();
+        }
+
+        return $model;
+    }
+
+    protected function getLastInsertId(): int
+    {
+        return (int)$this->database->getConnection()->getPDO()->lastInsertId();
     }
 
     protected function insert(array $data): bool

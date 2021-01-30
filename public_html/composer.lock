@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "017af074989252b0b12555b3bcd0298c",
+    "content-hash": "e04c1ec93af5d352d915427f1dfd6baf",
     "packages": [
         {
             "name": "davedevelopment/phpmig",
@@ -1146,6 +1146,46 @@
                 "source": "https://github.com/rkistaps/the-app/tree/v0.3.8.1"
             },
             "time": "2020-09-13T13:21:16+00:00"
+        },
+        {
+            "name": "romanato/php-coloringo-cli",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/romanato73/php-coloringo-cli.git",
+                "reference": "ec2be8663d10d77b98b3f66758bf32ebc397ed51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/romanato73/php-coloringo-cli/zipball/ec2be8663d10d77b98b3f66758bf32ebc397ed51",
+                "reference": "ec2be8663d10d77b98b3f66758bf32ebc397ed51",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Romanato\\ColoringoCLI\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman",
+                    "email": "romikor1999@gmail.com"
+                }
+            ],
+            "description": "Colors and styles for PHP CLI output.",
+            "support": {
+                "issues": "https://github.com/romanato73/php-coloringo-cli/issues",
+                "source": "https://github.com/romanato73/php-coloringo-cli/tree/1.0"
+            },
+            "time": "2020-04-08T22:09:57+00:00"
         },
         {
             "name": "samdark/hydrator",
