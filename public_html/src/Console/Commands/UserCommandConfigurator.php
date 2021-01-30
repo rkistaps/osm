@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OSM\Console\Commands;
 
-use OSM\Modules\User\Exceptions\UserCreationException;
-use OSM\Modules\User\Services\UserCreationService;
+use OSM\Modules\Users\Exceptions\UserCreationException;
+use OSM\Modules\Users\Services\UserCreationService;
 use Psr\Log\LoggerInterface;
 use TheApp\Components\CommandRunner;
 use TheApp\Interfaces\CommandConfiguratorInterface;

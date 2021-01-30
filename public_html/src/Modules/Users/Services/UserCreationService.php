@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OSM\Modules\User\Services;
+namespace OSM\Modules\Users\Services;
 
 use OSM\Core\Models\User;
 use OSM\Core\Repositories\UserRepository;

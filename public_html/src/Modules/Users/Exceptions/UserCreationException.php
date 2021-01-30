@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OSM\Modules\User\Exceptions;
+namespace OSM\Modules\Users\Exceptions;
 
 use Exception;
 
