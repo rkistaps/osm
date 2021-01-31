@@ -38,7 +38,7 @@ class OptionValueService
 
         foreach ($this->groupRepository->getOptionGroups() as $optionGroup) {
             foreach ($optionGroup->getOptionDefinitions() as $definition) {
-                $this->optionValues[$definition->namey] = $this->values[$definition->name] ?? $definition->defaultValue;
+                $this->optionValues[$definition->name] = $this->values[$definition->name] ?? $definition->defaultValue;
             }
         }
     }

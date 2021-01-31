@@ -40,7 +40,7 @@ class StartingOptionGroup implements \OSM\Modules\Options\Interfaces\OptionGroup
     }
 
     /**
-     * @inheritDoc
+     * @return OptionDefinition[]
      */
     public function getOptionDefinitions(): array
     {
