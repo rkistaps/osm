@@ -10,7 +10,8 @@
     "samdark/hydrator": "^1.0",
     "davedevelopment/phpmig": "^1.7",
     "jawira/case-converter": "^3.4",
-    "romanato/php-coloringo-cli": "^1.0"
+    "romanato/php-coloringo-cli": "^1.0",
+    "nesbot/carbon": "^2.44"
   },
   "autoload": {
     "psr-4": {

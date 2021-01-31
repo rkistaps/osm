@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 use OSM\Core\Abstracts\AbstractMigration;
 
-class CreateFinancialLog extends AbstractMigration
+class CreateFinancialStats extends AbstractMigration
 {
     /**
      * Do the migration
      */
     public function up()
     {
-        $this->createTable('finance_logs', function (\Opis\Database\Schema\CreateTable $table) {
+        $this->createTable('financial_stats', function (\Opis\Database\Schema\CreateTable $table) {
             $table->integer('id')->autoincrement();
             $table->integer('team_id');
+            $table->string('period');
             $table->string('event');
-            $table->float('change');
-            $table->float('result');
-            $table->dateTime('date');
+            $table->float('amount');
 
             $table->foreign('team_id')
                 ->references('teams', 'id')
@@ -30,6 +29,6 @@ class CreateFinancialLog extends AbstractMigration
      */
     public function down()
     {
-        $this->dropTable('finance_logs');
+        $this->dropTable('financial_stats');
     }
 }
