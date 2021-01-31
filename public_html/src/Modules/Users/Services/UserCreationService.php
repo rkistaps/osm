@@ -6,7 +6,7 @@ namespace OSM\Modules\Users\Services;
 
 use OSM\Core\Models\User;
 use OSM\Core\Repositories\UserRepository;
-use OSM\Modules\User\Exceptions\UserCreationException;
+use OSM\Modules\Users\Exceptions\UserCreationException;
 
 class UserCreationService
 {
