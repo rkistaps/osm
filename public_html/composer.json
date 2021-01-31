@@ -2,7 +2,7 @@
   "require": {
     "php": "^7.4",
     "ext-json": "*",
-    "rkistaps/the-app": "v0.3.8.1",
+    "rkistaps/the-app": "^v0.3.8.1",
     "league/plates": "^3.4",
     "opis/database": "^4.2",
     "tightenco/collect": "^8.19",
@@ -10,11 +10,21 @@
     "samdark/hydrator": "^1.0",
     "davedevelopment/phpmig": "^1.7",
     "jawira/case-converter": "^3.4",
-    "romanato/php-coloringo-cli": "^1.0"
+    "romanato/php-coloringo-cli": "^1.0",
+    "nesbot/carbon": "^2.44"
   },
   "autoload": {
     "psr-4": {
       "OSM\\": "src/"
+    },
+    "files": [
+      "src/Core/Library/functions.php"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "github",
+      "url": "https://github.com/rkistaps/the-app.git"
     }
-  }
+  ]
 }
