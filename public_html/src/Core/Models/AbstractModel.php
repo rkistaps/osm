@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OSM\Core\Models;
 
 use OSM\Core\Helpers\StringHelper;
+use OSM\Core\Interfaces\ModelDataHydratorInterface;
 
 abstract class AbstractModel
 {
@@ -22,9 +23,18 @@ abstract class AbstractModel
 
     public function __set($name, $value)
     {
+        $hydrator = getContainer()->get(ModelDataHydratorInterface::class);
+
         $nameCandidate = StringHelper::toCamelCase($name);
         if (property_exists($this, $nameCandidate)) {
-            $this->$nameCandidate = $value;
+            $hydrator->hydrateProperty($this, $nameCandidate, $value);
         }
+    }
+
+    public function __toString()
+    {
+        $hydrator = getContainer()->get(ModelDataHydratorInterface::class);
+
+        return print_r($hydrator->extract($this), true);
     }
 }

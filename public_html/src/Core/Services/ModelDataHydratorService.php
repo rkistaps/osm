@@ -7,6 +7,7 @@ namespace OSM\Core\Services;
 use OSM\Core\Helpers\StringHelper;
 use OSM\Core\Interfaces\ModelDataHydratorInterface;
 use OSM\Core\Models\AbstractModel;
+use ReflectionProperty;
 
 class ModelDataHydratorService implements ModelDataHydratorInterface
 {
@@ -17,8 +18,28 @@ class ModelDataHydratorService implements ModelDataHydratorInterface
             if (!array_key_exists($arrayProperty, $data)) {
                 continue;
             }
-            $model->{$property} = $data[$arrayProperty];
+
+            $this->hydrateProperty($model, $property, $data[$arrayProperty]);
         }
+
+        return $model;
+    }
+
+    public function hydrateProperty(AbstractModel $model, string $property, $value): AbstractModel
+    {
+        $reflectionProperty = new ReflectionProperty($model, $property);
+
+        $type = $reflectionProperty->getType()->getName();
+        switch ($type) {
+            case 'int':
+                $value = (int)$value;
+                break;
+            case 'bool':
+                $value = (bool)$value;
+                break;
+        }
+
+        $model->{$property} = $value;
 
         return $model;
     }

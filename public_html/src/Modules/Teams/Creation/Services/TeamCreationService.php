@@ -17,19 +17,29 @@ class TeamCreationService
     private TeamRepository $repository;
     private OptionValueService $optionValueService;
     private TeamFinancialService $financialService;
+    private TeamCreationValidationService $validationService;
 
     public function __construct(
         TeamRepository $repository,
         OptionValueService $optionValueService,
-        TeamFinancialService $financialService
+        TeamFinancialService $financialService,
+        TeamCreationValidationService $validationService
     ) {
         $this->repository = $repository;
         $this->optionValueService = $optionValueService;
         $this->financialService = $financialService;
+        $this->validationService = $validationService;
     }
 
+    /**
+     * @param TeamCreationParams $params
+     * @return Team
+     * @throws \OSM\Modules\Teams\Creation\Exceptions\TeamCreationValidationException
+     */
     public function createTeam(TeamCreationParams $params): Team
     {
+        $this->validationService->validate($params);
+
         $team = $this->repository->createModel();
         $team->name = $params->name;
         $team->countryId = $params->countryId;

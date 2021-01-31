@@ -11,7 +11,7 @@ class CreateFinancialStats extends AbstractMigration
      */
     public function up()
     {
-        $this->createTable('financial_stats', function (\Opis\Database\Schema\CreateTable $table) {
+        $this->createTable('finance_stats', function (\Opis\Database\Schema\CreateTable $table) {
             $table->integer('id')->autoincrement();
             $table->integer('team_id');
             $table->string('period');

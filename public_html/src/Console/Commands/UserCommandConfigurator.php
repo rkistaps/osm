@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Console\Commands;
 
+use OSM\Core\Repositories\UserRepository;
 use OSM\Modules\Users\Exceptions\UserCreationException;
 use OSM\Modules\Users\Services\UserCreationService;
 use Psr\Log\LoggerInterface;
@@ -33,6 +34,12 @@ class UserCommandConfigurator implements CommandConfiguratorInterface
             } catch (UserCreationException $exception) {
                 $this->logger->error($exception->getMessage());
             }
+        });
+
+        $commandRunner->addCommand(self::PREFIX . '/find', function (int $id, UserRepository $repository) {
+            $user = $repository->findById($id);
+
+            var_dump($user);
         });
     }
 }

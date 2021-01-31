@@ -20,10 +20,7 @@ return $localConfig + [
             'configurators' => [
                 \OSM\Console\Commands\SiteCommandConfigurator::class,
                 \OSM\Console\Commands\UserCommandConfigurator::class,
+                \OSM\Console\Commands\TeamsCommandConfigurator::class,
             ],
-        ],
-        'automapper' => [],
-        'repositories' => [
-            \OSM\Core\Repositories\CountryRepository::class,
         ],
     ];

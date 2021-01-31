@@ -11,6 +11,7 @@ use OSM\Core\Models\Team;
 /**
  * @method Team createModel(array $properties = [], bool $persistent = false)
  * @method Team saveModel(AbstractModel $model, array $properties = [])
+ * @method Team|null findOne(array $condition = [])
  */
 class TeamRepository extends AbstractModelRepository
 {
@@ -27,5 +28,10 @@ class TeamRepository extends AbstractModelRepository
     protected function getCollectionClassName(): string
     {
         return TeamCollection::class;
+    }
+
+    public function findByName(string $name): ?Team
+    {
+        return $this->findOne(['name' => $name]);
     }
 }

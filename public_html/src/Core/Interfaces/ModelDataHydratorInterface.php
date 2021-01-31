@@ -22,4 +22,13 @@ interface ModelDataHydratorInterface
      * @return array
      */
     public function extract(AbstractModel $model): array;
+
+    /**
+     * Hydrate single property
+     * @param AbstractModel $model
+     * @param string $property
+     * @param $value
+     * @return AbstractModel
+     */
+    public function hydrateProperty(AbstractModel $model, string $property, $value): AbstractModel;
 }

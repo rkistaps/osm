@@ -2,7 +2,7 @@
   "require": {
     "php": "^7.4",
     "ext-json": "*",
-    "rkistaps/the-app": "v0.3.8.1",
+    "rkistaps/the-app": "^v0.3.8.1",
     "league/plates": "^3.4",
     "opis/database": "^4.2",
     "tightenco/collect": "^8.19",
@@ -20,5 +20,11 @@
     "files": [
       "src/Core/Library/functions.php"
     ]
-  }
+  },
+  "repositories": [
+    {
+      "type": "github",
+      "url": "https://github.com/rkistaps/the-app.git"
+    }
+  ]
 }

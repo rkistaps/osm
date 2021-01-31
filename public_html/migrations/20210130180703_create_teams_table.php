@@ -22,7 +22,7 @@ class CreateTeamsTable extends AbstractMigration
             $table->string('training_priority');
             $table->string('status');
             $table->double('money');
-            $table->double('rating');
+            $table->integer('rating');
             $table->integer('is_default')->defaultValue(1);
 
             $table->index('user_id');

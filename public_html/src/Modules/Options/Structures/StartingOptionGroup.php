@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OSM\Modules\Options\Structures;
 
 use OSM\Core\Models\Option;
+use OSM\Core\Translations\Structures\Domains;
 
 class StartingOptionGroup implements \OSM\Modules\Options\Interfaces\OptionGroupInterface
 {
@@ -18,7 +19,7 @@ class StartingOptionGroup implements \OSM\Modules\Options\Interfaces\OptionGroup
      */
     public function getTitle(): string
     {
-        return t('app', 'Starting options');
+        return td(Domains::DOMAIN_BACKEND, 'Starting options');
     }
 
     /**
@@ -27,7 +28,7 @@ class StartingOptionGroup implements \OSM\Modules\Options\Interfaces\OptionGroup
      */
     public function getDescription(): string
     {
-        return t('app', 'Starting option values');
+        return td(Domains::DOMAIN_BACKEND, 'Starting option values');
     }
 
     /**
@@ -46,17 +47,17 @@ class StartingOptionGroup implements \OSM\Modules\Options\Interfaces\OptionGroup
         return [
             OptionDefinition::fromArray([
                 'name' => self::OPTION_MONEY,
-                'label' => t('app', 'Money'),
+                'label' => td(Domains::DOMAIN_BACKEND, 'Money'),
                 'defaultValue' => 1000000,
             ]),
             OptionDefinition::fromArray([
                 'name' => self::OPTION_SUPPORTERS,
-                'label' => t('app', 'Supporters'),
+                'label' => td(Domains::DOMAIN_BACKEND, 'Supporters'),
                 'defaultValue' => 1000,
             ]),
             OptionDefinition::fromArray([
                 'name' => self::OPTION_STADIUM_SIZE,
-                'label' => t('app', 'Stadium size'),
+                'label' => td(Domains::DOMAIN_BACKEND, 'Stadium size'),
                 'defaultValue' => 1000,
             ]),
         ];

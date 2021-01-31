@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36c407db49c368109add1e07c1228e85",
+    "content-hash": "98c8a5958ae4b0745bac178311f3c3dc",
     "packages": [
         {
             "name": "davedevelopment/phpmig",
@@ -1198,16 +1198,16 @@
         },
         {
             "name": "rkistaps/the-app",
-            "version": "v0.3.8.1",
+            "version": "v0.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rkistaps/the-app.git",
-                "reference": "fe1bff368fa17ecd670148440820f553a5d914e9"
+                "reference": "ce45d9db7129dbf4c768715c6b1ae2f1c17319db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rkistaps/the-app/zipball/fe1bff368fa17ecd670148440820f553a5d914e9",
-                "reference": "fe1bff368fa17ecd670148440820f553a5d914e9",
+                "url": "https://api.github.com/repos/rkistaps/the-app/zipball/ce45d9db7129dbf4c768715c6b1ae2f1c17319db",
+                "reference": "ce45d9db7129dbf4c768715c6b1ae2f1c17319db",
                 "shasum": ""
             },
             "require": {
@@ -1227,7 +1227,6 @@
                     "TheApp\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "kristaps taube",
@@ -1235,10 +1234,10 @@
                 }
             ],
             "support": {
-                "issues": "https://github.com/rkistaps/the-app/issues",
-                "source": "https://github.com/rkistaps/the-app/tree/v0.3.8.1"
+                "source": "https://github.com/rkistaps/the-app/tree/v0.3.9",
+                "issues": "https://github.com/rkistaps/the-app/issues"
             },
-            "time": "2020-09-13T13:21:16+00:00"
+            "time": "2021-01-31T15:57:14+00:00"
         },
         {
             "name": "romanato/php-coloringo-cli",
