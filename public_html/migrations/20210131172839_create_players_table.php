@@ -23,7 +23,7 @@ class CreatePlayersTable extends AbstractMigration
             $table->integer('country_id');
             $table->integer('team_id');
             $table->string('position', 1);
-            $table->string('experience');
+            $table->integer('experience');
             $table->string('speciality');
             $table->string('character');
             $table->double('salary');
