@@ -43,4 +43,20 @@ abstract class AbstractModelCollection extends AbstractCollection
     {
         return parent::firstWhere($key, $operator, $value);
     }
+
+    public function where($key, $operator = null, $value = null): AbstractModelCollection
+    {
+        $items = parent::where($key, $operator, $value);
+
+        return self::collect($items);
+    }
+    
+    public function random($number = null)
+    {
+        $result = parent::random($number);
+
+        return is_null($number)
+            ? $result
+            : self::collect($result);
+    }
 }

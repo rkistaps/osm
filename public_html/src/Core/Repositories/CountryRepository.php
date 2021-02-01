@@ -7,6 +7,10 @@ namespace OSM\Core\Repositories;
 use OSM\Core\Collections\CountryCollection;
 use OSM\Core\Models\Country;
 
+/**
+ * @method Country|null findOne(array $condition = [])
+ * @method Country|null findById(int $id)
+ */
 class CountryRepository extends AbstractModelRepository
 {
     public function getCollectionClassName(): string

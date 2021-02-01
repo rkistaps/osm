@@ -8,4 +8,5 @@ class Country extends AbstractModel
 {
     public string $name;
     public string $shortName;
+    public string $skinTones;
 }

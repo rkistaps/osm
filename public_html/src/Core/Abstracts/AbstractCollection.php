@@ -19,4 +19,14 @@ class AbstractCollection
     {
         return $this->collection->firstWhere($key, $operator, $value);
     }
+
+    public function where($key, $operator = null, $value = null)
+    {
+        return $this->collection->where($key, $operator, $value);
+    }
+
+    public function random($number = null)
+    {
+        return $this->collection->random($number);
+    }
 }
