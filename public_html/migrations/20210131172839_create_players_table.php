@@ -16,18 +16,18 @@ class CreatePlayersTable extends AbstractMigration
             $table->string('name');
             $table->string('surname');
             $table->integer('age');
-            $table->double('skill');
-            $table->integer('talent');
-            $table->integer('energy');
+            $table->double('skill')->defaultValue(0)->notNull();
+            $table->integer('talent')->defaultValue(0)->notNull();
+            $table->integer('energy')->defaultValue(100)->notNull();
             $table->integer('injury_days')->defaultValue(0);
             $table->integer('country_id');
             $table->integer('team_id');
             $table->string('position', 1);
-            $table->integer('experience');
+            $table->integer('experience')->defaultValue(0)->notNull();
             $table->string('speciality');
             $table->string('character');
-            $table->double('salary');
-            $table->integer('number');
+            $table->double('salary')->defaultValue(0)->notNull();
+            $table->integer('number')->defaultValue(1)->notNull();
             $table->boolean('is_youth')->defaultValue(false);
 
             $table->foreign('country_id')
