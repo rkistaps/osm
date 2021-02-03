@@ -52,7 +52,7 @@ class PlayerCreationService
         $faceParams = new PlayerFaceCreationParams();
         $faceParams->player = $player;
         $faceParams->canHaveFacialHair = $params->canHaveFacialHair;
-        $faceParams->skinTones = explode(',', $params->country->skinTones);
+        $faceParams->skinTones = array_filter(explode(',', $params->country->skinTones ?? ''));
         $faceParams->skinTones = $faceParams->skinTones ?: [1, 2, 3, 4, 5];
 
         $this->faceCreationService->createPlayerFace($faceParams);

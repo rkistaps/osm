@@ -18,7 +18,7 @@ abstract class AbstractModelCollection extends AbstractCollection
     {
         $calledClass = get_called_class();
 
-        return $calledClass($data);
+        return new $calledClass($data);
     }
 
     abstract public function getModelClassName(): string;
@@ -46,7 +46,7 @@ abstract class AbstractModelCollection extends AbstractCollection
 
     public function where($key, $operator = null, $value = null): AbstractModelCollection
     {
-        $items = parent::where($key, $operator, $value);
+        $items = parent::where($key, $operator, $value)->all();
 
         return self::collect($items);
     }

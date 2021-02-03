@@ -27,6 +27,10 @@ class AbstractCollection
 
     public function random($number = null)
     {
+        if (!$this->collection->count()) {
+            return null;
+        }
+
         return $this->collection->random($number);
     }
 }

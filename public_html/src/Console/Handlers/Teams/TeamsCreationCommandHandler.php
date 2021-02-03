@@ -33,7 +33,7 @@ class TeamsCreationCommandHandler implements \TheApp\Interfaces\CommandHandlerIn
 
             $this->logger->info('Team created: ' . $team->id);
         } catch (\Throwable $exception) {
-            $this->logger->error($exception->getMessage());
+            $this->logger->error($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
         }
     }
 }

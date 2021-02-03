@@ -16,14 +16,14 @@ class CreateTeamsTable extends AbstractMigration
             $table->string('name')->unique();
             $table->integer('user_id')->notNull();
             $table->integer('country_id')->notNull();
-            $table->integer('supporters');
-            $table->integer('stadium_size');
-            $table->integer('rating');
-            $table->string('training_priority');
-            $table->string('status');
-            $table->double('money');
-            $table->integer('rating');
-            $table->integer('is_default')->defaultValue(1);
+            $table->integer('supporters')->defaultValue(0)->notNull();
+            $table->integer('stadium_size')->defaultValue(0)->notNull();
+            $table->integer('rating')->defaultValue(0)->notNull();
+            $table->string('training_priority')->notNull();
+            $table->string('status')->notNull();
+            $table->double('money')->defaultValue(0)->notNull();
+            $table->integer('rating')->defaultValue(0)->notNull();
+            $table->integer('is_default')->defaultValue(1)->notNull();
 
             $table->index('user_id');
             $table->index('country_id');

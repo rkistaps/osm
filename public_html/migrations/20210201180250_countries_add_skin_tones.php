@@ -12,7 +12,7 @@ class CountriesAddSkinTones extends AbstractMigration
     public function up()
     {
         $this->alterTable('countries', function (\Opis\Database\Schema\AlterTable $table) {
-            $table->string('skin_tones');
+            $table->string('skin_tones')->notNull();
         });
     }
 
