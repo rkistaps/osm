@@ -33,4 +33,14 @@ class AbstractCollection
 
         return $this->collection->random($number);
     }
+
+    public function sort($callback = null)
+    {
+        return $this->collection->sort($callback);
+    }
+
+    public function pluck($value, $key = null)
+    {
+        return $this->collection->pluck($value, $key);
+    }
 }

@@ -46,6 +46,7 @@ class PlayerCreationService
         $player->isYouth = $params->isYouth;
         $player->energy = 100;
         $player->experience = 0;
+        $player->salary = 0;
 
         $player = $this->playerRepository->saveModel($player);
 

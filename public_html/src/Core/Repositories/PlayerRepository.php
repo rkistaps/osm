@@ -11,6 +11,7 @@ use OSM\Core\Models\Player;
 /**
  * @method Player createModel(array $properties = [], bool $persistent = false)
  * @method Player saveModel(AbstractModel $model, array $properties = [])
+ * @method PlayerCollection findAll(array $condition = [])
  */
 class PlayerRepository extends AbstractModelRepository
 {
@@ -27,5 +28,13 @@ class PlayerRepository extends AbstractModelRepository
     protected function getCollectionClassName(): string
     {
         return PlayerCollection::class;
+    }
+
+    public function getSquadPlayersByTeam(int $teamId): PlayerCollection
+    {
+        return $this->findAll([
+            'team_id' => $teamId,
+            'is_youth' => false,
+        ]);
     }
 }

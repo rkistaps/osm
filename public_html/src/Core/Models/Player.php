@@ -50,10 +50,10 @@ class Player extends AbstractModel
     public int $countryId;
     public int $teamId;
     public string $position;
-    public int $experience;
-    public string $speciality;
-    public string $character;
-    public float $salary;
-    public int $number;
+    public int $experience = 0;
+    public string $speciality = self::SPECIALITY_NONE;
+    public string $character = self::CHARACTER_NONE;
+    public float $salary = 0;
+    public int $number = 0;
     public bool $isYouth = false;
 }

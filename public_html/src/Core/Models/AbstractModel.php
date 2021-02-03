@@ -9,7 +9,7 @@ use OSM\Core\Interfaces\ModelDataHydratorInterface;
 
 abstract class AbstractModel
 {
-    public ?int $id;
+    public int $id;
 
     public function getPrimaryKey(): array
     {
