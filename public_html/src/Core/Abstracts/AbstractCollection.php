@@ -19,4 +19,28 @@ class AbstractCollection
     {
         return $this->collection->firstWhere($key, $operator, $value);
     }
+
+    public function where($key, $operator = null, $value = null)
+    {
+        return $this->collection->where($key, $operator, $value);
+    }
+
+    public function random($number = null)
+    {
+        if (!$this->collection->count()) {
+            return null;
+        }
+
+        return $this->collection->random($number);
+    }
+
+    public function sort($callback = null)
+    {
+        return $this->collection->sort($callback);
+    }
+
+    public function pluck($value, $key = null)
+    {
+        return $this->collection->pluck($value, $key);
+    }
 }

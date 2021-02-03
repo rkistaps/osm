@@ -9,8 +9,11 @@ use OSM\Core\Models\Team;
 use OSM\Core\Repositories\TeamRepository;
 use OSM\Modules\Options\Services\OptionValueService;
 use OSM\Modules\Options\Structures\StartingOptionGroup;
+use OSM\Modules\Players\Creation\Services\SquadCreationService;
+use OSM\Modules\Players\Creation\Structures\SquadCreationParams;
 use OSM\Modules\Teams\Creation\Structures\TeamCreationParams;
 use OSM\Modules\Teams\Finances\Services\TeamFinancialService;
+use OSM\Modules\Teams\Lineups\Services\TeamLineupGeneratorService;
 
 class TeamCreationService
 {
@@ -18,17 +21,23 @@ class TeamCreationService
     private OptionValueService $optionValueService;
     private TeamFinancialService $financialService;
     private TeamCreationValidationService $validationService;
+    private SquadCreationService $squadCreationService;
+    private TeamLineupGeneratorService $lineupGeneratorService;
 
     public function __construct(
         TeamRepository $repository,
         OptionValueService $optionValueService,
         TeamFinancialService $financialService,
-        TeamCreationValidationService $validationService
+        TeamCreationValidationService $validationService,
+        SquadCreationService $squadCreationService,
+        TeamLineupGeneratorService $lineupGeneratorService
     ) {
         $this->repository = $repository;
         $this->optionValueService = $optionValueService;
         $this->financialService = $financialService;
         $this->validationService = $validationService;
+        $this->squadCreationService = $squadCreationService;
+        $this->lineupGeneratorService = $lineupGeneratorService;
     }
 
     /**
@@ -57,10 +66,12 @@ class TeamCreationService
         $this->financialService->depositFunds($money, FinanceLog::EVENT_STARTING_MONEY, $team);
 
         // create players
-        // todo me
+        $params = new SquadCreationParams();
+        $params->team = $team;
+        $players = $this->squadCreationService->generate($params);
 
         // create default lineup
-        // todo me
+        $this->lineupGeneratorService->generateDefaultLineup($team);
 
         return $team;
     }

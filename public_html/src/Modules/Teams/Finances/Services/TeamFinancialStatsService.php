@@ -41,6 +41,7 @@ class TeamFinancialStatsService
                     'team_id' => $team->id,
                     'period' => $period,
                     'event' => $event,
+                    'amount' => 0,
                 ]);
 
             $entry->amount += $amount;

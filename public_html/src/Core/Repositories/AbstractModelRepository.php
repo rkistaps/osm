@@ -182,4 +182,26 @@ abstract class AbstractModelRepository
 
         return $condition;
     }
+
+    protected function updateAll(array $data, array $condition = []): int
+    {
+        $query = $this->database->update($this->getTableName());
+
+        if ($condition) {
+            $this->addConditionsToStatement($query, $condition);
+        }
+
+        return $query->set($data);
+    }
+
+    protected function deleteAll(array $condition = []): int
+    {
+        $query = $this->database->from($this->getTableName());
+
+        if ($condition) {
+            $this->addConditionsToStatement($query, $condition);
+        }
+
+        return $query->delete();
+    }
 }
