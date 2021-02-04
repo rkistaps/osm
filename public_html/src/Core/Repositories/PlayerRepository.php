@@ -37,4 +37,17 @@ class PlayerRepository extends AbstractModelRepository
             'is_youth' => false,
         ]);
     }
+
+    public function getPlayersForTeamLineupId(int $teamLineupId): PlayerCollection
+    {
+        $rows = $this->database
+            ->from($this->getTableName())
+            ->join('team_lineup_players', function ($join) {
+                $join->on('players.id', 'team_lineup_players.player_id');
+            })
+            ->select('players.*')
+            ->all();
+
+        return new PlayerCollection($rows);
+    }
 }

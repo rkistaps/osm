@@ -43,4 +43,9 @@ class AbstractCollection
     {
         return $this->collection->pluck($value, $key);
     }
+
+    public function filter(callable $callback = null)
+    {
+        return $this->collection->filter($callback);
+    }
 }

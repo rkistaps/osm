@@ -27,9 +27,8 @@ class CreateMatchTable extends AbstractMigration
             $table->boolean('is_walkover')->defaultValue(false)->notNull();
             $table->string('ticket_price_level')->defaultValue(Match::TICKET_PRICE_LEVEL_NORMAL)->notNull();
 
-            $table->index('series_type');
-            $table->index('home_team_id');
-            $table->index('away_team_id');
+            $table->index(['home_team_id', 'series_type']);
+            $table->index(['away_team_id', 'series_type']);
         });
     }
 
