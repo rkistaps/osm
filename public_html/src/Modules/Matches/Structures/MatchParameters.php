@@ -18,7 +18,7 @@ class MatchParameters
      * Do not save anything after game
      * @var bool
      */
-    public bool $dryRun = false;
+    public bool $isDryRun = false;
 
     /**
      * How many experience points players receive

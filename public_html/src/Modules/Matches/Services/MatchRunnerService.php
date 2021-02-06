@@ -15,20 +15,42 @@ class MatchRunnerService
     private MatchEngine $matchEngine;
     private MatchLineupBuilderService $lineupBuilderService;
     private TeamRepository $teamRepository;
+    private MatchReportSavingService $matchReportService;
 
     public function __construct(
         MatchEngine $matchEngine,
         MatchLineupBuilderService $lineupBuilderService,
-        TeamRepository $teamRepository
+        TeamRepository $teamRepository,
+        MatchReportSavingService $matchReportService
     ) {
         $this->matchEngine = $matchEngine;
         $this->lineupBuilderService = $lineupBuilderService;
         $this->teamRepository = $teamRepository;
+        $this->matchReportService = $matchReportService;
     }
 
     public function runMatch(Match $match, MatchParameters $matchParameters): MatchResult
     {
         $homeTeamLineup = $this->lineupBuilderService->buildHomeTeamLineup($match, $matchParameters);
         $awayTeamLineup = $this->lineupBuilderService->buildAwayTeamLineup($match, $matchParameters);
+
+        $matchResult = $this->matchEngine->playMatch(
+            $homeTeamLineup,
+            $awayTeamLineup,
+            $matchParameters->matchSettings
+        );
+
+        $match->isPlayed = true;
+        $match->isWalkover = $matchResult->isWalkover();
+        $match->homeTeamGoals = $matchResult->stats->homeTeamGoals;
+        $match->awayTeamGoals = $matchResult->stats->awayTeamGoals;
+
+        if ($matchParameters->isDryRun) {
+            return $matchResult;
+        }
+
+        $this->matchReportService->saveMatchReport($match, $matchResult);
+
+        return $matchResult;
     }
 }

@@ -13,7 +13,7 @@ class CreateMatchTable extends AbstractMigration
     public function up()
     {
         $this->createTable('matches', function (\Opis\Database\Schema\CreateTable $table) {
-            $table->integer('id');
+            $table->integer('id')->autoincrement();
             $table->integer('home_team_id')->notNull();
             $table->integer('away_team_id')->notNull();
             $table->integer('home_team_lineup_id');

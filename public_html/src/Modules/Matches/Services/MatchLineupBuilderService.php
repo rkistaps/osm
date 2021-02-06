@@ -31,6 +31,11 @@ class MatchLineupBuilderService
         return $this->buildLineupForTeamId($match->homeTeamId, $matchParameters, $match->homeTeamLineupId);
     }
 
+    public function buildAwayTeamLineup(Match $match, MatchParameters $matchParameters): Lineup
+    {
+        return $this->buildLineupForTeamId($match->awayTeamId, $matchParameters, $match->awayTeamLineupId);
+    }
+
     protected function buildLineupForTeamId(
         int $teamId,
         MatchParameters $matchParameters,
@@ -38,6 +43,8 @@ class MatchLineupBuilderService
     ): Lineup {
         $lineup = new Lineup();
         $lineup->teamId = $teamId;
+
+        // todo coach
 
         $teamLineup = $lineupId
             ? $this->teamLineupRepository->findById($lineupId)
@@ -52,7 +59,7 @@ class MatchLineupBuilderService
         }
 
         $lineup->players = $this->getPlayersForTeamLineup($teamId, $teamLineup, $matchParameters);
-        
+
         return $lineup;
     }
 
