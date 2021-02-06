@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OSM\Console\Commands;
 
+use OSM\Console\Handlers\Matches\Friendlies\FriendlyAcceptInviteHandler;
+use OSM\Console\Handlers\Matches\Friendlies\FriendlyInviteHandler;
+use OSM\Console\Handlers\Matches\Friendlies\FriendlyRunRoundHandler;
 use OSM\Core\Models\Match;
-use OSM\Core\Repositories\FriendlyInvitationRepository;
 use OSM\Core\Repositories\MatchRepository;
 use OSM\Core\Repositories\PlayerRepository;
-use OSM\Modules\Series\Friendlies\Services\FriendlyInvitationService;
-use OSM\Modules\Series\Friendlies\Structures\FriendlyInvitationParameters;
 use Psr\Log\LoggerInterface;
 use TheApp\Components\CommandRunner;
 
@@ -36,31 +36,9 @@ class MatchCommandConfigurator implements \TheApp\Interfaces\CommandConfigurator
             dd($players);
         });
 
-        $commandRunner->addCommand(self::PREFIX . '/invite-friendly', function (
-            $homeTeamId,
-            $awayTeamId,
-            $round,
-            FriendlyInvitationService $service
-        ) {
-            $invitation = new FriendlyInvitationParameters();
-            $invitation->round = (int)$round;
-            $invitation->homeTeamId = (int)$homeTeamId;
-            $invitation->awayTeamId = (int)$awayTeamId;
-            $service->processInvitation($invitation);
-        });
-
-        $commandRunner->addCommand(self::PREFIX . '/accept-friendly-invitation', function (
-            int $id,
-            FriendlyInvitationService $invitationService,
-            FriendlyInvitationRepository $invitationRepository
-        ) {
-            $invitation = $invitationRepository->findById($id);
-            if (!$invitation) {
-                $this->logger->info('Invitation not found');
-                return;
-            }
-
-            $invitationService->acceptInvitation($invitation);
-        });
+        # Friendlies
+        $commandRunner->addCommand(self::PREFIX . '/run-friendly-round', FriendlyRunRoundHandler::class);
+        $commandRunner->addCommand(self::PREFIX . '/invite-friendly', FriendlyInviteHandler::class);
+        $commandRunner->addCommand(self::PREFIX . '/accept-friendly-invitation', FriendlyAcceptInviteHandler::class);
     }
 }

@@ -20,7 +20,7 @@ class MatchReportSavingService
 
     public function __construct(
         MatchReportRepository $matchReportRepository,
-        MatchReportTextRepository $matchReportTextRepository,
+        MatchReportTextRepository $matchReportTextRepository
     ) {
         $this->matchReportRepository = $matchReportRepository;
         $this->matchReportTextRepository = $matchReportTextRepository;
