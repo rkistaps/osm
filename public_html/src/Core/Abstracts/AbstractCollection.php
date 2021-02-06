@@ -15,7 +15,7 @@ class AbstractCollection
         $this->collection = collect($data);
     }
 
-    public function firstWhere(string $key, $operator = null, $value = null)
+    public function firstWhere($key, $operator = null, $value = null)
     {
         return $this->collection->firstWhere($key, $operator, $value);
     }

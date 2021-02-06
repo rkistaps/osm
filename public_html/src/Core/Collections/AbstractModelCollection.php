@@ -39,7 +39,7 @@ abstract class AbstractModelCollection extends AbstractCollection
         return $this;
     }
 
-    public function firstWhere(string $key, $operator = null, $value = null): ?AbstractModel
+    public function firstWhere($key, $operator = null, $value = null): ?AbstractModel
     {
         return parent::firstWhere($key, $operator, $value);
     }

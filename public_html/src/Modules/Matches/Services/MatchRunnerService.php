@@ -16,17 +16,20 @@ class MatchRunnerService
     private MatchLineupBuilderService $lineupBuilderService;
     private TeamRepository $teamRepository;
     private MatchReportSavingService $matchReportService;
+    private AfterMatchLineupProcessorService $matchLineupProcessorService;
 
     public function __construct(
         MatchEngine $matchEngine,
         MatchLineupBuilderService $lineupBuilderService,
         TeamRepository $teamRepository,
-        MatchReportSavingService $matchReportService
+        MatchReportSavingService $matchReportService,
+        AfterMatchLineupProcessorService $matchLineupProcessorService
     ) {
         $this->matchEngine = $matchEngine;
         $this->lineupBuilderService = $lineupBuilderService;
         $this->teamRepository = $teamRepository;
         $this->matchReportService = $matchReportService;
+        $this->matchLineupProcessorService = $matchLineupProcessorService;
     }
 
     public function runMatch(Match $match, MatchParameters $matchParameters): MatchResult
@@ -50,6 +53,9 @@ class MatchRunnerService
         }
 
         $this->matchReportService->saveMatchReport($match, $matchResult);
+
+        $this->matchLineupProcessorService->processLineup($match, $homeTeamLineup, $matchParameters);
+        $this->matchLineupProcessorService->processLineup($match, $awayTeamLineup, $matchParameters);
 
         return $matchResult;
     }
