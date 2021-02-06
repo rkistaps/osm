@@ -81,7 +81,7 @@ class InjuryService
     public function getRandomSeverity()
     {
         return RandomHelper::getOneByChance([
-            30 => Injury::SEVERITY_MINIMAL,
+            30 => Injury::SEVERITY_MINOR,
             40 => Injury::SEVERITY_LOW,
             20 => Injury::SEVERITY_AVERAGE,
             10 => Injury::SEVERITY_HIGH,

@@ -8,14 +8,14 @@ namespace OSM\Modules\MatchEngine\Structures;
  */
 class MatchEvent
 {
-    const TYPE_GOAL = 'goal';
-    const TYPE_SAVE = 'save';
-    const TYPE_ATTACK_STOP = 'attack_stop';
-    const TYPE_YELLOW_CARD = 'yellow_card';
-    const TYPE_RED_CARD = 'red_card';
-    const TYPE_SECOND_YELLOW_CARD = 'second_yellow_card';
-    const TYPE_INJURY_WITH_SUB = 'injury_with_sub';
-    const TYPE_INJURY = 'injury';
+    public const TYPE_GOAL = 'goal';
+    public const TYPE_SAVE = 'save';
+    public const TYPE_ATTACK_STOP = 'attack-stop';
+    public const TYPE_YELLOW_CARD = 'yellow-card';
+    public const TYPE_RED_CARD = 'red-card';
+    public const TYPE_SECOND_YELLOW_CARD = 'second-yellow-card';
+    public const TYPE_INJURY_WITH_SUB = 'injury-with-sub';
+    public const TYPE_INJURY = 'injury';
 
     private int $minute;
     private string $type;

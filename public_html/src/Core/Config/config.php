@@ -21,6 +21,7 @@ return $localConfig + [
                 \OSM\Console\Commands\SiteCommandConfigurator::class,
                 \OSM\Console\Commands\UserCommandConfigurator::class,
                 \OSM\Console\Commands\TeamsCommandConfigurator::class,
+                \OSM\Console\Commands\MatchCommandConfigurator::class,
             ],
         ],
     ];

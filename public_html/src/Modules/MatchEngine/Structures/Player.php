@@ -28,7 +28,7 @@ class Player
     public int $energy = 100;
     public PlayerStatistics $statistics;
     public PlayerPerformance $performance;
-    public ?Injury $injury;
+    public ?Injury $injury = null;
 
     /** @var Penalty[] */
     public array $penalties = [];

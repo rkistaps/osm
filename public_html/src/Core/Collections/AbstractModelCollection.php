@@ -39,7 +39,7 @@ abstract class AbstractModelCollection extends AbstractCollection
         return $this;
     }
 
-    public function firstWhere(string $key, $operator = null, $value = null): ?AbstractModel
+    public function firstWhere($key, $operator = null, $value = null): ?AbstractModel
     {
         return parent::firstWhere($key, $operator, $value);
     }
@@ -50,7 +50,7 @@ abstract class AbstractModelCollection extends AbstractCollection
 
         return self::collect($items);
     }
-    
+
     public function random($number = null)
     {
         $result = parent::random($number);
@@ -58,5 +58,12 @@ abstract class AbstractModelCollection extends AbstractCollection
         return is_null($number)
             ? $result
             : self::collect($result);
+    }
+
+    public function filter(callable $callback = null): AbstractModelCollection
+    {
+        $items = parent::filter($callback)->all();
+
+        return self::collect($items);
     }
 }

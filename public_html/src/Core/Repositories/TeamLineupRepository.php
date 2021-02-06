@@ -7,6 +7,9 @@ namespace OSM\Core\Repositories;
 use OSM\Core\Collections\TeamLineupCollection;
 use OSM\Core\Models\TeamLineup;
 
+/**
+ * @method TeamLineup|null findOne(array $condition = [])
+ */
 class TeamLineupRepository extends AbstractModelRepository
 {
     protected function getTableName(): string
@@ -27,5 +30,13 @@ class TeamLineupRepository extends AbstractModelRepository
     public function removeDefaultLineupForTeam(int $teamId)
     {
         $this->updateAll(['is_default' => false], ['team_id' => $teamId]);
+    }
+
+    public function getDefaultForTeamId(int $teamId): ?TeamLineup
+    {
+        return $this->findOne([
+            'team_id' => $teamId,
+            'is_default' => true,
+        ]);
     }
 }

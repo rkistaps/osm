@@ -15,7 +15,7 @@ class AbstractCollection
         $this->collection = collect($data);
     }
 
-    public function firstWhere(string $key, $operator = null, $value = null)
+    public function firstWhere($key, $operator = null, $value = null)
     {
         return $this->collection->firstWhere($key, $operator, $value);
     }
@@ -42,5 +42,10 @@ class AbstractCollection
     public function pluck($value, $key = null)
     {
         return $this->collection->pluck($value, $key);
+    }
+
+    public function filter(callable $callback = null)
+    {
+        return $this->collection->filter($callback);
     }
 }
