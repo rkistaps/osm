@@ -53,4 +53,11 @@ class AbstractCollection
     {
         return $this->collection->slice($offset, $length);
     }
+
+    public function transform(callable $callable): AbstractCollection
+    {
+        $this->collection->transform($callable);
+
+        return $this;
+    }
 }
