@@ -16,7 +16,7 @@ class CreateRegistryTable extends AbstractMigration
             $table->string('key');
             $table->string('value');
 
-            $table->index('key');
+            $table->unique('key');
         });
     }
 
