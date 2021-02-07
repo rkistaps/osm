@@ -37,6 +37,8 @@ class LineupStrengthCalculatorService
      */
     protected function positionStrength(string $position, Lineup $lineup, MatchSettings $settings): float
     {
+        $position = Player::POS_F;
+
         switch ($position) {
             case Player::POS_D:
                 $positionK = $settings->defenseModifier;

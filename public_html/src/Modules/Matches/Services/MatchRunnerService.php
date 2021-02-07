@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OSM\Modules\Matches\Services;
 
 use OSM\Core\Models\Match;
+use OSM\Core\Repositories\MatchRepository;
 use OSM\Core\Repositories\TeamRepository;
 use OSM\Modules\MatchEngine\MatchEngine;
 use OSM\Modules\MatchEngine\Structures\MatchResult;
@@ -17,19 +18,22 @@ class MatchRunnerService
     private TeamRepository $teamRepository;
     private MatchReportSavingService $matchReportService;
     private AfterMatchLineupProcessorService $matchLineupProcessorService;
+    private MatchRepository $matchRepository;
 
     public function __construct(
         MatchEngine $matchEngine,
         MatchLineupBuilderService $lineupBuilderService,
         TeamRepository $teamRepository,
         MatchReportSavingService $matchReportService,
-        AfterMatchLineupProcessorService $matchLineupProcessorService
+        AfterMatchLineupProcessorService $matchLineupProcessorService,
+        MatchRepository $matchRepository
     ) {
         $this->matchEngine = $matchEngine;
         $this->lineupBuilderService = $lineupBuilderService;
         $this->teamRepository = $teamRepository;
         $this->matchReportService = $matchReportService;
         $this->matchLineupProcessorService = $matchLineupProcessorService;
+        $this->matchRepository = $matchRepository;
     }
 
     public function runMatch(Match $match, MatchParameters $matchParameters): MatchResult
@@ -56,6 +60,8 @@ class MatchRunnerService
 
         $this->matchLineupProcessorService->processLineup($match, $homeTeamLineup, $matchParameters);
         $this->matchLineupProcessorService->processLineup($match, $awayTeamLineup, $matchParameters);
+
+        $this->matchRepository->saveModel($match);
 
         return $matchResult;
     }

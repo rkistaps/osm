@@ -45,7 +45,9 @@ class PlayerRepository extends AbstractModelRepository
             ->join('team_lineup_players', function ($join) {
                 $join->on('players.id', 'team_lineup_players.player_id');
             })
+            ->where('team_lineup_players.team_lineup_id')->is($teamLineupId)
             ->select('players.*')
+            ->fetchClass($this->getModelClassName())
             ->all();
 
         return new PlayerCollection($rows);

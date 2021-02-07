@@ -2,7 +2,6 @@
 
 namespace OSM\Modules\MatchEngine\Services;
 
-use OSM\Modules\MatchEngine\Helpers\LineupHelper;
 use OSM\Modules\MatchEngine\Structures\Lineup;
 use OSM\Modules\MatchEngine\Structures\Player;
 
@@ -22,7 +21,10 @@ class LineupValidatorService
             return false;
         }
 
-        $goalkeeper = LineupHelper::getRandomPlayerInPosition($lineup, Player::POS_G, 1);
+        $goalkeeper = collect($lineup->players)->first(function (Player $player) {
+            return $player->isGoalkeeper() && $player->isStarting();
+        });
+
         if (!$goalkeeper) {
             return false;
         }

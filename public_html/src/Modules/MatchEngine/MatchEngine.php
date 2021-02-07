@@ -113,8 +113,17 @@ class MatchEngine
         $result->stats->awayTeamAttackCount = $atAttackCount;
 
         // calculate shoot counts
-        $htShootCount = $result->stats->homeTeamShootCount = $this->getShootCount($homeTeam->strength, $awayTeam->strength, $htAttackCount);
-        $atShootCount = $result->stats->awayTeamShootCount = $this->getShootCount($awayTeam->strength, $homeTeam->strength, $atAttackCount);
+        $htShootCount = $result->stats->homeTeamShootCount = $this->getShootCount(
+            $homeTeam->strength,
+            $awayTeam->strength,
+            $htAttackCount
+        );
+
+        $atShootCount = $result->stats->awayTeamShootCount = $this->getShootCount(
+            $awayTeam->strength,
+            $homeTeam->strength,
+            $atAttackCount
+        );
 
         // add attack stop events
         $htAttacksStopped = $htAttackCount - $htShootCount;
@@ -318,14 +327,19 @@ class MatchEngine
         int $attackCount
     ): int {
         $atK = $attackingTeam->attack + $attackingTeam->midfield * 0.33;
-        $dtK = $defendingTeam->defence + $defendingTeam->midfield * 0.33;
+        $dtK = $defendingTeam->defence * 2 + $defendingTeam->midfield * 0.33;
 
-        return round($atK / $dtK * $attackCount);
+        $shootCount = round($atK / $dtK * $attackCount);
+
+        return $shootCount > $attackCount ? $attackCount : $shootCount;
     }
 
     protected function getAttackCount(MatchSettings $settings): int
     {
-        $attackCountRandomModifier = rand(100 - $settings->attackCountRandomModifier, 100 + $settings->attackCountRandomModifier) / 100;
+        $attackCountRandomModifier = rand(
+                100 - $settings->attackCountRandomModifier,
+                100 + $settings->attackCountRandomModifier
+            ) / 100;
 
         return ceil($settings->baseAttackCount * $attackCountRandomModifier);
     }
