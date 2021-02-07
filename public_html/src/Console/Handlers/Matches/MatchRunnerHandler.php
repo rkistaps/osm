@@ -48,6 +48,6 @@ class MatchRunnerHandler implements CommandHandlerInterface
 
         $result = $this->matchRunnerService->runMatch($match, $matchParams);
 
-        dd($result);
+        dd($result->stats);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Modules\Teams\Lineups\Services;
 
+use OSM\Core\Collections\PlayerCollection;
 use OSM\Core\Models\Player;
 use OSM\Core\Models\Team;
 use OSM\Core\Models\TeamLineup;
@@ -49,29 +50,46 @@ class TeamLineupGeneratorService
 
     public function setBestPlayersForLineup(TeamLineup $lineup)
     {
-        $players = $this
+        /** @var PlayerCollection $playerCollection */
+        $playerCollection = $this
             ->playerRepository
             ->getSquadPlayersByTeam($lineup->teamId)
-            ->sort(fn(Player $player) => $this->playerStrengthCalculator->calculateStrength($player))
-            ->all();
+            ->sort(fn(Player $player) => $this->playerStrengthCalculator->calculateStrength($player));
 
         $playerIds = [];
 
         // add goalkeeper first
         /** @var Player $goalkeeper */
-        $goalkeeper = collect($players)->firstWhere('position', Player::POSITION_G);
-        if ($goalkeeper) {
-            $playerIds[] = $goalkeeper->id;
+
+
+        // player count min limit for positions
+        $playerPositionMinLimits = [
+            Player::POSITION_G => 1,
+            Player::POSITION_D => 3,
+            Player::POSITION_M => 3,
+            Player::POSITION_F => 1,
+        ];
+
+        foreach ($playerPositionMinLimits as $position => $limit) {
+            $positionPlayerIds = $playerCollection
+                ->where('position', $position)
+                ->slice(0, $limit)
+                ->map(fn(Player $player) => $player->id)
+                ->all();
+
+            $playerIds = array_merge($playerIds, $positionPlayerIds);
         }
 
-        // Player count limit per position
-        $playerPositionLimits = [
-            Player::POSITION_D => 5,
-            Player::POSITION_M => 5,
-            Player::POSITION_F => 3,
+        // Player count max limit per position
+        $playerPositionMaxLimits = [
+            Player::POSITION_G => 1,
+            Player::POSITION_D => 2,
+            Player::POSITION_M => 2,
+            Player::POSITION_F => 2,
         ];
-        foreach ($players as $player) {
-            if ($playerPositionLimits[$player->position] < 1) { // no more spots in this position
+
+        foreach ($playerCollection as $player) {
+            if ($playerPositionMaxLimits[$player->position] < 1) { // no more spots in this position
                 continue;
             }
 
@@ -79,7 +97,7 @@ class TeamLineupGeneratorService
             $playerIds[] = $player->id;
 
             // remove one spot for position
-            $playerPositionLimits[$player->position] -= 1;
+            $playerPositionMaxLimits[$player->position] -= 1;
 
             // we are set
             if (count($playerIds) === 11) {

@@ -48,4 +48,9 @@ class AbstractCollection
     {
         return $this->collection->filter($callback);
     }
+
+    public function slice(int $offset, int $length = null)
+    {
+        return $this->collection->slice($offset, $length);
+    }
 }
