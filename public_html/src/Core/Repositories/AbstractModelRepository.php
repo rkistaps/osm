@@ -204,4 +204,14 @@ abstract class AbstractModelRepository
 
         return $query->delete();
     }
+
+    public function findRandom(array $condition = []): ?AbstractModel
+    {
+        return $this
+            ->buildQuery($condition)
+            ->orderBy(fn($expr) => $expr->op('rand()'))
+            ->select()
+            ->fetchClass($this->getModelClassName())
+            ->first();
+    }
 }

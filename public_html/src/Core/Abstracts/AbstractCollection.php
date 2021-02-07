@@ -20,6 +20,11 @@ class AbstractCollection
         return $this->collection->firstWhere($key, $operator, $value);
     }
 
+    public function first(callable $callback = null, $default = null)
+    {
+        return $this->collection->first($callback, $default);
+    }
+
     public function where($key, $operator = null, $value = null)
     {
         return $this->collection->where($key, $operator, $value);
