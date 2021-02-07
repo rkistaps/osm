@@ -326,12 +326,6 @@ class MatchEngine
         LineupStrength $defendingTeam,
         int $attackCount
     ): int {
-        $attackingTeam->midfield = 100;
-        $attackingTeam->attack = 100;
-
-        $defendingTeam->midfield = 100;
-        $defendingTeam->defence = 100;
-
         $atK = $attackingTeam->attack + $attackingTeam->midfield * 0.33;
         $dtK = $defendingTeam->defence * 2 + $defendingTeam->midfield * 0.33;
 
