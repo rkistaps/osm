@@ -8,7 +8,9 @@ use OSM\Core\Models\Country;
 use OSM\Core\Models\Registry;
 use OSM\Core\Models\Team;
 use OSM\Core\Models\User;
+use OSM\Core\Models\UserMeta;
 use OSM\Core\Repositories\CountryRepository;
+use OSM\Core\Services\MetaService;
 use OSM\Core\Services\RegistryService;
 use OSM\Modules\Teams\Creation\Services\TeamCreationService;
 use OSM\Modules\Teams\Creation\Structures\TeamCreationParams;
@@ -20,17 +22,20 @@ class BotCreationService
     private TeamCreationService $teamCreationService;
     private RegistryService $registryService;
     private CountryRepository $countryRepository;
+    private MetaService $metaService;
 
     public function __construct(
         UserCreationService $userCreationService,
         TeamCreationService $teamCreationService,
         RegistryService $registryService,
-        CountryRepository $countryRepository
+        CountryRepository $countryRepository,
+        MetaService $metaService
     ) {
         $this->userCreationService = $userCreationService;
         $this->teamCreationService = $teamCreationService;
         $this->registryService = $registryService;
         $this->countryRepository = $countryRepository;
+        $this->metaService = $metaService;
     }
 
     public function addBot(Country $country = null): array
@@ -64,9 +69,13 @@ class BotCreationService
 
         $this->registryService->setValue(Registry::BOT_COUNTER, $botCounter);
 
-        return $this->userCreationService->create(
+        $user = $this->userCreationService->create(
             uniqid('Bot '),
             ''
         );
+
+        $this->metaService->setMetaValue($user, UserMeta::IS_BOT, '1');
+
+        return $user;
     }
 }
