@@ -14,7 +14,7 @@ class CreateUserMetaTable extends AbstractMigration
         $this->createTable('user_metas', function (\Opis\Database\Schema\CreateTable $table) {
             $table->integer('id')->autoincrement();
             $table->integer('user_id');
-            $table->string('key');
+            $table->string('key')->notNull();
             $table->string('value');
 
             $table->foreign('user_id')
