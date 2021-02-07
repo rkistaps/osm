@@ -22,6 +22,7 @@ return $localConfig + [
                 \OSM\Console\Commands\UserCommandConfigurator::class,
                 \OSM\Console\Commands\TeamsCommandConfigurator::class,
                 \OSM\Console\Commands\MatchCommandConfigurator::class,
+                \OSM\Console\Commands\BotCommandConfigurator::class,
             ],
         ],
     ];

@@ -24,11 +24,13 @@ class RegistryService
     {
         $registry = $this->getByKey($key);
 
-        return $registry ? $registry->value : $default;
+        return $registry ? $registry->value : (string)$default;
     }
 
-    public function setValue(string $key, string $value)
+    public function setValue(string $key, $value)
     {
+        $value = (string)$value;
+
         if (!in_array($key, Registry::REGISTRY_KEYS)) {
             throw new \InvalidArgumentException('Bad registry key');
         }
@@ -52,7 +54,7 @@ class RegistryService
     {
         $registry = new Registry();
         $registry->key = $key;
-        $registry->value = $value;
+        $registry->value = (string)$value;
 
         $registry = $this->repository->saveModel($registry);
         $this->registries->add($registry);
@@ -62,6 +64,8 @@ class RegistryService
 
     protected function getByKey(string $key): ?Registry
     {
-        return $this->registries->firstWhere('key', $key);
+        return $this->registries->first(function (Registry $registry) use ($key) {
+            return $registry->key === $key;
+        });
     }
 }
