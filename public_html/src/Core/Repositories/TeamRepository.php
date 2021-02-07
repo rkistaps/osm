@@ -12,6 +12,7 @@ use OSM\Core\Models\Team;
  * @method Team createModel(array $properties = [], bool $persistent = false)
  * @method Team saveModel(AbstractModel $model, array $properties = [])
  * @method Team|null findOne(array $condition = [])
+ * @method Team|null findById(int $id)
  */
 class TeamRepository extends AbstractModelRepository
 {

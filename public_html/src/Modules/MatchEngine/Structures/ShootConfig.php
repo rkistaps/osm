@@ -13,8 +13,8 @@ class ShootConfig
     public int $defendingTeamId;
     public Player $striker;
     public Player $goalkeeper;
-    public ?Player $attackHelper;
-    public ?Player $defenseHelper;
+    public ?Player $attackHelper = null;
+    public ?Player $defenseHelper = null;
     public int $saveBonus = 0;
     public int $randomModifier = 7;
 }

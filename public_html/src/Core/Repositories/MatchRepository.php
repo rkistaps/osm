@@ -9,6 +9,7 @@ use OSM\Core\Models\Match;
 
 /**
  * @method MatchCollection findAll(array $condition = [])
+ * @method Match|null findById(int $id)
  */
 class MatchRepository extends AbstractModelRepository
 {

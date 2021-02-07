@@ -6,6 +6,7 @@ namespace OSM\Console\Commands;
 
 use OSM\Console\Handlers\Teams\TeamsCreationCommandHandler;
 use OSM\Core\Repositories\TeamRepository;
+use OSM\Modules\Teams\Lineups\Services\TeamLineupGeneratorService;
 use Psr\Log\LoggerInterface;
 use TheApp\Components\CommandRunner;
 
@@ -13,7 +14,8 @@ class TeamsCommandConfigurator implements \TheApp\Interfaces\CommandConfigurator
 {
     private LoggerInterface $logger;
 
-    public function __construct(LoggerInterface $logger) {
+    public function __construct(LoggerInterface $logger)
+    {
         $this->logger = $logger;
     }
 
@@ -31,7 +33,22 @@ class TeamsCommandConfigurator implements \TheApp\Interfaces\CommandConfigurator
             $team = $repository->findByName($name);
 
             $this->logger->info($team);
+        });
 
+        $commandRunner->addCommand(self::PREFIX . '/generate-default-lineup', function (
+            int $teamId,
+            TeamRepository $teamRepository,
+            TeamLineupGeneratorService $lineupGeneratorService
+        ) {
+            $team = $teamRepository->findById($teamId);
+            if (!$team) {
+                $this->logger->info('Team not found');
+                return;
+            }
+
+            $lineUp = $lineupGeneratorService->generateDefaultLineup($team);
+
+            $this->logger->info('DONE. Lineup id: ' . $lineUp->id);
         });
     }
 }

@@ -7,6 +7,7 @@ namespace OSM\Console\Commands;
 use OSM\Console\Handlers\Matches\Friendlies\FriendlyAcceptInviteHandler;
 use OSM\Console\Handlers\Matches\Friendlies\FriendlyInviteHandler;
 use OSM\Console\Handlers\Matches\Friendlies\FriendlyRunRoundHandler;
+use OSM\Console\Handlers\Matches\MatchRunnerHandler;
 use OSM\Core\Models\Match;
 use OSM\Core\Repositories\MatchRepository;
 use OSM\Core\Repositories\PlayerRepository;
@@ -32,9 +33,10 @@ class MatchCommandConfigurator implements \TheApp\Interfaces\CommandConfigurator
         });
         $commandRunner->addCommand(self::PREFIX . '/test', function (PlayerRepository $repository) {
             $players = $repository->getPlayersForTeamLineupId(4);
-
-            dd($players);
         });
+
+        # Run a match
+        $commandRunner->addCommand(self::PREFIX . '/run', MatchRunnerHandler::class);
 
         # Friendlies
         $commandRunner->addCommand(self::PREFIX . '/run-friendly-round', FriendlyRunRoundHandler::class);

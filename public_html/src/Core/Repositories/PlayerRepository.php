@@ -46,6 +46,7 @@ class PlayerRepository extends AbstractModelRepository
                 $join->on('players.id', 'team_lineup_players.player_id');
             })
             ->select('players.*')
+            ->fetchClass($this->getModelClassName())
             ->all();
 
         return new PlayerCollection($rows);

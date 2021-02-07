@@ -55,15 +55,21 @@ class TeamLineupGeneratorService
             ->sort(fn(Player $player) => $this->playerStrengthCalculator->calculateStrength($player))
             ->all();
 
-        // how many players can be at one position
+        $playerIds = [];
+
+        // add goalkeeper first
+        /** @var Player $goalkeeper */
+        $goalkeeper = collect($players)->firstWhere('position', Player::POSITION_G);
+        if ($goalkeeper) {
+            $playerIds[] = $goalkeeper->id;
+        }
+
+        // Player count limit per position
         $playerPositionLimits = [
-            Player::POSITION_G => 1,
             Player::POSITION_D => 5,
             Player::POSITION_M => 5,
             Player::POSITION_F => 3,
         ];
-
-        $playerIds = [];
         foreach ($players as $player) {
             if ($playerPositionLimits[$player->position] < 1) { // no more spots in this position
                 continue;

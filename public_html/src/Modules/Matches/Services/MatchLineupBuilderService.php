@@ -44,8 +44,6 @@ class MatchLineupBuilderService
         $lineup = new Lineup();
         $lineup->teamId = $teamId;
 
-        // todo coach
-
         $teamLineup = $lineupId
             ? $this->teamLineupRepository->findById($lineupId)
             : $this->teamLineupRepository->getDefaultForTeamId($teamId);
@@ -59,6 +57,14 @@ class MatchLineupBuilderService
         }
 
         $lineup->players = $this->getPlayersForTeamLineup($teamId, $teamLineup, $matchParameters);
+
+        $lineup->pressure = $teamLineup->pressure;
+        $lineup->passingStyle = $teamLineup->passingStyle;
+        $lineup->defensiveLine = $teamLineup->defensiveLine;
+        $lineup->tactic = $teamLineup->tactic;
+
+        // todo coach
+        $lineup->coach = null;
 
         return $lineup;
     }
@@ -96,6 +102,7 @@ class MatchLineupBuilderService
                 : $player->energy;
 
             $matchPlayer->experience = $player->experience;
+            $matchPlayer->status = MatchPlayer::STATUS_STARTING;
 
             return $matchPlayer;
         }, $playerCollection->all());
