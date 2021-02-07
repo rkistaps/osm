@@ -12,6 +12,7 @@ use OSM\Core\Models\UserMeta;
 use OSM\Core\Repositories\CountryRepository;
 use OSM\Core\Services\MetaService;
 use OSM\Core\Services\RegistryService;
+use OSM\Modules\Bots\Creation\Structures\BotCreationResult;
 use OSM\Modules\Teams\Creation\Services\TeamCreationService;
 use OSM\Modules\Teams\Creation\Structures\TeamCreationParams;
 use OSM\Modules\Users\Services\UserCreationService;
@@ -38,15 +39,13 @@ class BotCreationService
         $this->metaService = $metaService;
     }
 
-    public function addBot(Country $country = null): array
+    public function addBot(Country $country = null): BotCreationResult
     {
-        $user = $this->createBotUser();
-        $team = $this->createBotTeam($user, $country);
+        $result = new BotCreationResult();
+        $result->user = $this->createBotUser();
+        $result->team = $this->createBotTeam($result->user, $country);
 
-        return [
-            'user' => $user,
-            'team' => $team,
-        ];
+        return $result;
     }
 
     public function createBotTeam(User $user, Country $country = null): Team
