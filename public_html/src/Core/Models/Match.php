@@ -57,4 +57,9 @@ class Match extends AbstractModel
     public bool $isWalkover = false;
 
     public string $ticketPriceLevel = self::TICKET_PRICE_LEVEL_NORMAL;
+
+    public function isFriendly(): bool
+    {
+        return $this->seriesType === self::TYPE_FRIENDLY;
+    }
 }

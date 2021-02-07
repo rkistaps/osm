@@ -73,4 +73,14 @@ abstract class AbstractModelCollection extends AbstractCollection
 
         return self::collect($result);
     }
+
+    public function property(string $property): array
+    {
+        return $this
+            ->collection
+            ->map(function (AbstractModel $model) use ($property) {
+                return $model->{$property};
+            })
+            ->all();
+    }
 }

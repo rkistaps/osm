@@ -33,11 +33,16 @@ class MatchRepository extends AbstractModelRepository
         int $round,
         ?int $seriesId = null
     ): MatchCollection {
-        return $this->findAll([
+        $cond = [
             'series_type' => $seriesType,
-            'series_id' => $seriesId,
             'series_round' => $round,
-        ]);
+        ];
+
+        if ($seriesId) {
+            $cond['series_id'] = $seriesId;
+        }
+
+        return $this->findAll($cond);
     }
 
     public function findByRoundTypeAndTeam(int $round, string $seriesType, int $teamId): ?Match

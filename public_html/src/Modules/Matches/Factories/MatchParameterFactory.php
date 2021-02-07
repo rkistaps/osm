@@ -24,6 +24,7 @@ class MatchParameterFactory
 
         $parameters->processInjuries = false;
         $parameters->processFatigue = false;
+        $parameters->processPlayerStats = false;
         $parameters->useFullEnergy = true;
 
         return $parameters;
@@ -38,6 +39,10 @@ class MatchParameterFactory
 
     public function buildForMatch(Match $match): MatchParameters
     {
+        if ($match->isFriendly()) {
+            return $this->buildForFriendlies();
+        }
+
         // todo implement
         return $this->buildDefault();
     }

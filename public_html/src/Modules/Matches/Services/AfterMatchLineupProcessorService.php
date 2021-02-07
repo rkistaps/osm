@@ -8,6 +8,7 @@ use OSM\Core\Models\Match;
 use OSM\Core\Repositories\PlayerRepository;
 use OSM\Modules\MatchEngine\Structures\Injury;
 use OSM\Modules\MatchEngine\Structures\Lineup;
+use OSM\Modules\MatchEngine\Structures\Player;
 use OSM\Modules\Matches\Structures\MatchParameters;
 use OSM\Modules\Options\Services\OptionValueService;
 use OSM\Modules\Options\Structures\PlayerOptionGroup;
@@ -50,8 +51,7 @@ class AfterMatchLineupProcessorService
         }
 
         // update player models
-
-        $playerIds = collect($lineup->players)->pluck('id')->all();
+        $playerIds = collect($lineup->players)->map(fn(Player $player) => $player->id)->all();
         $playerCollection = $this->playerRepository->findAll(['id' => $playerIds]);
         foreach ($lineup->players as $player) {
             $playerModel = $playerCollection->firstWhere('id', $player->id);
