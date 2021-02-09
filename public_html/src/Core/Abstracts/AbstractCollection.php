@@ -6,7 +6,7 @@ namespace OSM\Core\Abstracts;
 
 use Tightenco\Collect\Support\Collection;
 
-class AbstractCollection
+abstract class AbstractCollection
 {
     protected Collection $collection;
 
