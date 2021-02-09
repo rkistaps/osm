@@ -15,6 +15,11 @@ class AbstractCollection
         $this->collection = collect($data);
     }
 
+    public function getCollection(): Collection
+    {
+        return $this->collection;
+    }
+
     public function firstWhere($key, $operator = null, $value = null)
     {
         return $this->collection->firstWhere($key, $operator, $value);
@@ -62,6 +67,18 @@ class AbstractCollection
     public function transform(callable $callable): AbstractCollection
     {
         $this->collection->transform($callable);
+
+        return $this;
+    }
+
+    public function count(): int
+    {
+        return $this->collection->count();
+    }
+
+    public function merge(AbstractCollection $items)
+    {
+        $this->collection = $this->collection->merge($items->getCollection());
 
         return $this;
     }

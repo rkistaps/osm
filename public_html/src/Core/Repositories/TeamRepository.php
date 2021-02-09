@@ -35,4 +35,21 @@ class TeamRepository extends AbstractModelRepository
     {
         return $this->findOne(['name' => $name]);
     }
+
+    public function findTeamsWithoutChampionship(int $countryId = null, int $limit = 10): TeamCollection
+    {
+        $cond = [];
+        if ($countryId) {
+            $cond['country_id'] = $countryId;
+        }
+
+        $models = $this
+            ->buildQuery($cond)
+            ->limit($limit)
+            ->select()
+            ->fetchClass($this->getModelClassName())
+            ->all();
+
+        return new TeamCollection($models);
+    }
 }

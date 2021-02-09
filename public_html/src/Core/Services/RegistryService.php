@@ -47,6 +47,8 @@ class RegistryService
 
                 $this->repository->saveModel($registry);
             }
+
+            return $registry;
         });
     }
 

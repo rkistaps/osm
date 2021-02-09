@@ -10,6 +10,7 @@ use OSM\Core\Models\Championship;
 
 /**
  * @method Championship saveModel(AbstractModel $model, array $properties = [])
+ * @method Championship|null findById(int $id)
  */
 class ChampionshipRepository extends AbstractModelRepository
 {
