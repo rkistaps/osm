@@ -167,6 +167,8 @@ abstract class AbstractModelRepository
         foreach ($conditions as $key => $value) {
             if (is_array($value)) {
                 $statement->andWhere($key)->in($value);
+            } elseif (is_null($value)) {
+                $statement->andWhere($key)->isNull();
             } else {
                 $statement->andWhere($key)->is($value);
             }

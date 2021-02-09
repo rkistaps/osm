@@ -38,7 +38,7 @@ class TeamRepository extends AbstractModelRepository
 
     public function findTeamsWithoutChampionship(int $countryId = null, int $limit = 10): TeamCollection
     {
-        $cond = [];
+        $cond = ['championship_id' => null];
         if ($countryId) {
             $cond['country_id'] = $countryId;
         }
