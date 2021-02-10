@@ -10,6 +10,8 @@ use OSM\Core\Models\AbstractModel;
 
 abstract class AbstractModelCollection extends AbstractCollection
 {
+    abstract public function getModelClassName(): string;
+
     /**
      * @param array $data
      * @return self
@@ -21,7 +23,6 @@ abstract class AbstractModelCollection extends AbstractCollection
         return new $calledClass($data);
     }
 
-    abstract public function getModelClassName(): string;
 
     public function all(): array
     {
@@ -82,5 +83,10 @@ abstract class AbstractModelCollection extends AbstractCollection
                 return $model->{$property};
             })
             ->all();
+    }
+
+    public function getIds(): array
+    {
+        return $this->property('id');
     }
 }

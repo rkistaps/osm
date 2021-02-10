@@ -11,4 +11,5 @@ class LeagueCreationParameters
     public int $number = 1;
     public int $level = 1;
     public bool $addTeams = false;
+    public bool $createTable = false;
 }

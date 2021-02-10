@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OSM\Modules\Series\Leagues\Services;
 
 use OSM\Core\Models\Championship;
+use OSM\Core\Models\Match;
 use OSM\Core\Repositories\ChampionshipLeagueRepository;
 use OSM\Modules\Series\Leagues\Structures\LeagueCreationParameters;
 
@@ -23,7 +24,7 @@ class LeagueLevelCreationService
 
     public function createNewLeagueLevel(Championship $championship)
     {
-        if ($championship->type !== Championship::TYPE_LEAGUE) {
+        if ($championship->type !== Match::TYPE_CHAMPIONSHIP_LEAGUE) {
             throw new \InvalidArgumentException('Invalid championship type: ' . $championship->type);
         }
 
@@ -34,6 +35,7 @@ class LeagueLevelCreationService
         $params->championshipId = $championship->id;
         $params->level = $newLevel;
         $params->addTeams = true;
+        $params->createTable = true;
 
         $leagueCount = $this->getLeagueCountForLevel($newLevel);
         for ($i = 0; $i !== $leagueCount; $i++) {
