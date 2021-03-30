@@ -61,4 +61,13 @@ class MatchRepository extends AbstractModelRepository
 
         return $result ? $result : null;
     }
+
+    public function findUnplayedByRoundAndType(int $round, string $type): MatchCollection
+    {
+        return $this->findAll([
+            'is_played' => false,
+            'round' => $round,
+            'type' => $type,
+        ]);
+    }
 }

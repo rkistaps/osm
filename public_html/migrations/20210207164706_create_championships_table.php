@@ -15,6 +15,7 @@ class CreateChampionshipsTable extends AbstractMigration
             $table->integer('id')->autoincrement();
             $table->string('type')->notNull();
             $table->string('name')->notNull();
+            $table->integer('round')->defaultValue(1)->notNull();
         });
     }
 

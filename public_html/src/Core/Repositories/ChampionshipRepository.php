@@ -11,6 +11,7 @@ use OSM\Core\Models\Championship;
 /**
  * @method Championship saveModel(AbstractModel $model, array $properties = [])
  * @method Championship|null findById(int $id)
+ * @method ChampionshipCollection findAll(array $condition = [])
  */
 class ChampionshipRepository extends AbstractModelRepository
 {
@@ -27,5 +28,10 @@ class ChampionshipRepository extends AbstractModelRepository
     protected function getCollectionClassName(): string
     {
         return ChampionshipCollection::class;
+    }
+
+    public function findByType(string $type): ChampionshipCollection
+    {
+        return $this->findAll(['type' => $type]);
     }
 }
