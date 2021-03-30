@@ -10,6 +10,7 @@ use OSM\Core\Models\ChampionshipLeague;
 
 /**
  * @method ChampionshipLeague saveModel(AbstractModel $model, array $properties = [])
+ * @method ChampionshipLeagueCollection findAll(array $condition = [])
  */
 class ChampionshipLeagueRepository extends AbstractModelRepository
 {
@@ -37,4 +38,8 @@ class ChampionshipLeagueRepository extends AbstractModelRepository
             ->max('level');
     }
 
+    public function findAllByChampionshipId(int $championshipId): ChampionshipLeagueCollection
+    {
+        return $this->findAll(['championship_id' => $championshipId]);
+    }
 }
