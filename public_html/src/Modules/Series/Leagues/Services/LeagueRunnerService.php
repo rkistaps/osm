@@ -13,6 +13,7 @@ use OSM\Core\Repositories\ChampionshipRepository;
 use OSM\Core\Repositories\MatchRepository;
 use OSM\Modules\Matches\Factories\MatchParameterFactory;
 use OSM\Modules\Matches\Services\MatchRunnerService;
+use OSM\Modules\Series\Common\Services\LeagueTableUpdatingService;
 use Psr\Log\LoggerInterface;
 
 class LeagueRunnerService
@@ -23,6 +24,7 @@ class LeagueRunnerService
     private ChampionshipLeagueRepository $leagueRepository;
     private MatchParameterFactory $matchParameterFactory;
     private LoggerInterface $logger;
+    private LeagueTableUpdatingService $leagueTableUpdatingService;
 
     public function __construct(
         LoggerInterface $logger,
@@ -30,7 +32,8 @@ class LeagueRunnerService
         MatchRepository $matchRepository,
         MatchParameterFactory $matchParameterFactory,
         ChampionshipRepository $championshipRepository,
-        ChampionshipLeagueRepository $leagueRepository
+        ChampionshipLeagueRepository $leagueRepository,
+        LeagueTableUpdatingService $leagueTableUpdatingService
     ) {
         $this->matchRunnerService = $matchRunnerService;
         $this->championshipRepository = $championshipRepository;
@@ -38,6 +41,7 @@ class LeagueRunnerService
         $this->leagueRepository = $leagueRepository;
         $this->matchParameterFactory = $matchParameterFactory;
         $this->logger = $logger;
+        $this->leagueTableUpdatingService = $leagueTableUpdatingService;
     }
 
     public function runNextRoundForAllLeagues()
@@ -62,14 +66,21 @@ class LeagueRunnerService
 
     public function runLeagueRound(Championship $championship, ChampionshipLeague $league, int $round)
     {
-        $matches = $this->matchRepository->findUnplayedByRoundAndChampionship($round, $championship);
+        $matches = $this->matchRepository->findUnplayedByRoundAndChampionship(
+            $round,
+            $championship,
+            $league
+        );
         foreach ($matches->all() as $match) {
             $this->runMatch($match);
         }
+
+        $this->leagueTableUpdatingService->updateChampionshipLeagueTable($championship, $league);
     }
 
     public function runMatch(Match $match)
     {
         $parameters = $this->matchParameterFactory->buildForMatch($match);
+        $this->matchRunnerService->runMatch($match, $parameters);
     }
 }

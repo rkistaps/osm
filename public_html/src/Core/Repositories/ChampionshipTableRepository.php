@@ -7,6 +7,9 @@ namespace OSM\Core\Repositories;
 use OSM\Core\Collections\ChampionshipTableCollection;
 use OSM\Core\Models\ChampionshipTable;
 
+/**
+ * @method ChampionshipTableCollection findAll(array $condition = [])
+ */
 class ChampionshipTableRepository extends AbstractModelRepository
 {
     protected function getTableName(): string
@@ -27,6 +30,13 @@ class ChampionshipTableRepository extends AbstractModelRepository
     public function deleteByChampionshipId(int $championshipId)
     {
         $this->deleteAll([
+            'championship_id' => $championshipId,
+        ]);
+    }
+
+    public function findByChampionshipId(int $championshipId): ChampionshipTableCollection
+    {
+        return $this->findAll([
             'championship_id' => $championshipId,
         ]);
     }

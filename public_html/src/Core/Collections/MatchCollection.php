@@ -6,6 +6,9 @@ namespace OSM\Core\Collections;
 
 use OSM\Core\Models\Match;
 
+/**
+ * @method Match[] all()
+ */
 class MatchCollection extends AbstractModelCollection
 {
     public function getModelClassName(): string

@@ -6,6 +6,7 @@ namespace OSM\Core\Repositories;
 
 use OSM\Core\Collections\MatchCollection;
 use OSM\Core\Models\Championship;
+use OSM\Core\Models\ChampionshipLeague;
 use OSM\Core\Models\Match;
 
 /**
@@ -54,7 +55,8 @@ class MatchRepository extends AbstractModelRepository
         ]);
 
         $query->andWhere(function ($query) use ($teamId) {
-            $query->where('home_team_id')->is($teamId)
+            $query
+                ->where('home_team_id')->is($teamId)
                 ->orWhere('away_team_id')->is($teamId);
         });
 
@@ -63,14 +65,26 @@ class MatchRepository extends AbstractModelRepository
         return $result ? $result : null;
     }
 
+    public function findPlayedByChampionshipAndLeague(
+        Championship $championship,
+        ChampionshipLeague $league
+    ): MatchCollection {
+        return $this->findAll([
+            'is_played' => true,
+            'series_type' => $championship->type,
+            'series_id' => $league->id,
+        ]);
+    }
+
     public function findUnplayedByRoundAndChampionship(
         int $round,
-        Championship $championship
+        Championship $championship,
+        ChampionshipLeague $league
     ): MatchCollection {
         return $this->findAll([
             'is_played' => false,
             'series_type' => $championship->type,
-            'series_id' => $championship->id,
+            'series_id' => $league->id,
             'series_round' => $round,
         ]);
     }

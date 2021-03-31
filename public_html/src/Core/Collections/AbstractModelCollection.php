@@ -23,6 +23,10 @@ abstract class AbstractModelCollection extends AbstractCollection
         return new $calledClass($data);
     }
 
+    public function map(callable $callable)
+    {
+        self::collect($this->collection->map($callable)->all());
+    }
 
     public function all(): array
     {
