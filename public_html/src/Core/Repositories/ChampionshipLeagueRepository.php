@@ -11,6 +11,7 @@ use OSM\Core\Models\ChampionshipLeague;
 /**
  * @method ChampionshipLeague saveModel(AbstractModel $model, array $properties = [])
  * @method ChampionshipLeagueCollection findAll(array $condition = [])
+ * @method ChampionshipLeague|null findById(int $id)
  */
 class ChampionshipLeagueRepository extends AbstractModelRepository
 {

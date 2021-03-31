@@ -24,6 +24,7 @@ return $localConfig + [
                 \OSM\Console\Commands\MatchCommandConfigurator::class,
                 \OSM\Console\Commands\BotCommandConfigurator::class,
                 \OSM\Console\Commands\ChampionshipCommandConfigurator::class,
+                \OSM\Console\Commands\LeagueCommandConfigurator::class,
             ],
         ],
     ];

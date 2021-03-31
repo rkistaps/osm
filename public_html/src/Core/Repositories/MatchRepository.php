@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OSM\Core\Repositories;
 
 use OSM\Core\Collections\MatchCollection;
+use OSM\Core\Models\Championship;
 use OSM\Core\Models\Match;
 
 /**
@@ -62,12 +63,15 @@ class MatchRepository extends AbstractModelRepository
         return $result ? $result : null;
     }
 
-    public function findUnplayedByRoundAndType(int $round, string $type): MatchCollection
-    {
+    public function findUnplayedByRoundAndChampionship(
+        int $round,
+        Championship $championship
+    ): MatchCollection {
         return $this->findAll([
             'is_played' => false,
-            'round' => $round,
-            'type' => $type,
+            'series_type' => $championship->type,
+            'series_id' => $championship->id,
+            'series_round' => $round,
         ]);
     }
 }

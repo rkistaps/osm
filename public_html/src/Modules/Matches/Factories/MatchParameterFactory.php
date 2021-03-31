@@ -20,14 +20,11 @@ class MatchParameterFactory
 
     public function buildForFriendlies(MatchSettings $settings = null): MatchParameters
     {
-        $parameters = $this->buildDefault($settings);
-
-        $parameters->processInjuries = false;
-        $parameters->processFatigue = false;
-        $parameters->processPlayerStats = false;
-        $parameters->useFullEnergy = true;
-
-        return $parameters;
+        return $this->buildDefault($settings)
+            ->setProcessInjuries(false)
+            ->setProcessFatigue(false)
+            ->setProcessPlayerStats(false)
+            ->setUseFullEnergy(true);
     }
 
     public function buildDefault(MatchSettings $settings = null): MatchParameters

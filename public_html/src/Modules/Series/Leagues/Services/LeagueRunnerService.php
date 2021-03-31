@@ -11,7 +11,9 @@ use OSM\Core\Models\Match;
 use OSM\Core\Repositories\ChampionshipLeagueRepository;
 use OSM\Core\Repositories\ChampionshipRepository;
 use OSM\Core\Repositories\MatchRepository;
+use OSM\Modules\Matches\Factories\MatchParameterFactory;
 use OSM\Modules\Matches\Services\MatchRunnerService;
+use Psr\Log\LoggerInterface;
 
 class LeagueRunnerService
 {
@@ -19,10 +21,14 @@ class LeagueRunnerService
     private ChampionshipRepository $championshipRepository;
     private MatchRepository $matchRepository;
     private ChampionshipLeagueRepository $leagueRepository;
+    private MatchParameterFactory $matchParameterFactory;
+    private LoggerInterface $logger;
 
     public function __construct(
+        LoggerInterface $logger,
         MatchRunnerService $matchRunnerService,
         MatchRepository $matchRepository,
+        MatchParameterFactory $matchParameterFactory,
         ChampionshipRepository $championshipRepository,
         ChampionshipLeagueRepository $leagueRepository
     ) {
@@ -30,6 +36,8 @@ class LeagueRunnerService
         $this->championshipRepository = $championshipRepository;
         $this->matchRepository = $matchRepository;
         $this->leagueRepository = $leagueRepository;
+        $this->matchParameterFactory = $matchParameterFactory;
+        $this->logger = $logger;
     }
 
     public function runNextRoundForAllLeagues()
@@ -54,8 +62,14 @@ class LeagueRunnerService
 
     public function runLeagueRound(Championship $championship, ChampionshipLeague $league, int $round)
     {
-        $matches = $this->matchRepository->findUnplayedByRoundAndType($round, $championship->type);
+        $matches = $this->matchRepository->findUnplayedByRoundAndChampionship($round, $championship);
         foreach ($matches->all() as $match) {
+            $this->runMatch($match);
         }
+    }
+
+    public function runMatch(Match $match)
+    {
+        $parameters = $this->matchParameterFactory->buildForMatch($match);
     }
 }

@@ -51,6 +51,76 @@ class MatchParameters
     public bool $useFullEnergy = false;
 
     /**
+     * @param MatchSettings $matchSettings
+     * @return MatchParameters
+     */
+    public function setMatchSettings(MatchSettings $matchSettings): MatchParameters
+    {
+        $this->matchSettings = $matchSettings;
+        return $this;
+    }
+
+    /**
+     * @param bool $isDryRun
+     * @return MatchParameters
+     */
+    public function setIsDryRun(bool $isDryRun): MatchParameters
+    {
+        $this->isDryRun = $isDryRun;
+        return $this;
+    }
+
+    /**
+     * @param int $experienceGain
+     * @return MatchParameters
+     */
+    public function setExperienceGain(int $experienceGain): MatchParameters
+    {
+        $this->experienceGain = $experienceGain;
+        return $this;
+    }
+
+    /**
+     * @param bool $processFatigue
+     * @return MatchParameters
+     */
+    public function setProcessFatigue(bool $processFatigue): MatchParameters
+    {
+        $this->processFatigue = $processFatigue;
+        return $this;
+    }
+
+    /**
+     * @param bool $processInjuries
+     * @return MatchParameters
+     */
+    public function setProcessInjuries(bool $processInjuries): MatchParameters
+    {
+        $this->processInjuries = $processInjuries;
+        return $this;
+    }
+
+    /**
+     * @param bool $processPlayerStats
+     * @return MatchParameters
+     */
+    public function setProcessPlayerStats(bool $processPlayerStats): MatchParameters
+    {
+        $this->processPlayerStats = $processPlayerStats;
+        return $this;
+    }
+
+    /**
+     * @param bool $useFullEnergy
+     * @return MatchParameters
+     */
+    public function setUseFullEnergy(bool $useFullEnergy): MatchParameters
+    {
+        $this->useFullEnergy = $useFullEnergy;
+        return $this;
+    }
+
+    /**
      * MatchParams constructor.
      * @param MatchSettings $matchSettings
      */

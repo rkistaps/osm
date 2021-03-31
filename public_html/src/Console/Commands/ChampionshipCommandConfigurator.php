@@ -10,7 +10,7 @@ use TheApp\Components\CommandRunner;
 
 class ChampionshipCommandConfigurator implements \TheApp\Interfaces\CommandConfiguratorInterface
 {
-    private const PREFIX = 'championship';
+    private const PREFIX = 'championships';
 
     public function configureCommands(CommandRunner $commandRunner)
     {
