@@ -28,4 +28,9 @@ class MatchCollection extends AbstractModelCollection
             return $carry;
         }, []);
     }
+
+    public function getHomeTeamIds(): array
+    {
+        return $this->map(fn (Match $match) => $match->homeTeamId)->all();
+    }
 }

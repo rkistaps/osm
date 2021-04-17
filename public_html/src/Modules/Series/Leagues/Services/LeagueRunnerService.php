@@ -71,7 +71,7 @@ class LeagueRunnerService
         );
 
         // process match income
-        $this->incomeService->processMatchIncome($matches, $championship, $league);
+        $this->incomeService->processMatchIncome($matches, $league);
 
         foreach ($matches->all() as $match) {
             $this->matchRunnerService->runLeagueMatch($match, $league, $championship);

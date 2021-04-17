@@ -14,6 +14,7 @@ class TeamFinancialService
 {
     public const INCOME_EVENTS = [
         FinanceLog::EVENT_STARTING_MONEY,
+        FinanceLog::EVENT_MATCH_INCOME,
     ];
 
     public const EXPENSE_EVENTS = [];

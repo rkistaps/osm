@@ -7,6 +7,8 @@ namespace OSM\Modules\Series\Leagues\Services;
 use OSM\Core\Collections\MatchCollection;
 use OSM\Core\Models\Championship;
 use OSM\Core\Models\ChampionshipLeague;
+use OSM\Core\Models\FinanceLog;
+use OSM\Core\Models\Match;
 use OSM\Core\Repositories\TeamRepository;
 use OSM\Modules\Teams\Finances\Services\TeamFinancialService;
 
@@ -28,7 +30,6 @@ class LeagueMatchIncomeService
 
     public function processMatchIncome(
         MatchCollection $matchCollection,
-        Championship $championship,
         ChampionshipLeague $league
     ) {
         $attendances = $this->attendanceCalculationService->calculateAttendanceForMatches(
@@ -36,12 +37,32 @@ class LeagueMatchIncomeService
             $league
         );
 
+        $homeTeams = $this->teamRepository->findByIds($matchCollection->getHomeTeamIds());
+
         foreach ($matchCollection->all() as $match) {
             $attendance = $attendances->getMatchAttendance($match);
+            $homeTeam = $homeTeams->getById($match->homeTeamId);
 
+            // do not exceed stadium size
+            $attendance = $attendance > $homeTeam->stadiumSize ? $homeTeam->stadiumSize : $attendance;
+            $income = $attendance * $this->getTicketPriceForMatch($match);
 
+            $this->financialService->depositFunds($income, FinanceLog::EVENT_MATCH_INCOME, $homeTeam, true);
+
+            // todo process rest match income sources - snack, boards etc
         }
+    }
 
+    public function getTicketPriceForMatch(Match $match): float
+    {
+        $map = [
+            Match::TICKET_PRICE_LEVEL_VERY_LOW => 4,
+            Match::TICKET_PRICE_LEVEL_LOW => 4.5,
+            Match::TICKET_PRICE_LEVEL_NORMAL => 5,
+            Match::TICKET_PRICE_LEVEL_HIGH => 5.5,
+            Match::TICKET_PRICE_LEVEL_VERY_HIGH => 6,
+        ];
 
+        return $map[$match->ticketPriceLevel] ?? 5;
     }
 }
