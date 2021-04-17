@@ -14,7 +14,7 @@ class LeagueRoundRunnerHandler implements \TheApp\Interfaces\CommandHandlerInter
 
     public function __construct(
         LoggerInterface $logger,
-        LeagueRunnerService $leagueRunnerService,
+        LeagueRunnerService $leagueRunnerService
     ) {
         $this->leagueRunnerService = $leagueRunnerService;
         $this->logger = $logger;

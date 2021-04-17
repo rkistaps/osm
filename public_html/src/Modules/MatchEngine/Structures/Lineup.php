@@ -9,38 +9,38 @@ namespace OSM\Modules\MatchEngine\Structures;
 class Lineup
 {
     // pressures
-    const PRESSURE_SOFT = 'soft';
-    const PRESSURE_NORMAL = 'normal';
-    const PRESSURE_HARD = 'hard';
+    public const PRESSURE_SOFT = 'soft';
+    public const PRESSURE_NORMAL = 'normal';
+    public const PRESSURE_HARD = 'hard';
 
     // tactics
-    const TACTIC_NONE = 'none';
-    const TACTIC_OFFENSIVE = 'offensive';
-    const TACTIC_DEFENSIVE = 'defensive';
-    const TACTIC_COUNTER_ATTACKS = 'counter-attacks';
-    const TACTIC_TOWARDS_MIDDLE = 'towards-middle';
-    const TACTIC_ATTACKERS_TOWARDS_MIDDLE = 'attackers-towards-middle';
-    const TACTIC_DEFENDERS_TOWARDS_MIDDLE = 'defenders-towards-middle';
-    const TACTIC_MIDFIELDERS_TOWARDS_DEFENSE = 'midfielders-towards-defense';
-    const TACTIC_MIDFIELDERS_TOWARDS_ATTACK = 'midfielders-towards-attack';
-    const TACTIC_PLAY_IT_WIDE = 'play-it-wide';
+    public const TACTIC_NONE = 'none';
+    public const TACTIC_OFFENSIVE = 'offensive';
+    public const TACTIC_DEFENSIVE = 'defensive';
+    public const TACTIC_COUNTER_ATTACKS = 'counter-attacks';
+    public const TACTIC_TOWARDS_MIDDLE = 'towards-middle';
+    public const TACTIC_ATTACKERS_TOWARDS_MIDDLE = 'attackers-towards-middle';
+    public const TACTIC_DEFENDERS_TOWARDS_MIDDLE = 'defenders-towards-middle';
+    public const TACTIC_MIDFIELDERS_TOWARDS_DEFENSE = 'midfielders-towards-defense';
+    public const TACTIC_MIDFIELDERS_TOWARDS_ATTACK = 'midfielders-towards-attack';
+    public const TACTIC_PLAY_IT_WIDE = 'play-it-wide';
 
     // passing styles
-    const PASSING_SHORT = 'short';
-    const PASSING_LONG = 'long';
-    const PASSING_MIXED = 'mixed';
+    public const PASSING_SHORT = 'short';
+    public const PASSING_LONG = 'long';
+    public const PASSING_MIXED = 'mixed';
 
     // defensive lines
-    const DEFENSIVE_LINE_LOW = 'low';
-    const DEFENSIVE_LINE_HIGH = 'high';
-    const DEFENSIVE_LINE_NORMAL = 'normal';
+    public const DEFENSIVE_LINE_LOW = 'low';
+    public const DEFENSIVE_LINE_HIGH = 'high';
+    public const DEFENSIVE_LINE_NORMAL = 'normal';
 
     public int $teamId;
     public ?Coach $coach;
-    public string $tactic;
-    public string $passingStyle;
-    public string $defensiveLine;
-    public string $pressure;
+    public string $tactic = self::TACTIC_NONE;
+    public string $passingStyle = self::PASSING_MIXED;
+    public string $defensiveLine = self::DEFENSIVE_LINE_NORMAL;
+    public string $pressure = self::PRESSURE_NORMAL;
     public LineupStrength $strength;
 
     /** @var Player[] */
