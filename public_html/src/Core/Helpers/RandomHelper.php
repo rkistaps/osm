@@ -16,13 +16,20 @@ class RandomHelper
     }
 
     /**
-     * @param int $min
-     * @param int $max
-     * @return int
+     * @param int|float $min
+     * @param int|float $max
+     * @return float
      */
-    public static function between(int $min, int $max): int
+    public static function between($min, $max)
     {
-        return rand($min, $max);
+        $isInt = is_int($min) && is_int($max);
+
+        $min = (int)round($min * 100);
+        $max = (int)round($max * 100);
+
+        $result = rand($min, $max) / 100;
+
+        return $isInt ? (int)$result : $result;
     }
 
     /**

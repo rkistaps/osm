@@ -93,4 +93,14 @@ abstract class AbstractModelCollection extends AbstractCollection
     {
         return $this->property('id');
     }
+
+    public function getById(int $id): ?AbstractModel
+    {
+        return $this->first(fn(AbstractModel $model) => $model->id === $id);
+    }
+
+    public function reduce(callable $callable, $initial = null)
+    {
+        return $this->collection->reduce($callable, $initial);
+    }
 }

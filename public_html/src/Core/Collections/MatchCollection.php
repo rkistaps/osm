@@ -15,4 +15,17 @@ class MatchCollection extends AbstractModelCollection
     {
         return Match::class;
     }
+
+    /**
+     * @return int[]
+     */
+    public function getTeamIds(): array
+    {
+        return $this->reduce(function (array $carry, Match $match) {
+            $carry[] = $match->homeTeamId;
+            $carry[] = $match->awayTeamId;
+
+            return $carry;
+        }, []);
+    }
 }

@@ -11,37 +11,35 @@ use OSM\Core\Models\Match;
 use OSM\Core\Repositories\ChampionshipLeagueRepository;
 use OSM\Core\Repositories\ChampionshipRepository;
 use OSM\Core\Repositories\MatchRepository;
-use OSM\Modules\Matches\Factories\MatchParameterFactory;
-use OSM\Modules\Matches\Services\MatchRunnerService;
 use OSM\Modules\Series\Common\Services\LeagueTableUpdatingService;
 use Psr\Log\LoggerInterface;
 
 class LeagueRunnerService
 {
-    private MatchRunnerService $matchRunnerService;
     private ChampionshipRepository $championshipRepository;
     private MatchRepository $matchRepository;
     private ChampionshipLeagueRepository $leagueRepository;
-    private MatchParameterFactory $matchParameterFactory;
     private LoggerInterface $logger;
     private LeagueTableUpdatingService $leagueTableUpdatingService;
+    private LeagueMatchRunnerService $matchRunnerService;
+    private LeagueMatchIncomeService $incomeService;
 
     public function __construct(
         LoggerInterface $logger,
-        MatchRunnerService $matchRunnerService,
         MatchRepository $matchRepository,
-        MatchParameterFactory $matchParameterFactory,
         ChampionshipRepository $championshipRepository,
         ChampionshipLeagueRepository $leagueRepository,
-        LeagueTableUpdatingService $leagueTableUpdatingService
+        LeagueTableUpdatingService $leagueTableUpdatingService,
+        LeagueMatchRunnerService $matchRunnerService,
+        LeagueMatchIncomeService $incomeService
     ) {
         $this->matchRunnerService = $matchRunnerService;
         $this->championshipRepository = $championshipRepository;
         $this->matchRepository = $matchRepository;
         $this->leagueRepository = $leagueRepository;
-        $this->matchParameterFactory = $matchParameterFactory;
         $this->logger = $logger;
         $this->leagueTableUpdatingService = $leagueTableUpdatingService;
+        $this->incomeService = $incomeService;
     }
 
     public function runNextRoundForAllLeagues()
@@ -71,16 +69,58 @@ class LeagueRunnerService
             $championship,
             $league
         );
+
+        // process match income
+        $this->incomeService->processMatchIncome($matches, $championship, $league);
+
         foreach ($matches->all() as $match) {
-            $this->runMatch($match);
+            $this->matchRunnerService->runLeagueMatch($match, $league, $championship);
         }
 
         $this->leagueTableUpdatingService->updateChampionshipLeagueTable($championship, $league);
     }
 
-    public function runMatch(Match $match)
+    public function runNextLeagueRoundIdByLeagueId(int $leagueId)
     {
-        $parameters = $this->matchParameterFactory->buildForMatch($match);
-        $this->matchRunnerService->runMatch($match, $parameters);
+        $league = $this->getLeagueById($leagueId);
+        $championship = $this->getChampionshipByLeague($league);
+
+        $this->runLeagueRound(
+            $championship,
+            $league,
+            $championship->round
+        );
+    }
+
+    public function runLeagueRoundIdByLeagueId(int $leagueId, int $round)
+    {
+        $league = $this->getLeagueById($leagueId);
+        $championship = $this->getChampionshipByLeague($league);
+
+        $this->runLeagueRound(
+            $championship,
+            $league,
+            $round
+        );
+    }
+
+    protected function getLeagueById(int $leagueId): ChampionshipLeague
+    {
+        $league = $this->leagueRepository->findById($leagueId);
+        if (!$league) {
+            throw new \InvalidArgumentException('League not found');
+        }
+
+        return $league;
+    }
+
+    protected function getChampionshipByLeague(ChampionshipLeague $league): Championship
+    {
+        $championship = $this->championshipRepository->findById($league->championshipId);
+        if (!$championship || !$championship->isLeague()) {
+            throw new InvalidArgumentException('Invalid championship type');
+        }
+
+        return $championship;
     }
 }

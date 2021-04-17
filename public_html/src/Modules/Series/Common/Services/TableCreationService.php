@@ -24,11 +24,11 @@ class TableCreationService
 
     public function createTable(TableCreationParameters $parameters)
     {
-        $this->clearTableByChampionshipId($parameters->championshipId);
+        $this->clearTableByLeagueId($parameters->championshipLeagueId);
 
         foreach ($parameters->teams->all() as $team) {
             $table = new ChampionshipTable();
-            $table->championshipId = $parameters->championshipId;
+            $table->championshipLeagueId = $parameters->championshipLeagueId;
             $table->teamId = $team->id;
 
             $this->tableRepository->saveModel($table);
@@ -36,14 +36,14 @@ class TableCreationService
 
         if ($parameters->writeFixtures) {
             $fixtureParams = new FixtureCreationParameters();
-            $fixtureParams->championshipId = $parameters->championshipId;
+            $fixtureParams->championshipId = $parameters->championshipLeagueId;
             $fixtureParams->teams = $parameters->teams;
 
             $this->fixtureCreationService->createFixtures($fixtureParams);
         }
     }
 
-    public function clearTableByChampionshipId(int $championshipId)
+    public function clearTableByLeagueId(int $championshipId)
     {
         $this->tableRepository->deleteByChampionshipId($championshipId);
     }

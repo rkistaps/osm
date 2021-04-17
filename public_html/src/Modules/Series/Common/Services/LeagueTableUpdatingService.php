@@ -28,7 +28,7 @@ class LeagueTableUpdatingService
         Championship $championship,
         ChampionshipLeague $league
     ) {
-        $tableRows = $this->tableRepository->findByChampionshipId($championship->id);
+        $tableRows = $this->tableRepository->findByLeagueId($league->id);
         $tableRows->map(fn(ChampionshipTable $table) => $this->clearTableRow($table));
 
         $matches = $this->matchRepository->findPlayedByChampionshipAndLeague($championship, $league);

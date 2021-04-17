@@ -11,7 +11,7 @@ class TableCreationParameters
 {
     use FromArrayTrait;
 
-    public int $championshipId;
+    public int $championshipLeagueId;
     public TeamCollection $teams;
     public bool $writeFixtures = true;
 }

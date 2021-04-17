@@ -50,7 +50,7 @@ class LeagueCreationService
 
             if ($params->createTable) {
                 $tableCreationParams = new TableCreationParameters();
-                $tableCreationParams->championshipId = $params->championshipId;
+                $tableCreationParams->championshipLeagueId = $league->id;
                 $tableCreationParams->teams = $teams;
 
                 $this->tableCreationService->createTable($tableCreationParams);

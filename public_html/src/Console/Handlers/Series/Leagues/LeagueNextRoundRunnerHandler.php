@@ -32,35 +32,13 @@ class LeagueNextRoundRunnerHandler implements CommandHandlerInterface
     public function handle(array $params = [])
     {
         $leagueId = $params['league-id'] ?? null;
-
         if ($leagueId) {
-            $this->runNextRoundByLeagueId((int)$leagueId);
+            $this->logger->info("Running next round for: " . $leagueId);
+            $this->leagueRunnerService->runNextLeagueRoundIdByLeagueId($leagueId);
             return;
         }
 
         $this->logger->info('Running next round for all leagues');
         $this->leagueRunnerService->runNextRoundForAllLeagues();
-    }
-
-    protected function runNextRoundByLeagueId(int $leagueId)
-    {
-        $league = $this->leagueRepository->findById($leagueId);
-        if (!$league) {
-            $this->logger->error('League not found');
-            return;
-        }
-
-        $championship = $this->championshipRepository->findById($league->championshipId);
-        if (!$championship || !$championship->isLeague()) {
-            $this->logger->error('Invalid championship type');
-            return;
-        }
-
-        $this->logger->info("Running round " . $championship->round . " for " . $championship->name);
-        $this->leagueRunnerService->runLeagueRound(
-            $championship,
-            $league,
-            $championship->round
-        );
     }
 }

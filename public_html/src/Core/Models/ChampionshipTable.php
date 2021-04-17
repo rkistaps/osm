@@ -7,7 +7,7 @@ namespace OSM\Core\Models;
 class ChampionshipTable extends AbstractModel
 {
     public int $teamId;
-    public int $championshipId;
+    public int $championshipLeagueId;
     public int $wins = 0;
     public int $draws = 0;
     public int $losses = 0;

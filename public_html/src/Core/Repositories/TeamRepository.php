@@ -13,6 +13,7 @@ use OSM\Core\Models\Team;
  * @method Team saveModel(AbstractModel $model, array $properties = [])
  * @method Team|null findOne(array $condition = [])
  * @method Team|null findById(int $id)
+ * @method TeamCollection findAll(array $condition = [])
  */
 class TeamRepository extends AbstractModelRepository
 {
@@ -51,5 +52,10 @@ class TeamRepository extends AbstractModelRepository
             ->all();
 
         return new TeamCollection($models);
+    }
+
+    public function findByIds(array $ids): TeamCollection
+    {
+        return $this->findAll(['id' => $ids]);
     }
 }

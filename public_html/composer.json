@@ -16,7 +16,8 @@
   },
   "autoload": {
     "psr-4": {
-      "OSM\\": "src/"
+      "OSM\\": "src/",
+      "Tests\\": "tests/"
     },
     "files": [
       "src/Core/Library/functions.php"
@@ -27,5 +28,9 @@
       "type": "github",
       "url": "https://github.com/rkistaps/the-app.git"
     }
-  ]
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "mockery/mockery": "^1.4"
+  }
 }

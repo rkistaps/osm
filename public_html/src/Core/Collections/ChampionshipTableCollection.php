@@ -15,4 +15,9 @@ class ChampionshipTableCollection extends AbstractModelCollection
     {
         return ChampionshipTable::class;
     }
+
+    public function getByTeamId(int $teamId): ?ChampionshipTable
+    {
+        return $this->first(fn(ChampionshipTable $table) => $table->teamId === $teamId);
+    }
 }
