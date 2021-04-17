@@ -23,22 +23,14 @@ class MatchEngineTest extends BaseUnitTestCase
 
     public function setUp(): void
     {
-        $possessionCalculator = new PossessionCalculatorService();
-        $lineupStrengthCalculator = new LineupStrengthCalculatorService();
-        $performanceCalculator = new PerformanceCalculatorService();
-        $shootCalculator = new ShootCalculatorService();
-        $validatorService = new LineupValidatorService();
-        $injuryService = new InjuryService();
-        $penaltyService = new PenaltyService();
-
         $this->sut = new MatchEngine(
-            $possessionCalculator,
-            $lineupStrengthCalculator,
-            $performanceCalculator,
-            $shootCalculator,
-            $validatorService,
-            $injuryService,
-            $penaltyService
+            new PossessionCalculatorService(),
+            new LineupStrengthCalculatorService(),
+            new PerformanceCalculatorService(),
+            new ShootCalculatorService(),
+            new LineupValidatorService(),
+            new InjuryService(),
+            new PenaltyService()
         );
 
         parent::setUp();
