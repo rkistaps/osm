@@ -35,7 +35,9 @@ class MatchPlayerStatsUpdateService
 
     public function processLineup(Lineup $lineup, string $seriesType)
     {
-        $playerIds = collect($lineup->players)->pluck('id')->all();
+        $playerIds = collect($lineup->players)
+            ->map(fn(Player $player) => $player->id)
+            ->all();
 
         $statsTypes = self::MAPPING[$seriesType] ?? null;
 
@@ -46,7 +48,7 @@ class MatchPlayerStatsUpdateService
         $stats = $this->statsRepository->findAll([
             'player_id' => $playerIds,
             'team_id' => $lineup->teamId,
-            'stats_type' => $statsTypes,
+            'type' => $statsTypes,
             'season' => $this->state->getSeason(),
         ]);
 
@@ -61,12 +63,14 @@ class MatchPlayerStatsUpdateService
         }
     }
 
-    protected function processStatsType(string $type, Player $player, PlayerStatsCollection $stats, Lineup $lineup, int $value)
-    {
-        $playerStats = $stats->firstWhere(function (PlayerStats $playerStats) use ($type, $player) {
-            return $playerStats->type === $type && $player->id === $playerStats->playerId;
-        });
-
+    protected function processStatsType(
+        string $type,
+        Player $player,
+        PlayerStatsCollection $stats,
+        Lineup $lineup,
+        int $value
+    ) {
+        $playerStats = $stats->getByTypeAndPlayerId($type, $player->id);
         if (!$playerStats) {
             $playerStats = new PlayerStats();
             $playerStats->playerId = $player->id;

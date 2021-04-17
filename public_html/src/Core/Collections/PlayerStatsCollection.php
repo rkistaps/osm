@@ -12,4 +12,11 @@ class PlayerStatsCollection extends AbstractModelCollection
     {
         return PlayerStats::class;
     }
+
+    public function getByTypeAndPlayerId(string $type, int $playerId): ?PlayerStats
+    {
+        return $this->collection->first(
+            fn(PlayerStats $playerStats) => $type === $playerStats->type && $playerId === $playerStats->playerId
+        );
+    }
 }

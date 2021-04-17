@@ -6,13 +6,18 @@ namespace OSM\Core\Abstracts;
 
 use Tightenco\Collect\Support\Collection;
 
-class AbstractCollection
+abstract class AbstractCollection
 {
     protected Collection $collection;
 
     public function __construct(array $data = [])
     {
         $this->collection = collect($data);
+    }
+
+    public function getCollection(): Collection
+    {
+        return $this->collection;
     }
 
     public function firstWhere($key, $operator = null, $value = null)
@@ -62,6 +67,18 @@ class AbstractCollection
     public function transform(callable $callable): AbstractCollection
     {
         $this->collection->transform($callable);
+
+        return $this;
+    }
+
+    public function count(): int
+    {
+        return $this->collection->count();
+    }
+
+    public function merge(AbstractCollection $items)
+    {
+        $this->collection = $this->collection->merge($items->getCollection());
 
         return $this;
     }

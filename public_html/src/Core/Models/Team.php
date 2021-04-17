@@ -19,6 +19,8 @@ class Team extends AbstractModel
     public int $userId;
     public float $money = 0;
     public int $countryId;
+    public ?int $championshipId = null;
+
     public int $supporters = 0;
     public int $stadiumSize = 0;
     public int $rating = 0;

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Default values
+debug="";
+suite="--testsuite Unit";
+test="";
+group="";
+options="";
+
+function renderOption() {
+    flag=$1
+    description=$2
+    printf "    %-30s %-30s \n" "${flag}" "${description}"
+}
+
+function showHelp() {
+    echo 'Options:'
+    renderOption "-a" "Run all tests"
+    renderOption "-d" "Enable xDebug"
+    renderOption "-s {Suite1,Suite2...}" "Test suite to run"
+    renderOption "-t {ClassName|MethodName}" "Specify single test class|method to run"
+    renderOption "-g {Group1,Group2}" "Specify test groups to be run"
+    renderOption "-o" "Options passed directly to PHPUnit (surrounded with quotes). Ex. ./run-tests -o \"--help\" will bring up phpunit help"
+}
+
+# Processing flags
+while getopts "ds:t:rahcfg:o:x" flag; do
+    case "${flag}" in
+        s) suite="--testsuite ${OPTARG}";;
+        t) test="--filter ${OPTARG}";;
+        a) suite="";;
+        h) showHelp
+           exit;;
+        g) group="--group ${OPTARG}";;
+        o) options="${OPTARG}";;
+    esac;
+done;
+
+# Executing test command
+command="${debug} ./vendor/bin/phpunit ${suite} ${group} --stderr -c phpunit.xml ${test} ${options}";
+echo "Executing ${command}";
+${command};

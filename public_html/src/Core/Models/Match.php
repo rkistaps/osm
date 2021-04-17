@@ -47,6 +47,11 @@ class Match extends AbstractModel
     public ?int $awayTeamLineupId;
 
     public string $seriesType;
+
+    /**
+     * This field contains ChampionShipLeague id
+     * @var int|null
+     */
     public ?int $seriesId;
     public ?int $seriesRound;
 
@@ -61,5 +66,20 @@ class Match extends AbstractModel
     public function isFriendly(): bool
     {
         return $this->seriesType === self::TYPE_FRIENDLY;
+    }
+
+    public function isHomeTeamWin(): bool
+    {
+        return $this->homeTeamGoals > $this->awayTeamGoals;
+    }
+
+    public function isAwayTeamWin(): bool
+    {
+        return $this->homeTeamGoals < $this->awayTeamGoals;
+    }
+
+    public function isDraw(): bool
+    {
+        return $this->homeTeamGoals === $this->awayTeamGoals;
     }
 }
