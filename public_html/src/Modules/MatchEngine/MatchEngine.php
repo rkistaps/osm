@@ -286,7 +286,7 @@ class MatchEngine
     protected function getStriker(Lineup $lineup, int $minute): ?Player
     {
         $positionOrder = RandomHelper::getOneByChance([
-            15 => [Player::POS_F, Player::POS_D, Player::POS_F],
+            15 => [Player::POS_D, Player::POS_M, Player::POS_F],
             25 => [Player::POS_M, Player::POS_D, Player::POS_F],
             60 => [Player::POS_F, Player::POS_M, Player::POS_D],
         ]);
