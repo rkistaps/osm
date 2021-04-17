@@ -103,4 +103,14 @@ abstract class AbstractModelCollection extends AbstractCollection
     {
         return $this->collection->reduce($callable, $initial);
     }
+
+    public function isEmpty(): bool
+    {
+        return $this->collection->isEmpty();
+    }
+
+    public function isNotEmpty(): bool
+    {
+        return $this->collection->isNotEmpty();
+    }
 }

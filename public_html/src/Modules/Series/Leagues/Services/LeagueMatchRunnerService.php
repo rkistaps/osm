@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OSM\Modules\Series\Leagues\Services;
 
-use OSM\Core\Models\Championship;
-use OSM\Core\Models\ChampionshipLeague;
 use OSM\Core\Models\Match;
 use OSM\Modules\Matches\Factories\MatchParameterFactory;
 use OSM\Modules\Matches\Services\MatchRunnerService;
@@ -26,15 +24,9 @@ class LeagueMatchRunnerService
         $this->matchParameterFactory = $matchParameterFactory;
     }
 
-    public function runLeagueMatch(
-        Match $match,
-        ChampionshipLeague $league,
-        Championship $championship
-    ) {
+    public function runLeagueMatch(Match $match)
+    {
         $parameters = $this->matchParameterFactory->buildForMatch($match);
-
-        // todo remove in production
-        $parameters->setIsDryRun(true);
 
         $this->matchRunnerService->runMatch($match, $parameters);
     }

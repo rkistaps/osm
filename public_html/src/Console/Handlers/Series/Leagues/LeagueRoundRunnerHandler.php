@@ -34,6 +34,7 @@ class LeagueRoundRunnerHandler implements \TheApp\Interfaces\CommandHandlerInter
             return;
         }
 
+        $this->logger->info('Running round #' . $round . ' for league #' . $leagueId);
         $this->leagueRunnerService->runLeagueRoundIdByLeagueId($leagueId, $round);
     }
 }

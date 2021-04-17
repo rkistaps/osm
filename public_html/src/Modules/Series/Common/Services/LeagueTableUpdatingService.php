@@ -33,10 +33,8 @@ class LeagueTableUpdatingService
 
         $matches = $this->matchRepository->findPlayedByChampionshipAndLeague($championship, $league);
         foreach ($matches->all() as $match) {
-            /** @var ChampionshipTable $homeTeam */
-            $homeTeam = $tableRows->first(fn(ChampionshipTable $table) => $table->teamId === $match->homeTeamId);
-            /** @var ChampionshipTable $awayTeam */
-            $awayTeam = $tableRows->first(fn(ChampionshipTable $table) => $table->teamId === $match->awayTeamId);
+            $homeTeam = $tableRows->getByTeamId($match->homeTeamId);
+            $awayTeam = $tableRows->getByTeamId($match->awayTeamId);
 
             if ($match->isHomeTeamWin()) {
                 $homeTeam->wins += 1;
@@ -62,18 +60,28 @@ class LeagueTableUpdatingService
             $awayTeam->goalsForward += $match->awayTeamGoals;
             $awayTeam->goalsAgainst += $match->homeTeamGoals;
         }
+
+        $this->saveCollection($tableRows);
     }
 
     public function saveCollection(ChampionshipTableCollection $collection)
     {
-        $collection->sort(function (ChampionshipTable $a, ChampionshipTable $b) {
+        $collection = $collection->sort(function (ChampionshipTable $a, ChampionshipTable $b) {
             if ($a->points > $b->points) {
-                return 1;
-            } elseif ($a->points < $b->points) {
                 return -1;
+            } elseif ($a->points < $b->points) {
+                return 1;
+            } elseif ($a->wins > $b->wins) {
+                return -1;
+            } elseif ($a->wins < $b->wins) {
+                return 1;
+            } elseif ($a->goalsForward > $b->goalsForward) {
+                return -1;
+            } elseif ($a->goalsForward < $b->goalsForward) {
+                return 1;
             }
 
-            // todo finish this
+            return 0;
         });
 
         $place = 1;

@@ -70,13 +70,21 @@ class LeagueRunnerService
             $league
         );
 
+        if ($matches->isEmpty()) {
+            $this->logger->info('No more unplayed matches');
+            return;
+        }
+
         // process match income
+        $this->logger->info('Processing match income');
         $this->incomeService->processMatchIncome($matches, $league);
 
         foreach ($matches->all() as $match) {
-            $this->matchRunnerService->runLeagueMatch($match, $league, $championship);
+            $this->logger->info('Running match #' . $match->id);
+            $this->matchRunnerService->runLeagueMatch($match);
         }
 
+        $this->logger->info('Processing league table');
         $this->leagueTableUpdatingService->updateChampionshipLeagueTable($championship, $league);
     }
 
@@ -90,6 +98,9 @@ class LeagueRunnerService
             $league,
             $championship->round
         );
+
+        $championship->round += 1;
+        $this->championshipRepository->saveModel($championship);
     }
 
     public function runLeagueRoundIdByLeagueId(int $leagueId, int $round)
