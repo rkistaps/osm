@@ -51,7 +51,7 @@ use OSM\Frontend\Components\LoginForm\LoginForm;
         <div class='body'>
             <div class="container-fluid p-0">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 pt-3">
                         <?php echo FlashMessage::build()->render() ?>
                         <?php echo $this->section('content'); ?>
                     </div>

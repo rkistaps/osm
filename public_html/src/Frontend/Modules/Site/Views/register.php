@@ -79,7 +79,7 @@ $this->layout(LayoutTypes::TYPE_DEFAULT_OUTSIDE);
                 <?= ActiveHtml::fieldError($model, 'championshipId') ?>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-4">
             <div class="form-group">
                 <?= Html::submitButton(_d('frontend', 'Register')) ?>
             </div>
