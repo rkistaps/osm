@@ -20,3 +20,8 @@ function getContainer(): \Psr\Container\ContainerInterface
 {
     return App::getContainer();
 }
+
+function _d($domain, $message): string
+{
+    return dgettext($domain, $message);
+}

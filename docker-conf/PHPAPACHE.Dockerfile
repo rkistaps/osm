@@ -15,6 +15,7 @@ RUN apt-get install default-mysql-client -y
 # Install php extensions
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install gettext
 
 # Install git
 RUN apt-get -y install git
