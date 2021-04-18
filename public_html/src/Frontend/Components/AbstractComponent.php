@@ -5,17 +5,21 @@ declare(strict_types=1);
 namespace OSM\Frontend\Components;
 
 use League\Plates\Engine;
+use OSM\Core\Factories\GenericFactory;
 use ReflectionClass;
 use TheApp\Apps\WebApp;
 
 abstract class AbstractComponent
 {
     protected Engine $engine;
+    protected GenericFactory $genericFactory;
 
     public function __construct(
-        Engine $engine
+        Engine $engine,
+        GenericFactory $genericFactory
     ) {
         $this->engine = $engine;
+        $this->genericFactory = $genericFactory;
 
         $this->engine->addFolder(get_called_class(), $this->getViewFolderPath());
     }

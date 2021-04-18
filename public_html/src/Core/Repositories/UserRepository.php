@@ -9,6 +9,7 @@ use OSM\Core\Models\User;
 
 /**
  * @method User findOne(array $condition = [])
+ * @method User findById(int $id)
  * @method UserCollection findAll(array $condition = [])
  * @method User createModel(array $properties = [], bool $persistent = false)
  */
