@@ -32,39 +32,39 @@ class RegistrationValidationService
     public function validateModel(RegistrationViewModel $model): bool
     {
         if (!$model->username) {
-            $model->addError('username', 'Username cannot be empty');
+            $model->addError('username', _d('frontend', 'Username cannot be empty'));
         } else {
             $existingUser = $this->userRepository->findByUsername($model->username);
             if ($existingUser) {
-                $model->addError('username', 'Username already taken');
+                $model->addError('username', _d('frontend', 'Username already taken'));
             }
         }
 
         if (!$model->password) {
-            $model->addError('password', 'Password cannot be empty');
+            $model->addError('password', _d('frontend', 'Password cannot be empty'));
         } elseif ($model->password !== $model->passwordAgain) {
-            $model->addError('passwordAgain', 'Passwords do not match');
+            $model->addError('passwordAgain', _d('frontend', 'Passwords do not match'));
         }
 
         if (!$model->teamName) {
-            $model->addError('teamName', 'Team name cannot be empty');
+            $model->addError('teamName', _d('frontend', 'Team name cannot be empty'));
         } else {
             $existingTeam = $this->teamRepository->findByName($model->teamName);
             if ($existingTeam) {
-                $model->addError('teamName', 'Team name already taken');
+                $model->addError('teamName', _d('frontend', 'Team name already taken'));
             }
         }
 
         $country = $this->countryRepository->findById($model->countryId);
         if (!$country) {
-            $model->addError('countryId', 'Country not found');
+            $model->addError('countryId', _d('frontend', 'Country not found'));
         }
 
         $championship = $this->championshipRepository->findById($model->championshipId);
         if (!$championship) {
-            $model->addError('championshipId', 'Championship not found');
+            $model->addError('championshipId', _d('frontend', 'Championship not found'));
         } elseif (!$championship->isLeague()) {
-            $model->addError('championshipId', 'Incorrect championship type');
+            $model->addError('championshipId', _d('frontend', 'Incorrect championship type'));
         }
 
         return $model->isValid();

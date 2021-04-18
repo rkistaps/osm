@@ -16,5 +16,11 @@ $this->layout(LayoutTypes::TYPE_DEFAULT_OUTSIDE);
 <form method="post" action="/register">
     <?= Html::inputText('username', $model->username) ?>
     <?= Html::inputText('team_name', $model->teamName) ?>
-    <?= Html::submitButton('Register') ?>
+    <?= Html::select(
+        'country_id',
+        $countries->mapFieldById('name'),
+        $model->countryId,
+        ['placeholder' => _d('frontend', 'Select country')]
+    ) ?>
+    <?= Html::submitButton(_d('frontend', 'Register')) ?>
 </form>

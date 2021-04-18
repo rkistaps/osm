@@ -19,7 +19,7 @@ class RegisterRequestHandler extends AbstractRequestHandler
     {
         $viewModel = RegistrationViewModel::fromRequest($request);
         if ($this->isPost($request) && $this->processRegistration($viewModel)) {
-            return $this->reload($request); // todo add message
+            return $this->reloadWithSuccess($request, _d('frontend', 'Registration successful. You may log in now.'));
         }
 
         $countries = $this->genericFactory->get(CountryRepository::class)->findAll()->sortBy('name');

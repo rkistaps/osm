@@ -74,6 +74,14 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
         return $this->reload($request);
     }
 
+    protected function reloadWithSuccess(ServerRequestInterface $request, string $message): ResponseInterface
+    {
+        $alertService = $this->genericFactory->get(AlertService::class);
+        $alertService->success($message);
+
+        return $this->reload($request);
+    }
+
     protected function reload(ServerRequestInterface $request): ResponseInterface
     {
         return $this->redirect($request->getUri()->getPath());
