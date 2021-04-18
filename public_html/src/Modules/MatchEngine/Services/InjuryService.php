@@ -38,7 +38,6 @@ class InjuryService
             }
 
             $substitute = $this->processInjuredPlayer($player, $minute, $lineup);
-
             $type = $substitute ? MatchEvent::TYPE_INJURY_WITH_SUB : MatchEvent::TYPE_INJURY;
             $eventData = [
                 'injuredPlayerId' => $player->id,
@@ -59,7 +58,7 @@ class InjuryService
      * @param Lineup $lineup
      * @return Player|null
      */
-    public function processInjuredPlayer(Player $player, $minute, Lineup $lineup)
+    public function processInjuredPlayer(Player $player, int $minute, Lineup $lineup)
     {
         // setting up injury
         $injury = new Injury();
@@ -75,10 +74,7 @@ class InjuryService
         return $substitute;
     }
 
-    /**
-     * @return mixed|null
-     */
-    public function getRandomSeverity()
+    public function getRandomSeverity(): string
     {
         return RandomHelper::getOneByChance([
             30 => Injury::SEVERITY_MINOR,
@@ -88,12 +84,7 @@ class InjuryService
         ]);
     }
 
-    /**
-     * @param Player $playerOff
-     * @param Player $playerOn
-     * @param int $minute
-     */
-    public function substitutePlayers(Player $playerOff, Player $playerOn, $minute)
+    public function substitutePlayers(Player $playerOff, Player $playerOn, int $minute)
     {
         $playerOff->performance->playedToMin = $minute;
 
@@ -102,12 +93,7 @@ class InjuryService
         $playerOn->performance->playedToMin = MatchHelper::MATCH_LENGTH;
     }
 
-    /**
-     * @param Lineup $lineup
-     * @param int $minute
-     * @return Player|null;
-     */
-    public function getPlayerForInjury(Lineup $lineup, $minute)
+    public function getPlayerForInjury(Lineup $lineup, int $minute)
     {
         return collect($lineup->players)
             ->filter(function (Player $player) use ($minute) {

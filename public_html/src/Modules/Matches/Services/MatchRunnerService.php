@@ -6,42 +6,38 @@ namespace OSM\Modules\Matches\Services;
 
 use OSM\Core\Models\Match;
 use OSM\Core\Repositories\MatchRepository;
-use OSM\Core\Repositories\TeamRepository;
-use OSM\Modules\MatchEngine\MatchEngine;
+use OSM\Modules\MatchEngine\Interfaces\MatchEngineInterface;
 use OSM\Modules\MatchEngine\Structures\MatchResult;
 use OSM\Modules\Matches\Structures\MatchParameters;
 
 class MatchRunnerService
 {
-    private MatchEngine $matchEngine;
     private MatchLineupBuilderService $lineupBuilderService;
-    private TeamRepository $teamRepository;
     private MatchReportSavingService $matchReportService;
     private AfterMatchLineupProcessorService $matchLineupProcessorService;
     private MatchRepository $matchRepository;
 
     public function __construct(
-        MatchEngine $matchEngine,
         MatchLineupBuilderService $lineupBuilderService,
-        TeamRepository $teamRepository,
         MatchReportSavingService $matchReportService,
         AfterMatchLineupProcessorService $matchLineupProcessorService,
         MatchRepository $matchRepository
     ) {
-        $this->matchEngine = $matchEngine;
         $this->lineupBuilderService = $lineupBuilderService;
-        $this->teamRepository = $teamRepository;
         $this->matchReportService = $matchReportService;
         $this->matchLineupProcessorService = $matchLineupProcessorService;
         $this->matchRepository = $matchRepository;
     }
 
-    public function runMatch(Match $match, MatchParameters $matchParameters): MatchResult
-    {
+    public function runMatch(
+        MatchEngineInterface $matchEngine,
+        Match $match,
+        MatchParameters $matchParameters
+    ): MatchResult {
         $homeTeamLineup = $this->lineupBuilderService->buildHomeTeamLineup($match, $matchParameters);
         $awayTeamLineup = $this->lineupBuilderService->buildAwayTeamLineup($match, $matchParameters);
 
-        $matchResult = $this->matchEngine->playMatch(
+        $matchResult = $matchEngine->playMatch(
             $homeTeamLineup,
             $awayTeamLineup,
             $matchParameters->matchSettings
