@@ -8,7 +8,7 @@ class Html
 {
     protected static array $selfClosingTags = ['input'];
 
-    public static function tag(string $tag, string $content, array $options = []): string
+    public static function tag(string $tag, string $content = '', array $options = []): string
     {
         $result = '<' . $tag . ' ' . self::buildAttributes($options) . '>';
 
@@ -28,7 +28,7 @@ class Html
         return self::tag('input', '', $options);
     }
 
-    public static function inputText(string $name, string $value, array $options = []): string
+    public static function inputText(string $name, string $value = '', array $options = []): string
     {
         return self::input('text', $name, $value, $options);
     }

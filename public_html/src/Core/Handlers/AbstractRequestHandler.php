@@ -3,23 +3,28 @@
 namespace OSM\Core\Handlers;
 
 use League\Plates\Engine;
+use OSM\Core\Factories\GenericFactory;
+use OSM\Frontend\Core\Builders\ResponseBuilder;
+use OSM\Frontend\Services\AlertService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use ReflectionClass;
-use TheApp\Components\Builders\ResponseBuilder;
 
 abstract class AbstractRequestHandler implements RequestHandlerInterface
 {
-    protected ResponseBuilder $responseBuilder;
     protected Engine $engine;
+    protected GenericFactory $genericFactory;
+    protected ResponseBuilder $responseBuilder;
 
     public function __construct(
+        GenericFactory $genericFactory,
         ResponseBuilder $responseBuilder,
         Engine $engine
     ) {
         $this->responseBuilder = $responseBuilder;
         $this->engine = $engine;
+        $this->genericFactory = $genericFactory;
     }
 
     abstract public function handle(ServerRequestInterface $request): ResponseInterface;
@@ -61,8 +66,21 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
         return $this->redirect($referer, 302);
     }
 
+    protected function reloadWithError(ServerRequestInterface $request, string $message): ResponseInterface
+    {
+        $alertService = $this->genericFactory->get(AlertService::class);
+        $alertService->error($message);
+
+        return $this->reload($request);
+    }
+
     protected function reload(ServerRequestInterface $request): ResponseInterface
     {
         return $this->redirect($request->getUri()->getPath());
+    }
+
+    protected function isPost(ServerRequestInterface $request): bool
+    {
+        return $request->getMethod() === 'POST';
     }
 }

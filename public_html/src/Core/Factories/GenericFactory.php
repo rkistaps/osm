@@ -18,5 +18,5 @@ class GenericFactory
     public function get(string $className)
     {
         return $this->container->get($className);
-    }s
+    }
 }
