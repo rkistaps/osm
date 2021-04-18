@@ -16,10 +16,12 @@ class SiteRouteConfigurator implements RouterConfiguratorInterface
 {
     public function configureRouter(Router $router)
     {
+        # unauthorized routes
         $router->get('/', IndexRequestHandler::class);
         $router->any('/register', RegisterRequestHandler::class);
         $router->post('/process-login', ProcessLoginHandler::class);
 
+        # authorized routes
         $router->get('/news', NewsRequestHandler::class)->withMiddleware(IsAuthorizedMiddleware::class);
     }
 }
