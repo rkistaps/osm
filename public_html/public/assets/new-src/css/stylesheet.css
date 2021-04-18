@@ -1084,7 +1084,6 @@ ul.menu li .highlight a {
     text-align: left;
 }
 
-
 ul.menu li a {
     text-decoration: none;
     display: block;
@@ -1099,14 +1098,6 @@ ul.menu li a:hover {
 ul.menu li:hover {
     background: rgb(254, 140, 0);
     background: linear-gradient(0deg, rgba(254, 140, 0, 1) 40%, rgba(254, 102, 0, 1) 84%);
-}
-
-ul.menu li.last {
-    background: url("/assets/images/html/menu_item_last.png");
-}
-
-ul.menu li.last:hover {
-    background: url("/assets/images/html/menu_item_last_active.png");
 }
 
 .box .title {
