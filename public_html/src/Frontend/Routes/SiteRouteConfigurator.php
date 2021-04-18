@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace OSM\Frontend\Routes;
 
+use OSM\Frontend\Core\Middlewares\IsAuthorizedMiddleware;
 use OSM\Frontend\Modules\Site\Handlers\IndexRequestHandler;
+use OSM\Frontend\Modules\Site\Handlers\NewsRequestHandler;
 use OSM\Frontend\Modules\Site\Handlers\ProcessLoginHandler;
 use OSM\Frontend\Modules\Site\Handlers\RegisterRequestHandler;
 use TheApp\Components\Router;
@@ -17,5 +19,7 @@ class SiteRouteConfigurator implements RouterConfiguratorInterface
         $router->get('/', IndexRequestHandler::class);
         $router->any('/register', RegisterRequestHandler::class);
         $router->post('/process-login', ProcessLoginHandler::class);
+
+        $router->get('/news', NewsRequestHandler::class)->withMiddleware(IsAuthorizedMiddleware::class);
     }
 }
