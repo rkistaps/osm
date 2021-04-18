@@ -29,7 +29,7 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
 
     abstract public function handle(ServerRequestInterface $request): ResponseInterface;
 
-    protected function render(string $view, array $params = [])
+    protected function render(string $view, array $params = []): ResponseInterface
     {
         return $this->responseBuilder->withContent(
             $this->engine->render($this->getViewPath($view), $params)
@@ -48,7 +48,7 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
         return get_called_class() . '::' . $path;
     }
 
-    public function getViewFolderPath()
+    public function getViewFolderPath(): string
     {
         $class = new ReflectionClass($this);
 

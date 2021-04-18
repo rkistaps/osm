@@ -40,6 +40,12 @@ class RegistrationValidationService
             }
         }
 
+        if (!$model->password) {
+            $model->addError('password', 'Password cannot be empty');
+        } elseif ($model->password !== $model->passwordAgain) {
+            $model->addError('passwordAgain', 'Passwords do not match');
+        }
+
         if (!$model->teamName) {
             $model->addError('teamName', 'Team name cannot be empty');
         } else {
