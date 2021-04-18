@@ -45,9 +45,28 @@ abstract class AbstractCollection
         return $this->collection->random($number);
     }
 
-    public function sort($callback = null)
+    /**
+     * @param null $callback
+     * @return static
+     */
+    public function sort($callback = null): AbstractCollection
     {
-        return $this->collection->sort($callback);
+        $this->collection = $this->collection->sort($callback);
+
+        return $this;
+    }
+
+    /**
+     * @param $callback
+     * @param int $options
+     * @param false $descending
+     * @return static
+     */
+    public function sortBy($callback, $options = SORT_REGULAR, $descending = false): AbstractCollection
+    {
+        $this->collection = $this->collection->sortBy($callback, $options, $descending);
+
+        return $this;
     }
 
     public function pluck($value, $key = null)

@@ -22,10 +22,11 @@ class RegisterRequestHandler extends AbstractRequestHandler
             return $this->reload($request); // todo add message
         }
 
-        $countries = $this->genericFactory->get(CountryRepository::class)->findAll();
+        $countries = $this->genericFactory->get(CountryRepository::class)->findAll()->sortBy('name');
         $championships = $this->genericFactory
             ->get(ChampionshipRepository::class)
-            ->findByType(Match::TYPE_CHAMPIONSHIP_LEAGUE);
+            ->findByType(Match::TYPE_CHAMPIONSHIP_LEAGUE)
+            ->sortBy('name');
 
         return $this->render('register', [
             'model' => $viewModel,
