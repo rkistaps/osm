@@ -2,21 +2,29 @@
 
 use OSM\Frontend\Helpers\Html;
 
+/** @var bool $error */
+
 ?>
 <div id='login'>
-    <form method='post' action='' id='loginform'>
-        <a class='fb_login' href='#'><img src='/img/html/facebook_login.png' alt=''></a>
-        <input type='submit' value='Login' name='login'/>
-        <div class='shadows'>
-            <label for='username_input'><?= "Username:" ?></label><input id='username_input' name='user' type='text'/>
-            <div class='cb'></div>
+    <form method='post' action='/process-login' id='LoginForm'>
+        <div class="text-right">
+            <?= Html::submitButton(_d('frontend', 'Login')) ?>
         </div>
-        <div class='shadows'>
-            <label for='password_input'><?= "Password:" ?></label><input id='password_input' name='password' type='password'/>
-            <div class='cb'></div>
+        <?php if ($error) { ?>
+            <div class="input-wrap text-danger">
+                <?= _d('frontend', 'Authorization failed') ?>
+            </div>
+        <?php } ?>
+        <div class='input-wrap'>
+            <?= Html::label(_d('frontend', "Username") . ':', ['for' => 'username_input']) ?>
+            <?= Html::inputText('username', '', ['id' => 'username_input']) ?>
         </div>
-        <?= Html::a("Don't have a team? Register now!", '/register') ?>
-        <?= Html::a("Forgot your password?", '/recover') ?>
+        <div class='input-wrap'>
+            <?= Html::label(_d('frontend', "Password") . ':', ['for' => 'password_input']) ?>
+            <?= Html::inputPassword('password', '', ['id' => 'password_input']) ?>
+        </div>
+        <?= Html::a(_d('frontend', "Don't have a team? Register now!"), '/register') ?>
+        <?= Html::a(_d('frontend', "Forgot your password?"), '/recover') ?>
     </form>
 </div>
 

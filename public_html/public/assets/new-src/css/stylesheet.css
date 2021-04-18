@@ -1,3 +1,11 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
     background-color: #f0f0f0;
     background: url("/assets/images/html/fons.png") no-repeat center top #f0f0f0;
@@ -331,11 +339,6 @@ body#fb {
     padding: 0 20px;
 }
 
-#fb #logo_wrap {
-    width: 750px;
-}
-
-
 #logo_wrap {
     width: 990px;
     margin: auto;
@@ -378,74 +381,58 @@ body#fb {
     width: 352px;
 }
 
-#login .shadows {
+#login .input-wrap {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#login .input-wrap:after {
+    content: "";
     clear: both;
-    width: 380px;
+    display: table;
 }
-
-
-#login label[for='password_input'] {
-    margin-top: -20px;
-}
-
 
 #login label {
     background: url("/assets/images/html/login_label.png");
-    display: block;
-    width: 90px;
-    height: 74px;
-    font: bold 16px/74px "OpenSansRegular";
-    float: left;
-    padding-left: 30px;
+    background: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    display: inline-block;
+    width: 120px;
+    font: bold 16px/48px "OpenSansRegular";
+    padding-left: 20px;
     cursor: pointer;
+    margin-bottom: 0;
 }
-
 
 #login input[type='text'],
 #login input[type='password'] {
-    background: url("/assets/images/html/login_input.png") no-repeat left center transparent;
-    width: 192px;
-    float: left;
-    height: 72px;
-    line-height: 72px;
+    padding: 0 20px;
+    background: white;
     border: none;
-    font: bold 16px/74px "OpenSansRegular";
+    display: inline-block;
+    font: bold 16px/48px "OpenSansRegular";
     color: #636363;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
     outline: none;
-    outline-width: 0;
-    padding-right: 20px;
-    padding-left: 20px;
 }
-
-#login input[name='password'] {
-    margin-top: -20px;
-}
-
-#login a.fb_login {
-    float: right;
-    margin: 0px;
-    margin-right: 17px;
-    margin-bottom: -7px;
-    vertical-align: middle;
-}
-
 
 #login input[type='submit'] {
     color: white;
     border: none;
     background: none;
     font: bold 24px "OpenSansRegular";
-    float: right;
     cursor: pointer;
-    margin-bottom: -7px;
+    margin-bottom: 10px;
     box-shadow: none;
 }
 
 #login a {
+    display: block;
     text-decoration: none;
     color: white;
     font: bold 16px "OpenSansRegular";
-    margin-left: 40px;
 }
 
 #fb #newstab {

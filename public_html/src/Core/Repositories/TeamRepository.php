@@ -7,6 +7,7 @@ namespace OSM\Core\Repositories;
 use OSM\Core\Collections\TeamCollection;
 use OSM\Core\Models\AbstractModel;
 use OSM\Core\Models\Team;
+use OSM\Core\Models\User;
 
 /**
  * @method Team createModel(array $properties = [], bool $persistent = false)
@@ -57,5 +58,13 @@ class TeamRepository extends AbstractModelRepository
     public function findByIds(array $ids): TeamCollection
     {
         return $this->findAll(['id' => $ids]);
+    }
+
+    public function findDefaultTeam(User $user): ?Team
+    {
+        return $this->findOne([
+            'user_id' => $user->id,
+            'is_default' => true,
+        ]);
     }
 }
