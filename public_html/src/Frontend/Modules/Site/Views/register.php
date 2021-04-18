@@ -12,11 +12,9 @@ $this->layout(LayoutTypes::TYPE_DEFAULT_OUTSIDE);
 /** @var ChampionshipCollection $championships */
 /** @var RegistrationViewModel $model */
 
-var_dump($model);
-
 ?>
 <form method="post" action="/register">
-    <?= Html::inputText('username') ?>
-    <?= Html::inputText('team_name') ?>
-    <input type="submit" value="Test">
+    <?= Html::inputText('username', $model->username) ?>
+    <?= Html::inputText('team_name', $model->teamName) ?>
+    <?= Html::submitButton('Register') ?>
 </form>

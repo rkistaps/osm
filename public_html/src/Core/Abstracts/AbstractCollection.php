@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Core\Abstracts;
 
+use OSM\Core\Models\AbstractModel;
 use Tightenco\Collect\Support\Collection;
 
 abstract class AbstractCollection
@@ -81,5 +82,14 @@ abstract class AbstractCollection
         $this->collection = $this->collection->merge($items->getCollection());
 
         return $this;
+    }
+
+    public function mapFieldById(string $field): array
+    {
+        return $this
+            ->getCollection()
+            ->keyBy('id')
+            ->map(fn(AbstractModel $model) => $model->$field)
+            ->all();
     }
 }

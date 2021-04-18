@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace OSM\Frontend\Modules\Site\Handlers;
 
 use OSM\Core\Handlers\AbstractRequestHandler;
+use OSM\Core\Models\Match;
+use OSM\Core\Repositories\ChampionshipRepository;
+use OSM\Core\Repositories\CountryRepository;
 use OSM\Frontend\Modules\Site\Services\RegistrationService;
 use OSM\Frontend\Modules\Site\ViewModels\RegistrationViewModel;
 use Psr\Http\Message\ResponseInterface;
@@ -19,8 +22,15 @@ class RegisterRequestHandler extends AbstractRequestHandler
             return $this->reload($request); // todo add message
         }
 
+        $countries = $this->genericFactory->get(CountryRepository::class)->findAll();
+        $championships = $this->genericFactory
+            ->get(ChampionshipRepository::class)
+            ->findByType(Match::TYPE_CHAMPIONSHIP_LEAGUE);
+
         return $this->render('register', [
             'model' => $viewModel,
+            'countries' => $countries,
+            'championships' => $championships,
         ]);
     }
 
