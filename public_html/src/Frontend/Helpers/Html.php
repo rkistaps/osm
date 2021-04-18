@@ -101,4 +101,9 @@ class Html
 
         return implode(" ", $attributes);
     }
+
+    public static function label(string $content, array $options = []): string
+    {
+        return self::tag('label', $content, $options);
+    }
 }

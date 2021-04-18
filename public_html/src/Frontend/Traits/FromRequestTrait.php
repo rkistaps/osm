@@ -6,6 +6,7 @@ namespace OSM\Frontend\Traits;
 
 use OSM\Core\Helpers\StringHelper;
 use Psr\Http\Message\ServerRequestInterface;
+use ReflectionProperty;
 
 trait FromRequestTrait
 {
@@ -25,8 +26,24 @@ trait FromRequestTrait
             if (!array_key_exists($snakeCased, $data)) {
                 continue;
             }
-            $obj->{$property} = $data[$snakeCased];
+            $value = $data[$snakeCased];
+
+            $reflectionProperty = new ReflectionProperty($obj, $property);
+            $type = $reflectionProperty->getType()->getName();
+            switch ($type) {
+                case 'int':
+                    $value = (int)$value;
+                    break;
+                case 'bool':
+                    $value = (bool)$value;
+                    break;
+            }
+
+            $obj->{$property} = $value;
         }
+
         return $obj;
     }
+
+
 }

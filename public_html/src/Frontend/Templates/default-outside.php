@@ -16,7 +16,10 @@ use OSM\Frontend\Components\LoginForm\LoginForm;
     <link rel='icon' href='/assets/images/html/star.png' type='image/x-icon'/>
     <link rel='shortcut icon' href='/assets/images/html/star.png' type='image/x-icon'/>
     <link rel="stylesheet" href="/assets/new-src/css/opensans.css" type="text/css"/>
-        <link rel="stylesheet" href="/assets/new-src/css/stylesheet.css" type="text/css"/>
+    <link rel="stylesheet" href="/assets/new-src/css/stylesheet.css" type="text/css"/>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    
     <meta property="og:image" content="/assets/image/dark_logo.png"/>
 </head>
 <body>
@@ -43,12 +46,12 @@ use OSM\Frontend\Components\LoginForm\LoginForm;
             </div>
             <img class='overlay' src='/assets/images/html/top_overlay.png' alt=''/>
             <img class='tools' src='/assets/images/html/tools.png' alt=''/>
-            <?= LoginForm::build()->render()?>
+            <?= LoginForm::build()->render() ?>
         </div>
         <div class='body'>
             <div class="container-fluid p-0">
                 <div class="row">
-                    <div class="col-9 middle_col">
+                    <div class="col-12">
                         <?php echo FlashMessage::build()->render() ?>
                         <?php echo $this->section('content'); ?>
                     </div>

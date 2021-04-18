@@ -19,6 +19,11 @@ abstract class AbstractViewModel
         return $this;
     }
 
+    public function getFieldError(string $field): string
+    {
+        return $this->fieldErrors[$field] ?? '';
+    }
+
     public function getErrors(): array
     {
         return $this->fieldErrors;
@@ -29,8 +34,12 @@ abstract class AbstractViewModel
         return !$this->hasErrors();
     }
 
-    public function hasErrors(): bool
+    public function hasErrors(string $field = null): bool
     {
+        if ($field) {
+            return !empty($this->fieldErrors[$field]);
+        }
+
         return !empty($this->fieldErrors);
     }
 }
