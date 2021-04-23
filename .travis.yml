@@ -2,4 +2,4 @@ language: php
 php:
   - 7.4
 script:
-  - public_html/vendor/bin/phpunit --coverage-clover coverage.xml
+  - punlic_html/vendor/bin/phpunit --testsuite Unit  --stderr -c phpunit.xml
