@@ -1,8 +1,6 @@
 <?php
 
-$localConfig = require_once 'config-local.php';
-
-return $localConfig + [
+return [
         'templatePath' => APP_ROOT . '/src/Frontend/Templates',
         'database' => [
             'host' => '',
