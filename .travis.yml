@@ -5,4 +5,4 @@ before_script:
   - composer self-update --working-dir=$TRAVIS_BUILD_DIR/public_html
   - composer install --no-interaction --dev --working-dir=$TRAVIS_BUILD_DIR/public_html
 script:
-  - $TRAVIS_BUILD_DIR/public_html/vendor/bin/phpunit --testsuite Unit  --stderr -c phpunit.xml
+  - $TRAVIS_BUILD_DIR/public_html/vendor/bin/phpunit --testsuite Unit  --stderr -c $TRAVIS_BUILD_DIR/public_html/phpunit.xml
