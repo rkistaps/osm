@@ -12,11 +12,14 @@ class SideMenuComponent extends AbstractComponent
 {
     public function render(): string
     {
+        $authService = $this->genericFactory->get(AuthorizationService::class);
+
         $factory = $this->genericFactory->get(SideMenuFactory::class);
-        $activeUser = $this->genericFactory->get(AuthorizationService::class)->getActiveUser();
+        $activeUser = $authService->getActiveUser();
+        $activeTeam = $authService->getActiveTeam();
 
         return $this->renderView('index', [
-            'sideMenu' => $factory->forUser($activeUser),
+            'sideMenu' => $factory->build($activeUser, $activeTeam),
         ]);
     }
 }

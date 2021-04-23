@@ -58,9 +58,7 @@ use OSM\Frontend\Components\SideMenu\SideMenuComponent;
         <?php $this->insert('Partials/_footer') ?>
     </div>
 </div>
-
 <script src="https://kit.fontawesome.com/0466ae457f.js" crossorigin="anonymous"></script>
 <script src="/assets/js/index.min.js"></script>
-
 </body>
 </html>

@@ -25,7 +25,10 @@ class AlertService
      */
     public function getAlerts(): array
     {
-        return array_map(fn($alertData) => Alert::fromArray($alertData), $this->session->getFlash(self::SESSION_KEY, []));
+        return array_map(
+            fn($alertData) => Alert::fromArray($alertData),
+            $this->session->getFlash(self::SESSION_KEY, [])
+        );
     }
 
     public function success(string $message)

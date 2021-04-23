@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace OSM\Frontend\Components\SideMenu\Structures;
 
+use OSM\Core\Helpers\Traits\FromArrayTrait;
+
 class SideMenuItem
 {
+    use FromArrayTrait;
+
     public bool $isActive = true;
     public string $icon;
     public string $text;
