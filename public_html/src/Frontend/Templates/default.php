@@ -3,6 +3,7 @@
 use OSM\Frontend\Components\FlashMessage\FlashMessage;
 use OSM\Frontend\Components\Overview\Overview;
 use OSM\Frontend\Components\SideMenu\SideMenuComponent;
+use OSM\Frontend\Components\System\System;
 
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
@@ -20,7 +21,9 @@ use OSM\Frontend\Components\SideMenu\SideMenuComponent;
     </a>
 </div>
 <div class='width_wrap' id="app">
-    <div class='top'></div>
+    <div class='top'>
+        <?= System::build()->render() ?>
+    </div>
     <div class='middle'>
         <div id='head'>
             <div id='slideshow'>

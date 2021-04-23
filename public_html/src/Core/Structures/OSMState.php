@@ -17,4 +17,9 @@ class OSMState
     {
         $this->season = $season;
     }
+
+    public function getCurrentDateTime(): string
+    {
+        return date("d.m.Y H:i:s");
+    }
 }
