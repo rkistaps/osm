@@ -1,7 +1,7 @@
 <?php
 
 use OSM\Frontend\Components\FlashMessage\FlashMessage;
-use OSM\Frontend\Components\LoginForm\LoginForm;
+use OSM\Frontend\Components\Overview\Overview;
 use OSM\Frontend\Components\SideMenu\SideMenuComponent;
 
 ?>
@@ -38,7 +38,7 @@ use OSM\Frontend\Components\SideMenu\SideMenuComponent;
             </div>
             <img class='overlay' src='/assets/images/html/top_overlay.png' alt=''/>
             <img class='tools' src='/assets/images/html/tools.png' alt=''/>
-            <?= LoginForm::build()->render() ?>
+            <?= Overview::build()->render() ?>
         </div>
         <div class='body'>
             <div class="container-fluid p-0">
