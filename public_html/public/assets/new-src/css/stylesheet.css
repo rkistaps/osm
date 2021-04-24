@@ -967,13 +967,13 @@ body#fb {
 
 #footer {
     background: url("/assets/images/html/footer.png");
-    height: 45px;
+    height: 60px;
     width: 100%;
     margin-bottom: 35px;
     text-align: center;
     color: white;
     font: 14px Arial;
-    padding-top: 15px;
+    padding: 10px 0;
 }
 
 #footer a {
@@ -1054,33 +1054,6 @@ body#fb {
     padding: 15px 0px;
 }
 
-.body .left_col, .body .middle_col, .body .right_col {
-    float: left;
-}
-
-.body .middle_col {
-    width: 718px;
-}
-
-.body .middle_col.has_right {
-    margin-right: 23px;
-    width: 486px;
-}
-
-.body .middle_col.hasnt_left {
-    margin-right: 23px;
-}
-
-.body .left_col {
-    width: 208px;
-    margin-right: 23px;
-}
-
-.body .right_col {
-    width: 208px;
-}
-
-
 ul.menu, ul.clean {
     list-style-type: none;
     padding: 0px;
@@ -1111,7 +1084,6 @@ ul.menu li .highlight a {
     text-align: left;
 }
 
-
 ul.menu li a {
     text-decoration: none;
     display: block;
@@ -1126,14 +1098,6 @@ ul.menu li a:hover {
 ul.menu li:hover {
     background: rgb(254, 140, 0);
     background: linear-gradient(0deg, rgba(254, 140, 0, 1) 40%, rgba(254, 102, 0, 1) 84%);
-}
-
-ul.menu li.last {
-    background: url("/assets/images/html/menu_item_last.png");
-}
-
-ul.menu li.last:hover {
-    background: url("/assets/images/html/menu_item_last_active.png");
 }
 
 .box .title {
@@ -2426,3 +2390,6 @@ img.icon {
     text-align: right;
 }
 
+.copyrights {
+    margin-top: 5px;
+}

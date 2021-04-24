@@ -62,6 +62,12 @@ class AuthorizationService
         $this->session->set(self::SESSION_KEY_ACTIVE_USER_ID, $user->id);
     }
 
+    public function logoutActiveUser()
+    {
+        $this->session->clear(self::SESSION_KEY_ACTIVE_USER_ID);
+        $this->session->clear(self::SESSION_KEY_ACTIVE_TEAM_ID);
+    }
+
     public function isAuthorized(): bool
     {
         return !!$this->session->get(self::SESSION_KEY_ACTIVE_USER_ID);
