@@ -62,6 +62,6 @@ use OSM\Frontend\Components\System\System;
     </div>
 </div>
 <script src="https://kit.fontawesome.com/0466ae457f.js" crossorigin="anonymous"></script>
-<script src="/assets/js/index.min.js"></script>
+<script src="/dist/js/index.min.js"></script>
 </body>
 </html>
