@@ -17,6 +17,9 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 RUN docker-php-ext-install gettext
 
+# Install curl
+RUN apt install -y curl
+
 # Install git
 RUN apt-get -y install git
 
@@ -25,6 +28,17 @@ RUN a2enmod rewrite
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install node
+ENV NODE_VERSION=14.5.0
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
 
 # Copy stuff into container
 COPY public_html /var/www/html/
