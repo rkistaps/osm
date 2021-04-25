@@ -12,6 +12,7 @@ return [
         'router' => [
             'configurators' => [
                 \OSM\Frontend\Routes\SiteRouteConfigurator::class,
+                \OSM\Frontend\Routes\TeamRouteConfigurator::class,
             ],
         ],
         'command' => [
