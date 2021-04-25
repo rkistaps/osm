@@ -5,7 +5,7 @@
   "main": "./dist/app.min.js",
   "scripts": {
     "dev": "./node_modules/.bin/cross-env NODE_ENV=development webpack",
-    "dev-server": "./node_modules/.bin/cross-env NODE_ENV=development webpack-dev-server --open --inlince --hot",
+    "dev-server": "webpack-dev-server",
     "build": "./node_modules/.bin/cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "keywords": [],
@@ -41,6 +41,7 @@
     "axios": "^0.21.1",
     "bootstrap-loader": "^3.0.4",
     "jquery": "^3.4.1",
+    "lodash": "^4.17.21",
     "popper.js": "^1.16.0",
     "precss": "^4.0.0",
     "vue-mc": "^0.6.0"

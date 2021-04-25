@@ -1,15 +1,18 @@
 const path = require('path');
+const glob = require('glob');
 const {VueLoaderPlugin} = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: {
-        index: './src-fe/app.js',
-    },
+    entry: glob.sync('./src-fe/entries/**.js').reduce(function (obj, el) {
+        obj[path.parse(el).name] = el;
+        return obj
+    }, {}),
     output: {
         path: path.resolve(__dirname, "public/dist/js/"),
-        filename: '[name].min.js'
+        filename: '[name].min.js',
+        publicPath: '/dist/js'
     },
     devtool: 'source-map',
     module: {
