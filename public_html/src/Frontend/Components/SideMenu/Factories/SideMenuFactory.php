@@ -32,7 +32,7 @@ class SideMenuFactory
 
         $group->items[] = (new SideMenuItem())
             ->setText(_d('frontend', 'Team'))
-            ->setUrl('/team');
+            ->setUrl('/teams');
 
         $group->items[] = (new SideMenuItem())
             ->setText(_d('frontend', 'Players'))

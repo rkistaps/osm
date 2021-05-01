@@ -8,8 +8,8 @@ use OSM\Core\Collections\CountryCollection;
 use OSM\Core\Models\Country;
 
 /**
- * @method Country|null findOne(array $condition = [])
- * @method Country|null findById(int $id)
+ * @method Country findOne(array $condition = [])
+ * @method Country findById(int $id)
  */
 class CountryRepository extends AbstractModelRepository
 {

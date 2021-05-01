@@ -1,7 +1,7 @@
 <template>
   <div id="slideshow">
     <div class="current" :style="getCurrentStyle"></div>
-    <div class="next" :style="getNextStyle" v-if="isAnimating"></div>
+    <div class="next" :style="getNextStyle"></div>
     <img class='overlay' src='/assets/images/html/top_overlay.png' alt=''/>
     <img class='tools' src='/assets/images/html/tools.png' alt=''/>
   </div>

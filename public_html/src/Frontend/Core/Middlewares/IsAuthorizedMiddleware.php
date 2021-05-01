@@ -30,6 +30,11 @@ class IsAuthorizedMiddleware implements MiddlewareInterface
             return $this->responseBuilder->withRedirect('/', 302)->build();
         }
 
+        $request = $request->withAttribute('user', $this->authorizationService->getActiveUser());
+        $request = $request->withAttribute('team', $this->authorizationService->getActiveTeam());
+        $request = $request->withAttribute('active-user-id', $this->authorizationService->getActiveUserId());
+        $request = $request->withAttribute('active-team-id', $this->authorizationService->getActiveTeamId());
+
         return $handler->handle($request);
     }
 }
