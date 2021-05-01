@@ -7,8 +7,10 @@ namespace OSM\Frontend\Modules\Site\Factories;
 use League\Plates\Engine;
 use OSM\Frontend\Core\Builders\ResponseBuilder;
 use OSM\Frontend\Exceptions\Http\AbstractHttpException;
+use OSM\Frontend\Exceptions\Http\HttpNotFoundException;
 use OSM\Frontend\Modules\Site\ViewModels\ErrorViewModel;
 use Psr\Http\Message\ResponseInterface;
+use TheApp\Exceptions\NoRouteMatchException;
 use Throwable;
 
 class ErrorResponseFactory
@@ -29,14 +31,18 @@ class ErrorResponseFactory
      */
     public function buildFromThrowable(Throwable $throwable): ResponseInterface
     {
+        if ($throwable instanceof NoRouteMatchException) {
+            $throwable = new HttpNotFoundException(_f('Page not found'));
+        }
+
         // if not http exception let it bubble up
         if (!$throwable instanceof AbstractHttpException) {
             throw $throwable;
         }
 
         $model = new ErrorViewModel();
-        $model->title = _f('Error');
-        $model->description = $throwable->getMessage();
+        $model->code = $throwable->statusCode;
+        $model->title = $throwable->getMessage();
 
         $content = $this->engine->render('/error', [
             'error' => $model,

@@ -6,6 +6,6 @@ namespace OSM\Frontend\Modules\Site\ViewModels;
 
 class ErrorViewModel
 {
+    public int $code = 500;
     public string $title = '';
-    public string $description = '';
 }

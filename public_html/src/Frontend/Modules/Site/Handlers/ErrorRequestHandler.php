@@ -18,6 +18,9 @@ class ErrorRequestHandler implements ErrorHandlerInterface
         $this->responseFactory = $responseFactory;
     }
 
+    /**
+     * @throws Throwable
+     */
     public function handle(Throwable $throwable): ResponseInterface
     {
         return $this->responseFactory->buildFromThrowable($throwable);
