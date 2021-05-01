@@ -985,7 +985,7 @@ body#fb {
     position: absolute;
     right: 39px;
     top: 33px;
-    z-index: 3;
+    z-index: 5;
 }
 
 #budget {
@@ -1104,8 +1104,11 @@ ul.menu li:hover {
     background: #dfdfdf;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    font-size: 16px;
-    line-height: 30px;
+    font: 20px/39px "OpenSansRegular";
+    color: #828282;
+    padding-left: 24px;
+    padding-right: 10px;
+    margin-bottom: 10px;
 }
 
 .body .middle_col .title, .box.medium .title {

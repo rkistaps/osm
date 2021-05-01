@@ -6,10 +6,9 @@ namespace OSM\Frontend\Modules\Teams\Handlers;
 
 use OSM\Core\Handlers\AbstractRequestHandler;
 use OSM\Core\Models\Team;
-use OSM\Core\Repositories\CountryRepository;
 use OSM\Core\Repositories\TeamRepository;
-use OSM\Core\Repositories\UserRepository;
 use OSM\Frontend\Exceptions\Http\HttpNotFoundException;
+use OSM\Frontend\Modules\Teams\Factories\TeamViewModelFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -18,16 +17,13 @@ class TeamViewRequestHandler extends AbstractRequestHandler
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $teamId = $request->getAttribute('id', $request->getAttribute('active-team-id'));
-
         $team = $this->getTeam((int)$teamId);
 
-        $user = $this->genericFactory->get(UserRepository::class)->findById($team->userId);
-        $country = $this->genericFactory->get(CountryRepository::class)->findById($team->countryId);
+        $activeUserId = $request->getAttribute('active-user-id');
 
         return $this->render('index', [
-            'team' => $team,
-            'user' => $user,
-            'country' => $country,
+            'model' => $this->genericFactory->get(TeamViewModelFactory::class)->buildForTeam($team),
+            'isOwner' => $team->userId === $activeUserId,
         ]);
     }
 

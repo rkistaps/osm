@@ -43,4 +43,21 @@ class ChampionshipLeagueRepository extends AbstractModelRepository
     {
         return $this->findAll(['championship_id' => $championshipId]);
     }
+
+    public function findByChampionshipAndTeam(int $championshipId, int $teamId): ?ChampionshipLeague
+    {
+        return $this->buildQuery([
+            'championship_id' => $championshipId,
+            'championship_tables.team_id' => $teamId,
+        ])
+            ->join('championships', function ($join) {
+                $join->on('championship_leagues.id', 'championships.id');
+            })
+            ->join('championship_tables', function ($join) {
+                $join->on('championship_leagues.id', 'championship_tables.championship_league_id');
+            })
+            ->select('championship_leagues.*')
+            ->fetchClass($this->getModelClassName())
+            ->first();
+    }
 }
