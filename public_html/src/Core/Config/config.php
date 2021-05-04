@@ -18,6 +18,7 @@ return [
     ],
     'command' => [
         'configurators' => [
+            \OSM\Console\Commands\MaintenanceCommandConfigurator::class,
             \OSM\Console\Commands\SiteCommandConfigurator::class,
             \OSM\Console\Commands\UserCommandConfigurator::class,
             \OSM\Console\Commands\TeamsCommandConfigurator::class,

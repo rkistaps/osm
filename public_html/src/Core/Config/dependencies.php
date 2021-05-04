@@ -1,6 +1,7 @@
 <?php
 
 use AutoMapperPlus\AutoMapper;
+use League\Flysystem\Filesystem;
 use League\Plates\Engine;
 use Opis\Database\Database;
 use OSM\Core\AppTypes;
@@ -9,6 +10,7 @@ use OSM\Core\Components\VoidLogger;
 use OSM\Core\Factories\AutomapperFactory;
 use OSM\Core\Factories\ConfigFactory;
 use OSM\Core\Factories\DatabaseFactory;
+use OSM\Core\Factories\FilesystemFactory;
 use OSM\Core\Factories\OSMStateFactory;
 use OSM\Core\Factories\TemplateEngineFactory;
 use OSM\Core\Interfaces\ModelDataHydratorInterface;
@@ -35,4 +37,5 @@ return [
     AutoMapper::class => fn(ConfigInterface $config, AutoMapperFactory $autoMapperFactory) => $autoMapperFactory->fromConfig($config),
     ModelDataHydratorInterface::class => fn(ContainerInterface $container) => $container->get(ModelDataHydratorService::class),
     OSMState::class => fn(OSMStateFactory $factory) => $factory->build(),
+    Filesystem::class => fn(FilesystemFactory $factory) => $factory->build(),
 ];
