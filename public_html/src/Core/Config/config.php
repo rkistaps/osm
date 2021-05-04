@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'error_handler' => \OSM\Frontend\Modules\Site\Handlers\ErrorRequestHandler::class,
+    'error_handler' => \OSM\Frontend\Modules\Site\Handlers\ErrorHandler::class,
     'templatePath' => APP_ROOT . '/src/Frontend/Templates',
     'database' => [
         'host' => '',

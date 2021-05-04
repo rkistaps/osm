@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use TheApp\Interfaces\ErrorHandlerInterface;
 use Throwable;
 
-class ErrorRequestHandler implements ErrorHandlerInterface
+class ErrorHandler implements ErrorHandlerInterface
 {
     private ErrorResponseFactory $responseFactory;
 
