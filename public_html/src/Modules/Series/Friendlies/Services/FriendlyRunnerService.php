@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace OSM\Modules\Series\Friendlies\Services;
 
+use OSM\Core\Factories\GenericFactory;
 use OSM\Core\Models\Match;
 use OSM\Core\Repositories\MatchRepository;
+use OSM\Modules\MatchEngine\MatchEngine;
 use OSM\Modules\Matches\Factories\MatchParameterFactory;
 use OSM\Modules\Matches\Services\MatchRunnerService;
 
@@ -14,15 +16,18 @@ class FriendlyRunnerService
     private MatchRunnerService $matchRunnerService;
     private MatchRepository $matchRepository;
     private MatchParameterFactory $matchParameterFactory;
+    private GenericFactory $genericFactory;
 
     public function __construct(
         MatchRunnerService $matchRunnerService,
         MatchRepository $matchRepository,
+        GenericFactory $genericFactory,
         MatchParameterFactory $matchParameterFactory
     ) {
         $this->matchRunnerService = $matchRunnerService;
         $this->matchRepository = $matchRepository;
         $this->matchParameterFactory = $matchParameterFactory;
+        $this->genericFactory = $genericFactory;
     }
 
     public function runNextRound()
@@ -47,6 +52,9 @@ class FriendlyRunnerService
     public function runFriendlyMatch(Match $match)
     {
         $parameters = $this->matchParameterFactory->buildForFriendlies();
-        $result = $this->matchRunnerService->runMatch($match, $parameters);
+
+        $engine = $this->genericFactory->get(MatchEngine::class);
+
+        $result = $this->matchRunnerService->runMatch($engine, $match, $parameters);
     }
 }

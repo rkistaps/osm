@@ -5,6 +5,7 @@ namespace OSM\Modules\MatchEngine;
 use OSM\Core\Helpers\RandomHelper;
 use OSM\Modules\MatchEngine\Helpers\LineupHelper;
 use OSM\Modules\MatchEngine\Helpers\MatchHelper;
+use OSM\Modules\MatchEngine\Interfaces\MatchEngineInterface;
 use OSM\Modules\MatchEngine\Modifiers\FlatLineupStrengthModifier;
 use OSM\Modules\MatchEngine\Modifiers\RelativeLineupStrengthModifier;
 use OSM\Modules\MatchEngine\Services\InjuryService;
@@ -23,11 +24,7 @@ use OSM\Modules\MatchEngine\Structures\MatchSettings;
 use OSM\Modules\MatchEngine\Structures\Player;
 use OSM\Modules\MatchEngine\Structures\ShootConfig;
 
-/**
- * Class MatchEngine
- * @package OSM\Modules\MatchEngine\services
- */
-class MatchEngine
+class MatchEngine implements MatchEngineInterface
 {
     private PossessionCalculatorService $possessionCalculator;
     private LineupStrengthCalculatorService $lineupStrengthCalculator;
@@ -73,7 +70,6 @@ class MatchEngine
         $result->homeTeamLineup = $homeTeam;
         $result->awayTeamLineup = $awayTeam;
 
-
         $this->performanceCalculator->calculateForLineup($homeTeam, $matchSettings);
         $this->performanceCalculator->calculateForLineup($awayTeam, $matchSettings);
 
@@ -96,7 +92,8 @@ class MatchEngine
         }
 
         // calculate possession
-        $possession = $result->stats->possession = $this->possessionCalculator->calculate($homeTeam->strength, $awayTeam->strength, $matchSettings);
+        $possession = $this->possessionCalculator->calculate($homeTeam->strength, $awayTeam->strength, $matchSettings);
+        $result->stats->possession = $possession;
 
         // get total attack count for this match
         $totalAttackCount = $this->getAttackCount($matchSettings);
@@ -283,7 +280,7 @@ class MatchEngine
         return LineupHelper::getRandomPlayerByPositions($lineup, $minute, $positionOrder);
     }
 
-    protected function getStriker(Lineup $lineup, int $minute): ?Player
+    protected function getStriker(Lineup $lineup, int $minute): Player
     {
         $positionOrder = RandomHelper::getOneByChance([
             15 => [Player::POS_D, Player::POS_M, Player::POS_F],
@@ -365,9 +362,7 @@ class MatchEngine
             $this->applyPressureBonus($lineup);
         }
 
-        // apply bonus from passing style vs defensive line
-
-        $lineup->strength;
+        // todo apply bonus from passing style vs defensive line
     }
 
     /**
@@ -416,6 +411,7 @@ class MatchEngine
                 break;
             case Lineup::TACTIC_PLAY_IT_WIDE:
                 $amount = $strength->midfield * 0.8;
+                $modifier->midfieldModifier -= $amount;
                 $modifier->defenceModifier = $amount / 2;
                 $modifier->attackModifier = $amount / 2;
                 break;
