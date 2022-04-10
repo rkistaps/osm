@@ -6,6 +6,7 @@ namespace OSM\Frontend\Helpers;
 
 use OSM\Core\Models\ChampionshipLeague;
 use OSM\Core\Models\Country;
+use OSM\Core\Models\Player;
 use OSM\Core\Models\Team;
 use OSM\Core\Models\User;
 
@@ -33,5 +34,10 @@ class LinkHelper
         }
 
         return Html::a($league->name, '/leagues/' . $league->id);
+    }
+
+    public static function player(Player $player, array $options = []): string
+    {
+        return Html::a($player->getFullName(), '/players/' . $player->id, $options);
     }
 }

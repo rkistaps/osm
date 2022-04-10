@@ -6,6 +6,7 @@ use League\Plates\Engine;
 use OSM\Core\Factories\GenericFactory;
 use OSM\Core\Models\Team;
 use OSM\Core\Repositories\TeamRepository;
+use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Core\Builders\ResponseBuilder;
 use OSM\Frontend\Exceptions\Http\HttpNotFoundException;
 use OSM\Frontend\Services\AlertService;
@@ -103,9 +104,7 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
 
     public function getActiveTeam(ServerRequestInterface $request): ?Team
     {
-        $teamId = $request->getAttribute('id', $request->getAttribute('active-team-id'));
-
-        return $this->getTeam((int)$teamId);
+        return $this->getTeam((int)$request->getAttribute('active-team-id'));
     }
 
     /**
@@ -116,7 +115,7 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
         $team = $this->genericFactory->get(TeamRepository::class)->findById($teamId);
 
         if (!$team) {
-            throw new HttpNotFoundException(_d('frontend', 'Team not found'));
+            throw new HttpNotFoundException(_d(Domains::DOMAIN_FRONTEND, 'Team not found'));
         }
 
         return $team;
