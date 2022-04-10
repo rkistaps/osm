@@ -18,7 +18,7 @@ class LineupRouteConfigurator implements RouterConfiguratorInterface
      */
     public function configureRouter(Router $router)
     {
-        $router->get(self::PREFIX, LineupViewRequestHandler::class)
+        $router->any(self::PREFIX, LineupViewRequestHandler::class)
             ->withMiddleware(IsAuthorizedMiddleware::class);
     }
 }

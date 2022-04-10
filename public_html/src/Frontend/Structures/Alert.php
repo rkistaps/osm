@@ -24,4 +24,24 @@ class Alert
 
     public string $type = self::TYPE_INFO;
     public string $message;
+
+    /**
+     * @param string $message
+     * @return Alert
+     */
+    public function setMessage(string $message): Alert
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * @param string $type
+     * @return Alert
+     */
+    public function setType(string $type): Alert
+    {
+        $this->type = $type;
+        return $this;
+    }
 }

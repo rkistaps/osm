@@ -12,4 +12,6 @@ class TeamLineupCollection extends AbstractModelCollection
     {
         return TeamLineup::class;
     }
+
+
 }

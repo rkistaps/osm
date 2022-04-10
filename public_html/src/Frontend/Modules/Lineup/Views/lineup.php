@@ -13,15 +13,18 @@ use OSM\Frontend\Templates\LayoutTypes;
 
 $this->layout(LayoutTypes::TYPE_DEFAULT);
 
+/** @var array|null $postPlayerIds */
 /** @var Team $team */
 /** @var TeamLineup $lineup */
 /** @var TeamLineupPlayerCollection $lineupPlayers */
 /** @var \OSM\Core\Collections\PlayerCollection $players */
 /** @var \OSM\Core\Factories\GenericFactory $factory */
 
+$selectedPlayerIds = $postPlayerIds ?? $lineupPlayers->getPlayerIds();
+
 ?>
 <?php BoxHelper::start(_d(Domains::DOMAIN_FRONTEND, 'Lineup')) ?>
-<?php Html::startForm('/lineup/save'); ?>
+<?php Html::startForm('/lineup'); ?>
 <table class="">
     <tr>
         <th>&nbsp;</th>
@@ -36,7 +39,7 @@ $this->layout(LayoutTypes::TYPE_DEFAULT);
     </tr>
     <?php foreach ($players->all() as $player) { ?>
         <tr>
-            <td><?php echo Html::checkbox('players[]', $player->id, $lineupPlayers->containsPlayer($player)) ?></td>
+            <td><?php echo Html::checkbox('players[]', $player->id, in_array($player->id, $selectedPlayerIds)) ?></td>
             <td><?php echo $player->position ?></td>
             <td><?php echo LinkHelper::player($player) ?></td>
             <td><?php echo $player->age ?></td>
@@ -44,9 +47,9 @@ $this->layout(LayoutTypes::TYPE_DEFAULT);
             <td><?php echo $player->talent ?></td>
             <td><?php echo $player->energy ?></td>
             <td><?php echo $player->countryId ?></td>
-
         </tr>
     <?php } ?>
 </table>
+<?php echo Html::submitButton(_d(Domains::DOMAIN_FRONTEND, 'Save lineup'), 'save-lineup') ?>
 <?php echo Html::endForm() ?>
 <?php echo BoxHelper::end() ?>

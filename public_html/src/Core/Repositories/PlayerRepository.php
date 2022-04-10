@@ -38,6 +38,14 @@ class PlayerRepository extends AbstractModelRepository
         ]);
     }
 
+    public function getByIdsAndTeam(array $ids, int $teamId): PlayerCollection
+    {
+        return $this->findAll([
+            'team_id' => $teamId,
+            'id' => $ids,
+        ]);
+    }
+
     public function getPlayersForTeamLineupId(int $teamLineupId): PlayerCollection
     {
         $rows = $this->database

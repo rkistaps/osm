@@ -18,4 +18,9 @@ class TeamLineupPlayerCollection extends AbstractModelCollection
     {
         return !!$this->first(fn(TeamLineupPlayer $lineupPlayer) => $lineupPlayer->playerId === $player->id);
     }
+
+    public function getPlayerIds(): array
+    {
+        return $this->map(fn(TeamLineupPlayer $lineupPlayer) => $lineupPlayer->playerId)->all();
+    }
 }

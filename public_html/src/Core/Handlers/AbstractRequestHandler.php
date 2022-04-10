@@ -10,6 +10,7 @@ use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Core\Builders\ResponseBuilder;
 use OSM\Frontend\Exceptions\Http\HttpNotFoundException;
 use OSM\Frontend\Services\AlertService;
+use OSM\Frontend\Structures\Alert;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -102,6 +103,20 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
         return $request->getMethod() === 'POST';
     }
 
+    public function addAlert(string $type, string $message, bool $isFlash = true)
+    {
+        $this->genericFactory->get(AlertService::class)->addAlert(
+            $type,
+            $message,
+            $isFlash
+        );
+    }
+
+    public function addErrorAlert(string $message, bool $isFlash = true)
+    {
+        $this->addAlert(Alert::TYPE_ERROR, $message, $isFlash);
+    }
+
     public function getActiveTeam(ServerRequestInterface $request): ?Team
     {
         return $this->getTeam((int)$request->getAttribute('active-team-id'));
@@ -119,5 +134,23 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
         }
 
         return $team;
+    }
+
+    public function getPostParam(string $paramName, ServerRequestInterface $request, $default = null)
+    {
+        if (!$this->isPost($request)) {
+            return null;
+        }
+
+        return $request->getParsedBody()[$paramName] ?? $default;
+    }
+
+    public function hasPostParam(string $paramName, ServerRequestInterface $request): bool
+    {
+        if (!$this->isPost($request)) {
+            return false;
+        }
+
+        return isset($request->getParsedBody()[$paramName]);
     }
 }

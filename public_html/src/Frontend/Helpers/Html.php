@@ -28,10 +28,11 @@ class Html
         return self::tag('button', $value, $options);
     }
 
-    public static function submitButton(string $value, array $options = []): string
+    public static function submitButton(string $value, string $name = null, array $options = []): string
     {
         $options['type'] = 'submit';
         $options['value'] = $value;
+        $options['name'] = $name;
 
         return self::tag('input', '', $options);
     }
