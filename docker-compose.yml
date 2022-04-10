@@ -10,26 +10,21 @@ services:
       - "443:443"
     volumes:
       - ./public_html:/var/www/html
-    networks:
-      - default
     depends_on:
       - db
   db:
-    build:
-      context: ./
-      dockerfile: ./docker-conf/MySQL.Dockerfile
+    image: mysql:5.7
     platform: linux/amd64
+    restart: always
     ports:
-      - "3306:3306"
+      - '3306:3306'
     volumes:
-      - persistent:/var/lib/mysql
+      - data:/var/lib/mysql
       - ./docker-conf/mycustom.cnf:/etc/mysql/conf.d/custom.cnf
-    networks:
-      - default
     environment:
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
       MYSQL_DATABASE: osm
       MYSQL_ROOT_PASSWORD: admin
 volumes:
-  persistent:
+  data:

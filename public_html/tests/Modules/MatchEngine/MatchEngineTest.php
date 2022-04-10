@@ -15,7 +15,7 @@ use OSM\Modules\MatchEngine\Services\ShootCalculatorService;
 use OSM\Modules\MatchEngine\Structures\MatchResult;
 use OSM\Modules\MatchEngine\Structures\MatchSettings;
 use Tests\Bootstrap\BaseUnitTestCase;
-use Tests\Modules\MatchEngine\Helpers\TestDataHelper;
+use Tests\Modules\MatchEngine\Helpers\MatchEngineTestDataHelper;
 
 class MatchEngineTest extends BaseUnitTestCase
 {
@@ -38,8 +38,8 @@ class MatchEngineTest extends BaseUnitTestCase
 
     public function testMatchEngine_withCorrectData_returnsCorrectResult()
     {
-        $homeTeam = TestDataHelper::getLineup(1);
-        $awayTeam = TestDataHelper::getLineup(2);
+        $homeTeam = MatchEngineTestDataHelper::getLineup(1);
+        $awayTeam = MatchEngineTestDataHelper::getLineup(2);
         $settings = new MatchSettings();
 
         $result = $this->sut->playMatch($homeTeam, $awayTeam, $settings);
@@ -50,8 +50,8 @@ class MatchEngineTest extends BaseUnitTestCase
 
     public function testMatchEngine_withMissingPlayers_ReturnsWalkover()
     {
-        $homeTeam = TestDataHelper::getLineup(1);
-        $awayTeam = TestDataHelper::getLineup(2);
+        $homeTeam = MatchEngineTestDataHelper::getLineup(1);
+        $awayTeam = MatchEngineTestDataHelper::getLineup(2);
         $awayTeam->players = [];
         $settings = new MatchSettings();
 

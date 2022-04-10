@@ -10,7 +10,7 @@ use OSM\Modules\MatchEngine\Structures\Coach;
 use OSM\Modules\MatchEngine\Structures\Lineup;
 use OSM\Modules\MatchEngine\Structures\Player;
 
-class TestDataHelper
+class MatchEngineTestDataHelper
 {
     public static function getLineup($teamId): Lineup
     {

@@ -58,6 +58,6 @@ class ChampionshipLeagueRepository extends AbstractModelRepository
             })
             ->select('championship_leagues.*')
             ->fetchClass($this->getModelClassName())
-            ->first();
+            ->first() ?: null;
     }
 }
