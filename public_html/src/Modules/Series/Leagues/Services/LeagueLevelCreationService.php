@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Modules\Series\Leagues\Services;
 
+use InvalidArgumentException;
 use OSM\Core\Models\Championship;
 use OSM\Core\Models\Match;
 use OSM\Core\Repositories\ChampionshipLeagueRepository;
@@ -25,7 +26,7 @@ class LeagueLevelCreationService
     public function createNewLeagueLevel(Championship $championship)
     {
         if ($championship->type !== Match::TYPE_CHAMPIONSHIP_LEAGUE) {
-            throw new \InvalidArgumentException('Invalid championship type: ' . $championship->type);
+            throw new InvalidArgumentException('Invalid championship type: ' . $championship->type);
         }
 
         $currentMaxLevel = $this->leagueRepository->getMaxLevelByChampionshipId($championship->id);

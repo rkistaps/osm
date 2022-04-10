@@ -4,7 +4,10 @@ namespace OSM\Core\Handlers;
 
 use League\Plates\Engine;
 use OSM\Core\Factories\GenericFactory;
+use OSM\Core\Models\Team;
+use OSM\Core\Repositories\TeamRepository;
 use OSM\Frontend\Core\Builders\ResponseBuilder;
+use OSM\Frontend\Exceptions\Http\HttpNotFoundException;
 use OSM\Frontend\Services\AlertService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -25,9 +28,15 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
         $this->responseBuilder = $responseBuilder;
         $this->engine = $engine;
         $this->genericFactory = $genericFactory;
+
+        $this->init();
     }
 
     abstract public function handle(ServerRequestInterface $request): ResponseInterface;
+
+    protected function init(){
+
+    }
 
     protected function render(string $view, array $params = []): ResponseInterface
     {
@@ -90,5 +99,26 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
     protected function isPost(ServerRequestInterface $request): bool
     {
         return $request->getMethod() === 'POST';
+    }
+
+    public function getActiveTeam(ServerRequestInterface $request): ?Team
+    {
+        $teamId = $request->getAttribute('id', $request->getAttribute('active-team-id'));
+
+        return $this->getTeam((int)$teamId);
+    }
+
+    /**
+     * @throws HttpNotFoundException
+     */
+    protected function getTeam(int $teamId = null): Team
+    {
+        $team = $this->genericFactory->get(TeamRepository::class)->findById($teamId);
+
+        if (!$team) {
+            throw new HttpNotFoundException(_d('frontend', 'Team not found'));
+        }
+
+        return $team;
     }
 }

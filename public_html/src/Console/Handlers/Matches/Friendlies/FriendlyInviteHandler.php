@@ -8,8 +8,9 @@ use OSM\Modules\Series\Friendlies\Exceptions\FriendlyAlreadyBookedException;
 use OSM\Modules\Series\Friendlies\Services\FriendlyInvitationService;
 use OSM\Modules\Series\Friendlies\Structures\FriendlyInvitationParameters;
 use Psr\Log\LoggerInterface;
+use TheApp\Interfaces\CommandHandlerInterface;
 
-class FriendlyInviteHandler implements \TheApp\Interfaces\CommandHandlerInterface
+class FriendlyInviteHandler implements CommandHandlerInterface
 {
     private FriendlyInvitationService $invitationService;
     private LoggerInterface $logger;

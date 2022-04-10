@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Core\Database;
 
+use Exception;
 use Opis\Database\Database;
 use OSM\Core\Database\Interfaces\DatabaseSeederInterface;
 use OSM\Core\Database\Seeders\CountrySeeder;
@@ -43,7 +44,7 @@ class DatabaseSeeder
             $seeder = $this->genericFactory->get($seederClass);
 
             if (!$seeder || !($seeder instanceof DatabaseSeederInterface)) {
-                throw new \Exception('Bad seeder class');
+                throw new Exception('Bad seeder class');
             }
 
             $this->logger->info('Seeding');

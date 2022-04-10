@@ -6,8 +6,9 @@ namespace OSM\Console\Handlers\Bots;
 
 use OSM\Core\Repositories\CountryRepository;
 use OSM\Modules\Bots\Creation\Services\BotCreationService;
+use TheApp\Interfaces\CommandHandlerInterface;
 
-class BotCreationCommandHandler implements \TheApp\Interfaces\CommandHandlerInterface
+class BotCreationCommandHandler implements CommandHandlerInterface
 {
     private CountryRepository $countryRepository;
     private BotCreationService $botCreationService;

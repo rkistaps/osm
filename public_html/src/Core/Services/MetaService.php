@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Core\Services;
 
+use Exception;
 use OSM\Core\Collections\AbstractModelCollection;
 use OSM\Core\Components\ArrayCache;
 use OSM\Core\Factories\ArrayCacheFactory;
@@ -37,7 +38,7 @@ class MetaService
         string $value
     ) {
         if (!in_array($metaKey, $metaOwner->getAvailableMetas())) {
-            throw new \Exception('Unregistered meta: ' . $metaKey);
+            throw new Exception('Unregistered meta: ' . $metaKey);
         }
 
         $metas = $this->getMetas($metaOwner);

@@ -9,8 +9,9 @@ use OSM\Core\Repositories\TeamRepository;
 use OSM\Modules\Teams\Lineups\Services\TeamLineupGeneratorService;
 use Psr\Log\LoggerInterface;
 use TheApp\Components\CommandRunner;
+use TheApp\Interfaces\CommandConfiguratorInterface;
 
-class TeamsCommandConfigurator implements \TheApp\Interfaces\CommandConfiguratorInterface
+class TeamsCommandConfigurator implements CommandConfiguratorInterface
 {
     private LoggerInterface $logger;
 

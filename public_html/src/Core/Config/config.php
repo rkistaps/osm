@@ -1,7 +1,20 @@
 <?php
 
+use OSM\Console\Commands\BotCommandConfigurator;
+use OSM\Console\Commands\ChampionshipCommandConfigurator;
+use OSM\Console\Commands\LeagueCommandConfigurator;
+use OSM\Console\Commands\MaintenanceCommandConfigurator;
+use OSM\Console\Commands\MatchCommandConfigurator;
+use OSM\Console\Commands\SiteCommandConfigurator;
+use OSM\Console\Commands\TeamsCommandConfigurator;
+use OSM\Console\Commands\UserCommandConfigurator;
+use OSM\Frontend\Modules\Site\Handlers\ErrorHandler;
+use OSM\Frontend\Routes\LineupRouteConfigurator;
+use OSM\Frontend\Routes\SiteRouteConfigurator;
+use OSM\Frontend\Routes\TeamRouteConfigurator;
+
 return [
-    'error_handler' => \OSM\Frontend\Modules\Site\Handlers\ErrorHandler::class,
+    'error_handler' => ErrorHandler::class,
     'templatePath' => APP_ROOT . '/src/Frontend/Templates',
     'database' => [
         'host' => '',
@@ -12,20 +25,21 @@ return [
     ],
     'router' => [
         'configurators' => [
-            \OSM\Frontend\Routes\SiteRouteConfigurator::class,
-            \OSM\Frontend\Routes\TeamRouteConfigurator::class,
+            SiteRouteConfigurator::class,
+            TeamRouteConfigurator::class,
+            LineupRouteConfigurator::class,
         ],
     ],
     'command' => [
         'configurators' => [
-            \OSM\Console\Commands\MaintenanceCommandConfigurator::class,
-            \OSM\Console\Commands\SiteCommandConfigurator::class,
-            \OSM\Console\Commands\UserCommandConfigurator::class,
-            \OSM\Console\Commands\TeamsCommandConfigurator::class,
-            \OSM\Console\Commands\MatchCommandConfigurator::class,
-            \OSM\Console\Commands\BotCommandConfigurator::class,
-            \OSM\Console\Commands\ChampionshipCommandConfigurator::class,
-            \OSM\Console\Commands\LeagueCommandConfigurator::class,
+            MaintenanceCommandConfigurator::class,
+            SiteCommandConfigurator::class,
+            UserCommandConfigurator::class,
+            TeamsCommandConfigurator::class,
+            MatchCommandConfigurator::class,
+            BotCommandConfigurator::class,
+            ChampionshipCommandConfigurator::class,
+            LeagueCommandConfigurator::class,
         ],
     ],
 ];

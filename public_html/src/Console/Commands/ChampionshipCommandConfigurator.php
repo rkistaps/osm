@@ -7,8 +7,9 @@ namespace OSM\Console\Commands;
 use OSM\Console\Handlers\Series\Championships\ChampionshipCreationCommandHandler;
 use OSM\Console\Handlers\Series\Leagues\LeagueLevelCreationCommandHandler;
 use TheApp\Components\CommandRunner;
+use TheApp\Interfaces\CommandConfiguratorInterface;
 
-class ChampionshipCommandConfigurator implements \TheApp\Interfaces\CommandConfiguratorInterface
+class ChampionshipCommandConfigurator implements CommandConfiguratorInterface
 {
     private const PREFIX = 'championships';
 

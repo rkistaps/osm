@@ -26,18 +26,4 @@ class TeamViewRequestHandler extends AbstractRequestHandler
             'isOwner' => $team->userId === $activeUserId,
         ]);
     }
-
-    /**
-     * @throws HttpNotFoundException
-     */
-    protected function getTeam(int $teamId = null): Team
-    {
-        $team = $this->genericFactory->get(TeamRepository::class)->findById($teamId);
-
-        if (!$team) {
-            throw new HttpNotFoundException(_d('frontend', 'Team not found'));
-        }
-
-        return $team;
-    }
 }

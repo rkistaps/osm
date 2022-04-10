@@ -8,8 +8,10 @@ use OSM\Modules\Teams\Creation\Services\TeamCreationService;
 use OSM\Modules\Teams\Creation\Structures\TeamCreationParams;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use TheApp\Interfaces\CommandHandlerInterface;
+use Throwable;
 
-class TeamsCreationCommandHandler implements \TheApp\Interfaces\CommandHandlerInterface
+class TeamsCreationCommandHandler implements CommandHandlerInterface
 {
     private ContainerInterface $container;
     private LoggerInterface $logger;
@@ -32,7 +34,7 @@ class TeamsCreationCommandHandler implements \TheApp\Interfaces\CommandHandlerIn
             $team = $service->createTeam($params);
 
             $this->logger->info('Team created: ' . $team->id);
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
         }
     }

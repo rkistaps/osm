@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OSM\Core\Translations\Structures\Domains;
+use Psr\Container\ContainerInterface;
 use TheApp\Apps\App;
 
 function t(string $text): string
@@ -16,7 +17,7 @@ function td(string $domain, string $text): string
     return $text;
 }
 
-function getContainer(): \Psr\Container\ContainerInterface
+function getContainer(): ContainerInterface
 {
     return App::getContainer();
 }

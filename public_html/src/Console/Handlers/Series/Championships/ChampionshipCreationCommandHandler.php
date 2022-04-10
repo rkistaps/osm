@@ -6,8 +6,9 @@ namespace OSM\Console\Handlers\Series\Championships;
 
 use OSM\Modules\Series\Championships\Creation\Services\ChampionshipCreationService;
 use Psr\Log\LoggerInterface;
+use TheApp\Interfaces\CommandHandlerInterface;
 
-class ChampionshipCreationCommandHandler implements \TheApp\Interfaces\CommandHandlerInterface
+class ChampionshipCreationCommandHandler implements CommandHandlerInterface
 {
     private ChampionshipCreationService $creationService;
     private LoggerInterface $logger;

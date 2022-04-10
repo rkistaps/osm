@@ -7,8 +7,10 @@ namespace OSM\Console\Handlers\Series\Leagues;
 use OSM\Core\Repositories\ChampionshipRepository;
 use OSM\Modules\Series\Leagues\Services\LeagueLevelCreationService;
 use Psr\Log\LoggerInterface;
+use TheApp\Interfaces\CommandHandlerInterface;
+use Throwable;
 
-class LeagueLevelCreationCommandHandler implements \TheApp\Interfaces\CommandHandlerInterface
+class LeagueLevelCreationCommandHandler implements CommandHandlerInterface
 {
     private LeagueLevelCreationService $service;
     private ChampionshipRepository $championshipRepository;
@@ -40,7 +42,7 @@ class LeagueLevelCreationCommandHandler implements \TheApp\Interfaces\CommandHan
 
         try {
             $this->service->createNewLeagueLevel($championship);
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             $this->logger->error($throwable->getMessage());
         }
     }
