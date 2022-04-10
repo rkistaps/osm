@@ -13,7 +13,7 @@ class CreateCountryTable extends AbstractMigration
         $this->createTable('countries', function (CreateTable $table) {
             $table->integer('id')->autoincrement();
             $table->string('name')->unique();
-            $table->string('short_name', 2)->unique();
+            $table->string('short_name', 3)->unique();
         });
     }
 

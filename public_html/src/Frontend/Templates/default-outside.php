@@ -16,13 +16,18 @@ use OSM\Frontend\Components\LoginForm\LoginForm;
     <link rel='icon' href='/assets/images/html/star.png' type='image/x-icon'/>
     <link rel='shortcut icon' href='/assets/images/html/star.png' type='image/x-icon'/>
     <link rel="stylesheet" href="/assets/new-src/css/opensans.css" type="text/css"/>
-        <link rel="stylesheet" href="/assets/new-src/css/stylesheet.css" type="text/css"/>
+    <link rel="stylesheet" href="/assets/new-src/css/stylesheet.css" type="text/css"/>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
     <meta property="og:image" content="/assets/image/dark_logo.png"/>
 </head>
 <body>
 <div id='logo_wrap'>
     <div id='topMenu'></div>
-    <a id='loggedin_logo' href='index.php?page=news'><img src='/assets/images/html/logo.png' alt=''/></a>
+    <a href='/'>
+        <img src='/assets/images/html/logo.png' alt=''/>
+    </a>
 </div>
 <div class='width_wrap' id="app">
     <div class='top'></div>
@@ -43,25 +48,22 @@ use OSM\Frontend\Components\LoginForm\LoginForm;
             </div>
             <img class='overlay' src='/assets/images/html/top_overlay.png' alt=''/>
             <img class='tools' src='/assets/images/html/tools.png' alt=''/>
-            <?= LoginForm::build()->render()?>
+            <?= LoginForm::build()->render() ?>
         </div>
         <div class='body'>
             <div class="container-fluid p-0">
                 <div class="row">
-                    <div class="col-9 middle_col">
-                        <?php echo FlashMessage::build()->render() ?>
-                        <?php echo $this->section('content'); ?>
+                    <div class="col-12 pt-3">
+                        <?= FlashMessage::build()->render() ?>
+                        <?= $this->section('content'); ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id='facebook'>
-        <div class='borderhide'>
-        </div>
-    </div>
     <div id='footer'>
-        <a href='?page=terms'>Terms and Conditions</a> - <a href='?page=privacy'>Privacy</a> - <a href='?page=rules'>Rules</a> - <a href='?page=osmstaff'>Staff</a> - <a class='fancybox' href='?page=main&method=fancy&show=contact_form'>Contact</a><a href='?page=bugs'> - Bug reports</a><br/>Copyright &copy; 2011 - 2019 OneSkill Manager<br/></div>
+        <a href='?page=terms'>Terms and Conditions</a> - <a href='?page=privacy'>Privacy</a> - <a href='?page=rules'>Rules</a> - <a href='?page=osmstaff'>Staff</a> - <a class='fancybox' href='?page=main&method=fancy&show=contact_form'>Contact</a><a href='?page=bugs'> - Bug reports</a><br/>Copyright &copy; 2011 - 2019 OneSkill Manager<br/>
+    </div>
 </div>
 
 <script src="https://kit.fontawesome.com/0466ae457f.js" crossorigin="anonymous"></script>

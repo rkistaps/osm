@@ -20,3 +20,13 @@ function getContainer(): \Psr\Container\ContainerInterface
 {
     return App::getContainer();
 }
+
+function _d($domain, $message): string
+{
+    return dgettext($domain, $message);
+}
+
+function _f(string $text): string
+{
+    return _d('frontend', $text);
+}

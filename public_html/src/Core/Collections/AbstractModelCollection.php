@@ -72,11 +72,16 @@ abstract class AbstractModelCollection extends AbstractCollection
         return self::collect($items);
     }
 
+    /**
+     * @param int $offset
+     * @param int|null $length
+     * @return static
+     */
     public function slice(int $offset, int $length = null)
     {
-        $result = parent::slice($offset, $length);
+        $this->collection = $this->collection->slice($offset, $length);
 
-        return self::collect($result);
+        return $this;
     }
 
     public function property(string $property): array

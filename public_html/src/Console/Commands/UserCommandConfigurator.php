@@ -41,5 +41,24 @@ class UserCommandConfigurator implements CommandConfiguratorInterface
 
             var_dump($user);
         });
+
+        $commandRunner->addCommand(self::PREFIX . '/set-password', function (
+            int $id,
+            $password,
+            UserCreationService $creationService,
+            LoggerInterface $logger,
+            UserRepository $userRepository
+        ) {
+            $user = $userRepository->findById($id);
+
+            if ($user) {
+                $user->password = $creationService->hashPassword($password);
+                $userRepository->saveModel($user);
+                $logger->info('Password changed');
+                return;
+            }
+
+            $this->logger->error('User not found');
+        });
     }
 }

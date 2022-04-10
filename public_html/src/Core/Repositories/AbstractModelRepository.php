@@ -216,4 +216,9 @@ abstract class AbstractModelRepository
             ->fetchClass($this->getModelClassName())
             ->first();
     }
+
+    public function truncate()
+    {
+        $this->database->schema()->truncate($this->getTableName());
+    }
 }

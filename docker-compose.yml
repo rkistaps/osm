@@ -18,6 +18,7 @@ services:
     build:
       context: ./
       dockerfile: ./docker-conf/MySQL.Dockerfile
+    platform: linux/amd64
     ports:
       - "3306:3306"
     volumes:

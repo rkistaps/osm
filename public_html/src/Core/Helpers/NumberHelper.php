@@ -24,4 +24,9 @@ class NumberHelper
             $number <= $than :
             $number < $than;
     }
+
+    public static function formatMoney(float $money, int $dec = 2): string
+    {
+        return "€ " . number_format($money, $dec);
+    }
 }

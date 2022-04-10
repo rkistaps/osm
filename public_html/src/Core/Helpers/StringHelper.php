@@ -10,16 +10,17 @@ class StringHelper
 {
     public static function toSnakeCase(string $string): string
     {
-        $text = new Convert($string);
-
-        return $text->toSnake();
+        return (new Convert($string))->toSnake();
     }
 
     public static function toCamelCase(string $string): string
     {
-        $text = new Convert($string);
+        return (new Convert($string))->toCamel();
+    }
 
-        return $text->toCamel();
+    public static function toPascal(string $string): string
+    {
+        return (new Convert($string))->toPascal();
     }
 
     public static function getRomanNumerals(int $n): string
