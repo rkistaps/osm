@@ -29,5 +29,10 @@ function _d($domain, $message): string
 
 function _f(string $text): string
 {
-    return _d('frontend', $text);
+    return _d(Domains::DOMAIN_FRONTEND, $text);
+}
+
+function _b(string $text): string
+{
+    return _d(Domains::DOMAIN_BACKEND, $text);
 }
