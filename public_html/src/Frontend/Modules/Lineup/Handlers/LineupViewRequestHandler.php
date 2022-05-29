@@ -8,10 +8,10 @@ use OSM\Core\Handlers\AbstractRequestHandler;
 use OSM\Core\Helpers\ArrayHelper;
 use OSM\Core\Repositories\PlayerRepository;
 use OSM\Core\Repositories\TeamLineupPlayerRepository;
-use OSM\Core\Repositories\TeamLineupRepository;
 use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Modules\Lineup\Exceptions\LineupValidationException;
 use OSM\Frontend\Modules\Lineup\Services\LineupSavingService;
+use OSM\Frontend\Modules\Lineup\Services\TeamLineupSessionService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -19,16 +19,17 @@ use Psr\Http\Server\RequestHandlerInterface;
 class LineupViewRequestHandler extends AbstractRequestHandler implements RequestHandlerInterface
 {
     private TeamLineupPlayerRepository $lineupPlayerRepository;
-    private TeamLineupRepository $lineupRepository;
     private PlayerRepository $playerRepository;
     private LineupSavingService $lineupSavingService;
+    private TeamLineupSessionService $lineupSessionService;
+
 
     protected function init()
     {
-        $this->lineupRepository = $this->genericFactory->get(TeamLineupRepository::class);
         $this->lineupPlayerRepository = $this->genericFactory->get(TeamLineupPlayerRepository::class);
         $this->playerRepository = $this->genericFactory->get(PlayerRepository::class);
         $this->lineupSavingService = $this->genericFactory->get(LineupSavingService::class);
+        $this->lineupSessionService = $this->genericFactory->get(TeamLineupSessionService::class);
     }
 
     /**
@@ -37,7 +38,7 @@ class LineupViewRequestHandler extends AbstractRequestHandler implements Request
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $team = $this->getActiveTeam($request);
-        $lineup = $this->lineupRepository->getDefaultForTeamId($team->id);
+        $lineup = $this->lineupSessionService->getOrSet($team);
         $lineupPlayers = $this->lineupPlayerRepository->findByLineupId($lineup->id);
         $players = $this->playerRepository->findSquadPlayersByTeam($team->id);
 
