@@ -29,13 +29,13 @@ class LineupSavingService
     public function savePlayersForLineup(
         array $playerIds,
         TeamLineup $lineup
-    ) {
+    ): bool {
         $players = $this->validatorService->validate($playerIds, $lineup);
 
-        $lineupPlayers = $this->lineupPlayerRepository->findByLineupId($lineup->id);
+        $currentLineupPlayers = $this->lineupPlayerRepository->findByLineupId($lineup->id);
 
         // remove missing
-        $missing = $lineupPlayers
+        $missing = $currentLineupPlayers
             ->filter(fn(TeamLineupPlayer $lineupPlayer) => !in_array($lineupPlayer->playerId, $players->getIds()));
 
         if ($missing->isNotEmpty()) {
@@ -44,10 +44,12 @@ class LineupSavingService
 
         // add new
         $new = $players
-            ->filter(fn(Player $player) => !in_array($player->id, $lineupPlayers->getPlayerIds()));
+            ->filter(fn(Player $player) => !in_array($player->id, $currentLineupPlayers->getPlayerIds()));
 
         if ($new->isNotEmpty()) {
             $this->lineupPlayerRepository->addPlayerIdsToLineup($new->getIds(), $lineup->id);
         }
+
+        return true;
     }
 }

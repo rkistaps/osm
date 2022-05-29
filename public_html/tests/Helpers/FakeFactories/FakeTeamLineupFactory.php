@@ -22,6 +22,7 @@ class FakeTeamLineupFactory extends FakeModelFactory
         $faker = Factory::create();
 
         return [
+            'id' => $faker->randomNumber(),
             'teamId' => $faker->randomNumber(),
             'name' => 'Fake',
             'passingStyle' => TeamLineup::PASSING_MIXED,

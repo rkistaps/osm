@@ -5,54 +5,66 @@ declare(strict_types=1);
 namespace Tests\Modules\Frontend\Lineup;
 
 use Mockery;
-use OSM\Core\Collections\PlayerCollection;
-use OSM\Core\Collections\TeamLineupPlayerCollection;
-use OSM\Core\Repositories\PlayerRepository;
 use OSM\Core\Repositories\TeamLineupPlayerRepository;
-use OSM\Core\Repositories\TeamLineupRepository;
 use OSM\Frontend\Modules\Lineup\Services\LineupSavingService;
+use OSM\Frontend\Modules\Lineup\Services\LineupSavingValidatorService;
 use Tests\Bootstrap\BaseUnitTestCase;
-use Tests\Helpers\FakeFactories\FakePlayerFactory;
+use Tests\Helpers\FakeFactories\FakePlayerCollectionFactory;
 use Tests\Helpers\FakeFactories\FakeTeamLineupFactory;
+use Tests\Helpers\FakeFactories\FakeTeamLineupPlayerCollectionFactory;
 
 class LineupSavingServiceTest extends BaseUnitTestCase
 {
     private LineupSavingService $sut;
-    private PlayerRepository $playerRepo;
-    private TeamLineupRepository $teamLineupRepo;
     private TeamLineupPlayerRepository $teamLineupPlayerRepo;
+    private LineupSavingValidatorService $validatorService;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-
-        $this->playerRepo = Mockery::mock(PlayerRepository::class);
-        $this->teamLineupRepo = Mockery::mock(TeamLineupRepository::class);
         $this->teamLineupPlayerRepo = Mockery::mock(TeamLineupPlayerRepository::class);
-        $this->sut = new \OSM\Frontend\Modules\Lineup\Services\LineupSavingService(
-            $this->playerRepo,
-            $this->teamLineupRepo,
+        $this->validatorService = Mockery::mock(LineupSavingValidatorService::class);
+
+        $this->sut = new LineupSavingService(
+            $this->validatorService,
             $this->teamLineupPlayerRepo
         );
     }
 
     public function testSavingPlayersForLineup_withCorrectData_lineupSaves()
     {
-        $player = FakePlayerFactory::create([
-            'id' => 100,
-        ]);
+        $playerCollection = FakePlayerCollectionFactory::createForLineup();
 
-        $this->playerRepo->shouldReceive('findByIdsAndTeam')->andReturn(new PlayerCollection());
+        $this->validatorService->shouldReceive('validate')->andReturn($playerCollection);
 
-        $lineup = FakeTeamLineupFactory::create(['name' => 'real']);
-        dd($lineup);
-        $playerLineupCollection = new TeamLineupPlayerCollection();
+        $playerIds = [1, 2, 3];
+        $lineup = FakeTeamLineupFactory::create();
 
-        $this->sut->savePlayersForLineup(
-            [1,2,3],
-            $lineup,
-            $playerLineupCollection
-        );
+        $existingPlayerCollection = FakeTeamLineupPlayerCollectionFactory::createForLineupId($lineup->id);
+
+        $this
+            ->teamLineupPlayerRepo
+            ->shouldReceive('findByLineupId')
+            ->andReturn($existingPlayerCollection);
+
+        // validate removing all existing players
+        $this
+            ->teamLineupPlayerRepo
+            ->shouldReceive('removePlayerIdsFromLineup')
+            ->with($existingPlayerCollection->getPlayerIds(), $lineup->id)
+            ->once();
+
+
+        // validate adding all new players
+        $this
+            ->teamLineupPlayerRepo
+            ->shouldReceive('addPlayerIdsToLineup')
+            ->with($playerCollection->getIds(), $lineup->id)
+            ->once();
+
+        $result = $this->sut->savePlayersForLineup($playerIds, $lineup);
+
+        $this->assertTrue($result);
     }
 }

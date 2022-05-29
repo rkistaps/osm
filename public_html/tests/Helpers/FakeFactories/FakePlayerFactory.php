@@ -25,6 +25,7 @@ class FakePlayerFactory extends FakeModelFactory
         $faker = Factory::create();
 
         return [
+            'id' => $faker->unique()->randomNumber(),
             'name' => $faker->name,
             'surname' => $faker->lastName,
         ];
