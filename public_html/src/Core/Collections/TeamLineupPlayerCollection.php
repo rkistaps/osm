@@ -7,6 +7,10 @@ namespace OSM\Core\Collections;
 use OSM\Core\Models\Player;
 use OSM\Core\Models\TeamLineupPlayer;
 
+
+/**
+ * @method TeamLineupPlayerCollection filter(callable $callback = null)
+ */
 class TeamLineupPlayerCollection extends AbstractModelCollection
 {
     public function getModelClassName(): string

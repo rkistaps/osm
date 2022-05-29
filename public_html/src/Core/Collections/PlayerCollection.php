@@ -17,4 +17,9 @@ class PlayerCollection extends AbstractModelCollection
     {
         return Player::class;
     }
+
+    public function getIds(): array
+    {
+        return $this->map(fn(Player $player) => $player->id)->all();
+    }
 }

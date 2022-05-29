@@ -9,6 +9,7 @@ use OSM\Core\Helpers\ArrayHelper;
 use OSM\Core\Repositories\PlayerRepository;
 use OSM\Core\Repositories\TeamLineupPlayerRepository;
 use OSM\Core\Repositories\TeamLineupRepository;
+use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Modules\Lineup\Exceptions\LineupValidationException;
 use OSM\Frontend\Modules\Lineup\LineupSavingService;
 use Psr\Http\Message\ResponseInterface;
@@ -45,9 +46,10 @@ class LineupViewRequestHandler extends AbstractRequestHandler implements Request
                 $postPlayerIds = $this->getSanitizedPlayerIds($request);
                 $this->lineupSavingService->savePlayersForLineup(
                     $postPlayerIds,
-                    $lineup,
-                    $lineupPlayers
+                    $lineup
                 );
+
+                return $this->reloadWithSuccess($request, _d(Domains::DOMAIN_FRONTEND, 'Lineup players saved'));
             } catch (LineupValidationException $validationException) {
                 $this->addErrorAlert($validationException->getMessage(), false);
             }

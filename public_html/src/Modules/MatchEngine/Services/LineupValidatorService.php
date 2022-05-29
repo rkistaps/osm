@@ -13,6 +13,15 @@ class LineupValidatorService
 {
     public const MIN_REQUIRED_PLAYERS = 7;
 
+    public const MIN_DEFENDERS = 3;
+    public const MAX_DEFENDERS = 5;
+
+    public const MIN_MIDFIELDERS = 3;
+    public const MAX_MIDFIELDERS = 5;
+
+    public const MIN_FORWARDS = 1;
+    public const MAX_FORWARDS = 3;
+
     /**
      * @param Lineup $lineup
      * @return bool
