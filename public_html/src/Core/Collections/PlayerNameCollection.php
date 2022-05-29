@@ -12,4 +12,11 @@ class PlayerNameCollection extends AbstractModelCollection
     {
         return PlayerName::class;
     }
+
+    public function getRandomOneByType(string $type): ?PlayerName
+    {
+        return $this
+            ->filter(fn(PlayerName $playerName) => $playerName->type === $type)
+            ->random();
+    }
 }

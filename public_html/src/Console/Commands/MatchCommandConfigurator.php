@@ -33,7 +33,7 @@ class MatchCommandConfigurator implements CommandConfiguratorInterface
             dd($match);
         });
         $commandRunner->addCommand(self::PREFIX . '/test', function (PlayerRepository $repository) {
-            $players = $repository->getPlayersForTeamLineupId(4);
+            $players = $repository->findPlayersForTeamLineupId(4);
         });
 
         # Run a match

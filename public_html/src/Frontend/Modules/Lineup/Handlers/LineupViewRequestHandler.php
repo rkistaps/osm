@@ -38,7 +38,7 @@ class LineupViewRequestHandler extends AbstractRequestHandler implements Request
         $team = $this->getActiveTeam($request);
         $lineup = $this->lineupRepository->getDefaultForTeamId($team->id);
         $lineupPlayers = $this->lineupPlayerRepository->findByLineupId($lineup->id);
-        $players = $this->playerRepository->getSquadPlayersByTeam($team->id);
+        $players = $this->playerRepository->findSquadPlayersByTeam($team->id);
 
         if ($this->hasPostParam('save-lineup', $request)) {
             try {

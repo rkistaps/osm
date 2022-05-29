@@ -76,7 +76,7 @@ class MatchLineupBuilderService
     ): array {
         $playerCollection = $this
             ->playerRepository
-            ->getPlayersForTeamLineupId($teamLineup->id)
+            ->findPlayersForTeamLineupId($teamLineup->id)
             ->filter(function (Player $player) use ($teamId) {
                 if ($teamId !== $player->teamId) {
                     return false;

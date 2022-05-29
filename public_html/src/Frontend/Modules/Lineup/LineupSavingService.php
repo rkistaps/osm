@@ -38,7 +38,7 @@ class LineupSavingService
             throw new LineupValidationException(_d(Domains::DOMAIN_FRONTEND, 'Too few players selected'));
         }
 
-        $players = $this->playerRepository->getByIdsAndTeam($playerIds, $lineup->teamId);
+        $players = $this->playerRepository->findByIdsAndTeam($playerIds, $lineup->teamId);
 
         if ($players->count() < LineupValidatorService::MIN_REQUIRED_PLAYERS) {
             throw new LineupValidationException(_d(Domains::DOMAIN_FRONTEND, 'Too few players selected'));
