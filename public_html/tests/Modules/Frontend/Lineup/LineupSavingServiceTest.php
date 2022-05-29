@@ -38,7 +38,6 @@ class LineupSavingServiceTest extends BaseUnitTestCase
 
         $this->validatorService->shouldReceive('validate')->andReturn($playerCollection);
 
-        $playerIds = [1, 2, 3];
         $lineup = FakeTeamLineupFactory::create();
 
         $existingPlayerCollection = FakeTeamLineupPlayerCollectionFactory::createForLineupId($lineup->id);
@@ -63,7 +62,7 @@ class LineupSavingServiceTest extends BaseUnitTestCase
             ->with($playerCollection->getIds(), $lineup->id)
             ->once();
 
-        $result = $this->sut->savePlayersForLineup($playerIds, $lineup);
+        $result = $this->sut->savePlayersForLineup($playerCollection->getIds(), $lineup);
 
         $this->assertTrue($result);
     }
