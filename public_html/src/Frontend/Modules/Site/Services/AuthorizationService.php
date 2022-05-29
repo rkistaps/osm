@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace OSM\Frontend\Modules\Site\Services;
 
 use OSM\Core\Components\ArrayCache;
+use OSM\Core\Factories\GenericFactory;
 use OSM\Core\Interfaces\SessionInterface;
 use OSM\Core\Models\Team;
 use OSM\Core\Models\User;
 use OSM\Core\Repositories\TeamRepository;
 use OSM\Core\Repositories\UserRepository;
+use OSM\Frontend\Modules\Lineup\Services\TeamLineupSessionService;
 
 class AuthorizationService
 {
@@ -23,17 +25,20 @@ class AuthorizationService
     private SessionInterface $session;
     private TeamRepository $teamRepository;
     private ArrayCache $arrayCache;
+    private GenericFactory $factory;
 
     public function __construct(
         UserRepository $userRepository,
         TeamRepository $teamRepository,
         SessionInterface $session,
-        ArrayCache $arrayCache
+        ArrayCache $arrayCache,
+        GenericFactory $factory
     ) {
         $this->userRepository = $userRepository;
         $this->session = $session;
         $this->teamRepository = $teamRepository;
         $this->arrayCache = $arrayCache;
+        $this->factory = $factory;
     }
 
     public function authorizeUserByPassword(string $username, string $password): bool
@@ -66,6 +71,7 @@ class AuthorizationService
     {
         $this->session->clear(self::SESSION_KEY_ACTIVE_USER_ID);
         $this->session->clear(self::SESSION_KEY_ACTIVE_TEAM_ID);
+        $this->factory->get(TeamLineupSessionService::class)->clearSession();
     }
 
     public function isAuthorized(): bool

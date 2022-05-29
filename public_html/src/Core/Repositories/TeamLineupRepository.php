@@ -9,6 +9,7 @@ use OSM\Core\Models\TeamLineup;
 
 /**
  * @method TeamLineup|null findOne(array $condition = [])
+ * @method TeamLineup|null findById(int $id)
  */
 class TeamLineupRepository extends AbstractModelRepository
 {
