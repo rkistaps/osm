@@ -9,6 +9,7 @@ use OSM\Core\Repositories\TeamRepository;
 use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Core\Builders\ResponseBuilder;
 use OSM\Frontend\Exceptions\Http\HttpNotFoundException;
+use OSM\Frontend\Helpers\TemplateHelper;
 use OSM\Frontend\Services\AlertService;
 use OSM\Frontend\Structures\Alert;
 use Psr\Http\Message\ResponseInterface;
@@ -54,9 +55,13 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
             return $path;
         }
 
-        $this->engine->addFolder(get_called_class(), $this->getViewFolderPath());
+        $folderName = get_called_class();
 
-        return get_called_class() . '::' . $path;
+        TemplateHelper::rememberLatestFolderName($folderName);
+
+        $this->engine->addFolder($folderName, $this->getViewFolderPath());
+
+        return $folderName . '::' . $path;
     }
 
     public function getViewFolderPath(): string
@@ -115,6 +120,11 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
     public function addErrorAlert(string $message, bool $isFlash = true)
     {
         $this->addAlert(Alert::TYPE_ERROR, $message, $isFlash);
+    }
+
+    public function addSuccessAlert(string $message, bool $isFlash = true)
+    {
+        $this->addAlert(Alert::TYPE_SUCCESS, $message, $isFlash);
     }
 
     public function getActiveTeam(ServerRequestInterface $request): ?Team
