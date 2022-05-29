@@ -48,18 +48,21 @@ class TeamLineup extends AbstractModel
     public const TACTIC_MIDFIELDERS_TOWARDS_ATTACK = 'midfielders-towards-attack';
     public const TACTIC_PLAY_IT_WIDE = 'play-it-wide';
 
-    public const TACTICS = [
-        self::TACTIC_NONE,
-        self::TACTIC_OFFENSIVE,
-        self::TACTIC_DEFENSIVE,
-        self::TACTIC_COUNTER_ATTACKS,
-        self::TACTIC_TOWARDS_MIDDLE,
-        self::TACTIC_ATTACKERS_TOWARDS_MIDDLE,
-        self::TACTIC_DEFENDERS_TOWARDS_MIDDLE,
-        self::TACTIC_MIDFIELDERS_TOWARDS_DEFENSE,
-        self::TACTIC_MIDFIELDERS_TOWARDS_ATTACK,
-        self::TACTIC_PLAY_IT_WIDE,
-    ];
+    public static function getAvailableTactics(): array
+    {
+        return [
+            self::TACTIC_NONE => _f('None'),
+            self::TACTIC_OFFENSIVE => _f('Offensive'),
+            self::TACTIC_DEFENSIVE => _f('Defensive'),
+            self::TACTIC_COUNTER_ATTACKS => _f('Counter attacks'),
+            self::TACTIC_TOWARDS_MIDDLE => _f('Towards middle'),
+            self::TACTIC_ATTACKERS_TOWARDS_MIDDLE => _f('Attackers towards middle'),
+            self::TACTIC_DEFENDERS_TOWARDS_MIDDLE => _f('Defenders towards middle'),
+            self::TACTIC_MIDFIELDERS_TOWARDS_DEFENSE => _f('Midfield towards defense'),
+            self::TACTIC_MIDFIELDERS_TOWARDS_ATTACK => _f('Midfield towards attack'),
+            self::TACTIC_PLAY_IT_WIDE => _f('Play it wide'),
+        ];
+    }
 
     // passing styles
     public const PASSING_SHORT = 'short';

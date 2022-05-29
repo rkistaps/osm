@@ -13,7 +13,7 @@ use OSM\Frontend\Helpers\Html;
 <div>
     <div><?php echo _d(Domains::DOMAIN_FRONTEND, 'Tactic') ?></div>
     <div>
-        <?php echo Html::select('tactic', [1 => 'test 1', 2 => 'test 2'], 2) ?>
+        <?php echo Html::select('tactic', TeamLineup::getAvailableTactics(), $lineup->tactic) ?>
     </div>
 </div>
 

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace OSM\Frontend\Modules\Lineup\Services;
 
-use Psr\Http\Message\RequestInterface;
+use OSM\Core\Models\TeamLineup;
+use OSM\Frontend\Modules\Lineup\Exceptions\TacticValidationException;
 
 class LineupSaveTacticsService
 {
@@ -13,8 +14,17 @@ class LineupSaveTacticsService
 
     }
 
-    public function processSave(RequestInterface $request): bool
+    /**
+     * @throws TacticValidationException
+     */
+    public function processSave(?string $tactic): bool
     {
+        if (!$tactic || !isset(TeamLineup::getAvailableTactics()[$tactic])) {
+            throw new TacticValidationException(_f('Invalid tactic'));
+        }
+
+
+
         return true;
     }
 }

@@ -25,7 +25,7 @@ class LineupSaveTacticsHandler extends AbstractRequestHandler implements Request
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        if ($this->saveTacticsService->processSave($request)) {
+        if ($this->saveTacticsService->processSave($this->getPostParam('tactic', $request))) {
             $this->addSuccessAlert(_d(Domains::DOMAIN_FRONTEND, 'Tactics saved'));
         }
 
