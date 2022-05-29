@@ -12,6 +12,7 @@ use OSM\Modules\MatchEngine\Structures\Player;
 class LineupValidatorService
 {
     public const MIN_REQUIRED_PLAYERS = 7;
+    public const MAX_PLAYER_COUNT = 11;
 
     public const MIN_DEFENDERS = 3;
     public const MAX_DEFENDERS = 5;

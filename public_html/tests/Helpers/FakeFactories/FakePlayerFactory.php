@@ -7,6 +7,9 @@ namespace Tests\Helpers\FakeFactories;
 use Faker\Factory;
 use OSM\Core\Models\Player;
 
+/**
+ * @method public static create(array $data)
+ */
 class FakePlayerFactory extends FakeModelFactory
 {
     /**
@@ -25,5 +28,10 @@ class FakePlayerFactory extends FakeModelFactory
             'name' => $faker->name,
             'surname' => $faker->lastName,
         ];
+    }
+
+    public static function createForPosition(string $position): Player
+    {
+        return FakePlayerFactory::create(['position' => $position]);
     }
 }

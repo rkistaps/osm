@@ -27,4 +27,21 @@ class PlayerCollection extends AbstractModelCollection
     {
         return $this->filter(fn(Player $player) => $player->position === $position);
     }
+
+    public function removeByPosition(string $position, int $toRemove = null): PlayerCollection
+    {
+        $removed = 0;
+
+        $collection = new PlayerCollection();
+        foreach ($this->all() as $player) {
+            if ($player->position === $position && (is_null($toRemove) || $removed < $toRemove)) {
+                $removed++;
+                continue;
+            }
+
+            $collection->add($player);
+        }
+
+        return $collection;
+    }
 }

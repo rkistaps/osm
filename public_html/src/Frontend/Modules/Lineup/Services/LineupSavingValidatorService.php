@@ -38,6 +38,10 @@ class LineupSavingValidatorService
             throw new LineupValidationException(_d(Domains::DOMAIN_FRONTEND, 'Too few players selected'));
         }
 
+        if ($players->count() > LineupValidatorService::MAX_PLAYER_COUNT) {
+            throw new LineupValidationException(_d(Domains::DOMAIN_FRONTEND, 'Too many players selected'));
+        }
+
         $goalkeeperCount = $players->getByPosition(Player::POSITION_G)->count();
         if ($goalkeeperCount !== 1) {
             throw new LineupValidationException(_d(Domains::DOMAIN_FRONTEND, 'Incorrect number of goalkeepers'));
