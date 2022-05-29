@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Core\Services;
 
+use InvalidArgumentException;
 use OSM\Core\Collections\RegistryCollection;
 use OSM\Core\Models\Registry;
 use OSM\Core\Repositories\RegistryRepository;
@@ -32,7 +33,7 @@ class RegistryService
         $value = (string)$value;
 
         if (!in_array($key, Registry::REGISTRY_KEYS)) {
-            throw new \InvalidArgumentException('Bad registry key');
+            throw new InvalidArgumentException('Bad registry key');
         }
 
         $registry = $this->getByKey($key);

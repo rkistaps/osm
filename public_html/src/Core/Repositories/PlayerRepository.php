@@ -30,7 +30,7 @@ class PlayerRepository extends AbstractModelRepository
         return PlayerCollection::class;
     }
 
-    public function getSquadPlayersByTeam(int $teamId): PlayerCollection
+    public function findSquadPlayersByTeam(int $teamId): PlayerCollection
     {
         return $this->findAll([
             'team_id' => $teamId,
@@ -38,7 +38,22 @@ class PlayerRepository extends AbstractModelRepository
         ]);
     }
 
-    public function getPlayersForTeamLineupId(int $teamLineupId): PlayerCollection
+    public function findByTeam(int $teamId): PlayerCollection
+    {
+        return $this->findAll([
+            'team_id' => $teamId,
+        ]);
+    }
+
+    public function findByIdsAndTeam(array $ids, int $teamId): PlayerCollection
+    {
+        return $this->findAll([
+            'team_id' => $teamId,
+            'id' => $ids,
+        ]);
+    }
+
+    public function findPlayersForTeamLineupId(int $teamLineupId): PlayerCollection
     {
         $rows = $this->database
             ->from($this->getTableName())

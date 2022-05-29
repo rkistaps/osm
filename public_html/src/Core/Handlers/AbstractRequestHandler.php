@@ -4,8 +4,13 @@ namespace OSM\Core\Handlers;
 
 use League\Plates\Engine;
 use OSM\Core\Factories\GenericFactory;
+use OSM\Core\Models\Team;
+use OSM\Core\Repositories\TeamRepository;
+use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Core\Builders\ResponseBuilder;
+use OSM\Frontend\Exceptions\Http\HttpNotFoundException;
 use OSM\Frontend\Services\AlertService;
+use OSM\Frontend\Structures\Alert;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -25,9 +30,15 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
         $this->responseBuilder = $responseBuilder;
         $this->engine = $engine;
         $this->genericFactory = $genericFactory;
+
+        $this->init();
     }
 
     abstract public function handle(ServerRequestInterface $request): ResponseInterface;
+
+    protected function init(){
+
+    }
 
     protected function render(string $view, array $params = []): ResponseInterface
     {
@@ -90,5 +101,56 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
     protected function isPost(ServerRequestInterface $request): bool
     {
         return $request->getMethod() === 'POST';
+    }
+
+    public function addAlert(string $type, string $message, bool $isFlash = true)
+    {
+        $this->genericFactory->get(AlertService::class)->addAlert(
+            $type,
+            $message,
+            $isFlash
+        );
+    }
+
+    public function addErrorAlert(string $message, bool $isFlash = true)
+    {
+        $this->addAlert(Alert::TYPE_ERROR, $message, $isFlash);
+    }
+
+    public function getActiveTeam(ServerRequestInterface $request): ?Team
+    {
+        return $this->getTeam((int)$request->getAttribute('active-team-id'));
+    }
+
+    /**
+     * @throws HttpNotFoundException
+     */
+    protected function getTeam(int $teamId = null): Team
+    {
+        $team = $this->genericFactory->get(TeamRepository::class)->findById($teamId);
+
+        if (!$team) {
+            throw new HttpNotFoundException(_d(Domains::DOMAIN_FRONTEND, 'Team not found'));
+        }
+
+        return $team;
+    }
+
+    public function getPostParam(string $paramName, ServerRequestInterface $request, $default = null)
+    {
+        if (!$this->isPost($request)) {
+            return null;
+        }
+
+        return $request->getParsedBody()[$paramName] ?? $default;
+    }
+
+    public function hasPostParam(string $paramName, ServerRequestInterface $request): bool
+    {
+        if (!$this->isPost($request)) {
+            return false;
+        }
+
+        return isset($request->getParsedBody()[$paramName]);
     }
 }

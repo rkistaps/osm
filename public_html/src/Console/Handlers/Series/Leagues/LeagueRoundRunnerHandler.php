@@ -6,8 +6,9 @@ namespace OSM\Console\Handlers\Series\Leagues;
 
 use OSM\Modules\Series\Leagues\Services\LeagueRunnerService;
 use Psr\Log\LoggerInterface;
+use TheApp\Interfaces\CommandHandlerInterface;
 
-class LeagueRoundRunnerHandler implements \TheApp\Interfaces\CommandHandlerInterface
+class LeagueRoundRunnerHandler implements CommandHandlerInterface
 {
     private LeagueRunnerService $leagueRunnerService;
     private LoggerInterface $logger;

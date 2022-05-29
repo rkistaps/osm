@@ -195,7 +195,10 @@ class CountrySeeder implements DatabaseSeederInterface
         $this->countryRepository->truncate();
 
         foreach ($this->data as $countryData) {
-            $this->countryRepository->createModel($countryData, true);
+            $country = $this->countryRepository->findByName($countryData['name']);
+            if (!$country) {
+                $this->countryRepository->createModel($countryData, true);
+            }
         }
     }
 }

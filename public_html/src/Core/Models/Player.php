@@ -56,4 +56,9 @@ class Player extends AbstractModel
     public float $salary = 0;
     public int $number = 0;
     public bool $isYouth = false;
+
+    public function getFullName(): string
+    {
+        return $this->name . ' ' . $this->surname;
+    }
 }

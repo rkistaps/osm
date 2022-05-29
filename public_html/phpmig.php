@@ -1,7 +1,7 @@
 <?php
 
 use OSM\Core\Factories\ContainerFactory;
-use \Phpmig\Adapter;
+use Phpmig\Adapter;
 use Psr\Container\ContainerInterface;
 
 define('APP_ROOT', realpath(__DIR__));

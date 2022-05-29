@@ -24,7 +24,7 @@ class PlayerFaceCreationService
         $face = $this->faceRepository->createModel();
 
         $face->playerId = $params->player->id;
-        $face->skinTone = $params->skinTones[rand(0, count($params->skinTones) - 1)];
+        $face->skinTone = (int)$params->skinTones[rand(0, count($params->skinTones) - 1)];
         $face->hairType = rand(0, 6);
 
         $face->hairColor = $face->skinTone > 3

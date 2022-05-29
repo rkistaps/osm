@@ -53,7 +53,7 @@ class TeamLineupGeneratorService
         /** @var PlayerCollection $playerCollection */
         $playerCollection = $this
             ->playerRepository
-            ->getSquadPlayersByTeam($lineup->teamId)
+            ->findSquadPlayersByTeam($lineup->teamId)
             ->sort(fn(Player $player) => $this->playerStrengthCalculator->calculateStrength($player));
 
         $playerIds = [];

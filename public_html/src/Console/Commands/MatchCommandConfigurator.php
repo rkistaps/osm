@@ -13,8 +13,9 @@ use OSM\Core\Repositories\MatchRepository;
 use OSM\Core\Repositories\PlayerRepository;
 use Psr\Log\LoggerInterface;
 use TheApp\Components\CommandRunner;
+use TheApp\Interfaces\CommandConfiguratorInterface;
 
-class MatchCommandConfigurator implements \TheApp\Interfaces\CommandConfiguratorInterface
+class MatchCommandConfigurator implements CommandConfiguratorInterface
 {
     private const PREFIX = 'matches';
     private LoggerInterface $logger;
@@ -32,7 +33,7 @@ class MatchCommandConfigurator implements \TheApp\Interfaces\CommandConfigurator
             dd($match);
         });
         $commandRunner->addCommand(self::PREFIX . '/test', function (PlayerRepository $repository) {
-            $players = $repository->getPlayersForTeamLineupId(4);
+            $players = $repository->findPlayersForTeamLineupId(4);
         });
 
         # Run a match

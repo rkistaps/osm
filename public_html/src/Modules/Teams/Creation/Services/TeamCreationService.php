@@ -11,6 +11,7 @@ use OSM\Modules\Options\Services\OptionValueService;
 use OSM\Modules\Options\Structures\StartingOptionGroup;
 use OSM\Modules\Players\Creation\Services\SquadCreationService;
 use OSM\Modules\Players\Creation\Structures\SquadCreationParams;
+use OSM\Modules\Teams\Creation\Exceptions\TeamCreationValidationException;
 use OSM\Modules\Teams\Creation\Structures\TeamCreationParams;
 use OSM\Modules\Teams\Finances\Services\TeamFinancialService;
 use OSM\Modules\Teams\Lineups\Services\TeamLineupGeneratorService;
@@ -43,7 +44,7 @@ class TeamCreationService
     /**
      * @param TeamCreationParams $params
      * @return Team
-     * @throws \OSM\Modules\Teams\Creation\Exceptions\TeamCreationValidationException
+     * @throws TeamCreationValidationException
      */
     public function createTeam(TeamCreationParams $params): Team
     {

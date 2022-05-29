@@ -6,8 +6,9 @@ namespace OSM\Modules\Options\Structures;
 
 use OSM\Core\Models\Option;
 use OSM\Core\Translations\Structures\Domains;
+use OSM\Modules\Options\Interfaces\OptionGroupInterface;
 
-class StartingOptionGroup implements \OSM\Modules\Options\Interfaces\OptionGroupInterface
+class StartingOptionGroup implements OptionGroupInterface
 {
     const OPTION_MONEY = Option::GROUP_STARTING . '/money';
     const OPTION_STADIUM_SIZE = Option::GROUP_STARTING . '/stadium-size';

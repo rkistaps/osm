@@ -1,12 +1,15 @@
 <?php
 
-/** @var \OSM\Core\Models\User $user */
+/** @var User $user */
 
-/** @var \OSM\Core\Models\Team|null $team */
+/** @var Team|null $team */
 
-/** @var \OSM\Core\Models\Country|null $country */
+/** @var Country|null $country */
 
 use OSM\Core\Helpers\NumberHelper;
+use OSM\Core\Models\Country;
+use OSM\Core\Models\Team;
+use OSM\Core\Models\User;
 use OSM\Frontend\Helpers\Html;
 use OSM\Frontend\Helpers\LinkHelper;
 

@@ -11,13 +11,25 @@ use OSM\Modules\MatchEngine\Structures\Player;
  */
 class LineupValidatorService
 {
+    public const MIN_REQUIRED_PLAYERS = 7;
+    public const MAX_PLAYER_COUNT = 11;
+
+    public const MIN_DEFENDERS = 3;
+    public const MAX_DEFENDERS = 5;
+
+    public const MIN_MIDFIELDERS = 3;
+    public const MAX_MIDFIELDERS = 5;
+
+    public const MIN_FORWARDS = 1;
+    public const MAX_FORWARDS = 3;
+
     /**
      * @param Lineup $lineup
      * @return bool
      */
     public function validate(Lineup $lineup): bool
     {
-        if (count($lineup->getStartingPlayers()) < 7) {
+        if (count($lineup->getStartingPlayers()) < self::MIN_REQUIRED_PLAYERS) {
             return false;
         }
 

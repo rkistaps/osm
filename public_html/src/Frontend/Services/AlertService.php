@@ -14,10 +14,21 @@ class AlertService
 
     private SessionInterface $session;
 
+    /** @var Alert[] $alerts */
+    private array $alerts = [];
+
     public function __construct(
         SessionInterface $session
     ) {
         $this->session = $session;
+    }
+
+    protected function loadFlashAlerts()
+    {
+        $this->alerts = array_map(
+            fn($alertData) => Alert::fromArray($alertData),
+            $this->session->getFlash(self::SESSION_KEY, [])
+        );
     }
 
     /**
@@ -25,10 +36,7 @@ class AlertService
      */
     public function getAlerts(): array
     {
-        return array_map(
-            fn($alertData) => Alert::fromArray($alertData),
-            $this->session->getFlash(self::SESSION_KEY, [])
-        );
+        return $this->alerts;
     }
 
     public function success(string $message)
@@ -58,9 +66,17 @@ class AlertService
         $this->addAlert(Alert::TYPE_ERROR, $message);
     }
 
-    public function addAlert(string $type, string $message)
+    public function addAlert(string $type, string $message, bool $flash = true)
     {
         if (!in_array($type, Alert::TYPES)) {
+            return;
+        }
+
+        if (!$flash) {
+            $this->alerts[] = (new Alert())
+                ->setType($type)
+                ->setMessage($message);
+
             return;
         }
 

@@ -11,6 +11,11 @@ class NumberHelper
         return self::isBigger($number, $start, $including) && self::isSmaller($number, $end, $including);
     }
 
+    public static function isNotBetween(float $number, float $start, float $end, bool $including = true): bool
+    {
+        return !self::isBetween($number, $start, $end, $including);
+    }
+
     public static function isBigger(float $number, float $than, bool $including = true): bool
     {
         return $including ?

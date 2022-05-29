@@ -1,7 +1,8 @@
 <?php
 
-/** @var \OSM\Core\Structures\OSMState $state */
+/** @var OSMState $state */
 
+use OSM\Core\Structures\OSMState;
 use OSM\Frontend\Helpers\Html;
 
 ?>

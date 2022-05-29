@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Modules\Series\Leagues\Services;
 
+use Mockery;
+use Mockery\LegacyMockInterface;
+use Mockery\MockInterface;
 use OSM\Core\Collections\ChampionshipTableCollection;
 use OSM\Core\Collections\MatchCollection;
 use OSM\Core\Collections\TeamCollection;
@@ -22,11 +25,11 @@ class LeagueAttendanceCalculationServiceTest extends TestCase
 {
     private LeagueAttendanceCalculationService $sut;
     /**
-     * @var \Mockery\LegacyMockInterface|\Mockery\MockInterface|TeamRepository
+     * @var LegacyMockInterface|MockInterface|TeamRepository
      */
     private $teamRepository;
     /**
-     * @var \Mockery\LegacyMockInterface|\Mockery\MockInterface|ChampionshipTableRepository
+     * @var LegacyMockInterface|MockInterface|ChampionshipTableRepository
      */
     private $tableRepository;
 
@@ -34,8 +37,8 @@ class LeagueAttendanceCalculationServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->teamRepository = \Mockery::Mock(TeamRepository::class);
-        $this->tableRepository = \Mockery::Mock(ChampionshipTableRepository::class);
+        $this->teamRepository = Mockery::Mock(TeamRepository::class);
+        $this->tableRepository = Mockery::Mock(ChampionshipTableRepository::class);
 
         $this->sut = new LeagueAttendanceCalculationService(
             $this->teamRepository,

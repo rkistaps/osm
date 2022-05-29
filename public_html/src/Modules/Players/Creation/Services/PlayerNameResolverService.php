@@ -32,11 +32,8 @@ class PlayerNameResolverService
             return $this->nameRepository->findForCountryId($country->id);
         });
 
-        /** @var PlayerName $name */
-        $name = $entries->where('type', PlayerName::TYPE_NAME)->random();
-
-        /** @var PlayerName $surname */
-        $surname = $entries->where('type', PlayerName::TYPE_SURNAME)->random();
+        $name = $entries->getRandomOneByType(PlayerName::TYPE_NAME);
+        $surname = $entries->getRandomOneByType(PlayerName::TYPE_SURNAME);
 
         $result = new NameSurnameStructure();
         $result->name = $name ? $name->value : '';

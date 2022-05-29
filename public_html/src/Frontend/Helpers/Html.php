@@ -6,11 +6,21 @@ class Html
 {
     protected static array $selfClosingTags = ['input'];
 
+    public static function openTag(string $tag, array $options = []): string
+    {
+        return '<' . $tag . ' ' . self::buildAttributes($options) . '>';
+    }
+
+    public static function closeTag(string $tag): string
+    {
+        return '</' . $tag . '>';
+    }
+
     public static function tag(string $tag, string $content = '', array $options = []): string
     {
-        $result = '<' . $tag . ' ' . self::buildAttributes($options) . '>';
+        $result = self::openTag($tag, $options);
 
-        return in_array($tag, self::$selfClosingTags) ? $result : $result . $content . '</' . $tag . '>';
+        return in_array($tag, self::$selfClosingTags) ? $result : $result . $content . self::closeTag($tag);
     }
 
     public static function button(string $value, array $options = []): string
@@ -18,10 +28,11 @@ class Html
         return self::tag('button', $value, $options);
     }
 
-    public static function submitButton(string $value, array $options = []): string
+    public static function submitButton(string $value, string $name = null, array $options = []): string
     {
         $options['type'] = 'submit';
         $options['value'] = $value;
+        $options['name'] = $name;
 
         return self::tag('input', '', $options);
     }
@@ -56,10 +67,18 @@ class Html
         return self::tag('input', '', $options);
     }
 
-    public static function checkbox(string $name, bool $isChecked = false, array $options = []): string
+    public static function checkbox(string $name, $value, bool $isChecked = false, array $options = []): string
     {
-        // todo finish me
-        return '';
+        if ($isChecked) {
+            $options['checked'] = 'checked';
+        }
+
+        return self::input(
+            'checkbox',
+            $name,
+            $value,
+            $options
+        );
     }
 
     public static function select(string $name, array $values, $selectedValue = null, array $options = []): string
@@ -105,5 +124,20 @@ class Html
     public static function label(string $content, array $options = []): string
     {
         return self::tag('label', $content, $options);
+    }
+
+    public static function startForm(string $action, array $options = [])
+    {
+        $options['method'] = $options['method'] ?? 'POST';
+        $options['action'] = $action;
+
+        ob_start();
+        echo Html::openTag('form', $options);
+    }
+
+    public static function endForm(): string
+    {
+        echo self::closeTag('form');
+        return ob_get_clean();
     }
 }

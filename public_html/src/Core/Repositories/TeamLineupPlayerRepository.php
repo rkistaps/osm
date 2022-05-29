@@ -37,8 +37,18 @@ class TeamLineupPlayerRepository extends AbstractModelRepository
     public function removePlayerIdsFromLineup(array $playerIds, int $lineupId): int
     {
         return $this->deleteAll([
-            'lineup_id' => $lineupId,
+            'team_lineup_id' => $lineupId,
             'player_id' => $playerIds,
         ]);
+    }
+
+    public function addPlayerIdsToLineup(array $playerIds, int $lineupId)
+    {
+        foreach ($playerIds as $playerId) {
+            $this->createModel([
+                'player_id' => $playerId,
+                'team_lineup_id' => $lineupId,
+            ], true);
+        }
     }
 }

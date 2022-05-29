@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OSM\Modules\Teams\Finances\Services;
 
+use Exception;
 use OSM\Core\Helpers\DateHelper;
 use OSM\Core\Models\FinanceLog;
 use OSM\Core\Models\Team;
@@ -38,7 +39,7 @@ class TeamFinancialService
     public function depositFunds(float $amount, string $event, Team $team, bool $persistent = true)
     {
         if (!in_array($event, self::EVENTS)) {
-            throw new \Exception('Unsupported event');
+            throw new Exception('Unsupported event');
         }
 
         $this->statsService->updateStats($amount, $event, $team);
@@ -53,7 +54,7 @@ class TeamFinancialService
     public function withdrawFunds(int $amount, string $event, Team $team, $persistent = true)
     {
         if (!in_array($event, self::EVENTS)) {
-            throw new \Exception('Unsupported event');
+            throw new Exception('Unsupported event');
         }
 
         $this->statsService->updateStats($amount, $event, $team);

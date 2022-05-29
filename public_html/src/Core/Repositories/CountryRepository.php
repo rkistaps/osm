@@ -27,4 +27,9 @@ class CountryRepository extends AbstractModelRepository
     {
         return 'countries';
     }
+
+    public function findByName(string $name): ?Country
+    {
+        return $this->findOne(['name' => $name]);
+    }
 }
