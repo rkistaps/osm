@@ -22,4 +22,9 @@ class PlayerCollection extends AbstractModelCollection
     {
         return $this->map(fn(Player $player) => $player->id)->all();
     }
+
+    public function getByPosition(string $position): PlayerCollection
+    {
+        return $this->filter(fn(Player $player) => $player->position === $position);
+    }
 }

@@ -41,4 +41,14 @@ class TeamLineupPlayerRepository extends AbstractModelRepository
             'player_id' => $playerIds,
         ]);
     }
+
+    public function addPlayerIdsToLineup(array $playerIds, int $lineupId)
+    {
+        foreach ($playerIds as $playerId) {
+            $this->createModel([
+                'player_id' => $playerId,
+                'team_lineup_id' => $lineupId,
+            ], true);
+        }
+    }
 }

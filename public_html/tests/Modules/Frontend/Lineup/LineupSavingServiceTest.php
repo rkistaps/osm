@@ -10,7 +10,7 @@ use OSM\Core\Collections\TeamLineupPlayerCollection;
 use OSM\Core\Repositories\PlayerRepository;
 use OSM\Core\Repositories\TeamLineupPlayerRepository;
 use OSM\Core\Repositories\TeamLineupRepository;
-use OSM\Frontend\Modules\Lineup\LineupSavingService;
+use OSM\Frontend\Modules\Lineup\Services\LineupSavingService;
 use Tests\Bootstrap\BaseUnitTestCase;
 use Tests\Helpers\FakeFactories\FakePlayerFactory;
 use Tests\Helpers\FakeFactories\FakeTeamLineupFactory;
@@ -30,7 +30,7 @@ class LineupSavingServiceTest extends BaseUnitTestCase
         $this->playerRepo = Mockery::mock(PlayerRepository::class);
         $this->teamLineupRepo = Mockery::mock(TeamLineupRepository::class);
         $this->teamLineupPlayerRepo = Mockery::mock(TeamLineupPlayerRepository::class);
-        $this->sut = new LineupSavingService(
+        $this->sut = new \OSM\Frontend\Modules\Lineup\Services\LineupSavingService(
             $this->playerRepo,
             $this->teamLineupRepo,
             $this->teamLineupPlayerRepo

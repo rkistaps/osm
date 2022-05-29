@@ -11,7 +11,7 @@ use OSM\Core\Repositories\TeamLineupPlayerRepository;
 use OSM\Core\Repositories\TeamLineupRepository;
 use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Modules\Lineup\Exceptions\LineupValidationException;
-use OSM\Frontend\Modules\Lineup\LineupSavingService;
+use OSM\Frontend\Modules\Lineup\Services\LineupSavingService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
