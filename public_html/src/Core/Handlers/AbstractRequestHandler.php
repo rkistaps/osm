@@ -36,8 +36,8 @@ abstract class AbstractRequestHandler implements RequestHandlerInterface
 
     abstract public function handle(ServerRequestInterface $request): ResponseInterface;
 
-    protected function init(){
-
+    protected function init()
+    {
     }
 
     protected function render(string $view, array $params = []): ResponseInterface

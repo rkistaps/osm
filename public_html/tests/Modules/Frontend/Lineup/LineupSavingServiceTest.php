@@ -64,6 +64,6 @@ class LineupSavingServiceTest extends BaseUnitTestCase
 
         $result = $this->sut->savePlayersForLineup($playerCollection->getIds(), $lineup);
 
-        $this->assertTrue($result);
+        $this->assertFalse($result);
     }
 }

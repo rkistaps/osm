@@ -53,3 +53,15 @@ $selectedPlayerIds = $postPlayerIds ?? $lineupPlayers->getPlayerIds();
 <?php echo Html::submitButton(_d(Domains::DOMAIN_FRONTEND, 'Save lineup'), 'save-lineup') ?>
 <?php echo Html::endForm() ?>
 <?php echo BoxHelper::end() ?>
+
+<div class="row">
+    <?php BoxHelper::start(_d(Domains::DOMAIN_FRONTEND, 'Tactic'), ['class' => 'box col-4']); ?>
+        <?php echo $this->insert("_tactics", ['lineup' => $lineup]) ?>
+    <?php echo BoxHelper::end() ?>
+
+    <?php BoxHelper::start(_d(Domains::DOMAIN_FRONTEND, 'Substitutes'), ['class' => 'box col-4']); ?>
+    <?php echo BoxHelper::end() ?>
+
+    <?php BoxHelper::start(_d(Domains::DOMAIN_FRONTEND, 'Saved Tactics'), ['class' => 'box col-4']); ?>
+    <?php echo BoxHelper::end() ?>
+</div>
