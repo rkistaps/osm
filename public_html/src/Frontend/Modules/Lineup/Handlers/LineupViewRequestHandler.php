@@ -23,7 +23,6 @@ class LineupViewRequestHandler extends AbstractRequestHandler implements Request
     private LineupSavingService $lineupSavingService;
     private TeamLineupSessionService $lineupSessionService;
 
-
     protected function init()
     {
         $this->lineupPlayerRepository = $this->genericFactory->get(TeamLineupPlayerRepository::class);

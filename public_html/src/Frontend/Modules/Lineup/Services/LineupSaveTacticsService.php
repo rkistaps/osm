@@ -8,6 +8,7 @@ use OSM\Core\Models\Team;
 use OSM\Core\Models\TeamLineup;
 use OSM\Core\Repositories\TeamLineupRepository;
 use OSM\Frontend\Modules\Lineup\Exceptions\TacticValidationException;
+use OSM\Frontend\Modules\Lineup\Structures\SaveTacticsParameters;
 
 class LineupSaveTacticsService
 {
@@ -25,15 +26,18 @@ class LineupSaveTacticsService
     /**
      * @throws TacticValidationException
      */
-    public function processSave(?string $tactic, Team $team): bool
+    public function processSave(SaveTacticsParameters $parameters, Team $team): bool
     {
-        if (!$tactic || !isset(TeamLineup::getAvailableTactics()[$tactic])) {
+        if (!isset(TeamLineup::getAvailableTactics()[$parameters->tactic])) {
             throw new TacticValidationException(_f('Invalid tactic'));
         }
 
         $lineup = $this->lineupSessionService->getOrSet($team);
 
-        $lineup->tactic = $tactic;
+        $lineup->tactic = $parameters->tactic;
+        $lineup->passingStyle = $parameters->passingStyle;
+        $lineup->defensiveLine = $parameters->defensiveLine;
+        $lineup->pressure = $parameters->pressure;
         $this->teamLineupRepository->saveModel($lineup);
 
         return true;
