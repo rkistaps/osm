@@ -37,7 +37,6 @@ class LineupSaveTacticsHandler extends AbstractRequestHandler implements Request
             }
         } catch (TacticValidationException $exception) {
             $this->addErrorAlert($exception->getMessage());
-            return $this->redirectBack($request);
         }
 
         return $this->redirectBack($request);
