@@ -30,11 +30,14 @@ class TeamLineup extends AbstractModel
     public const PRESSURE_NORMAL = 'normal';
     public const PRESSURE_HARD = 'hard';
 
-    public const PRESSURES = [
-        self::PRESSURE_SOFT,
-        self::PRESSURE_NORMAL,
-        self::PRESSURE_HARD,
-    ];
+    public static function getAvailablePressures(): array
+    {
+        return [
+            self::PRESSURE_NORMAL => _f('Normal'),
+            self::PRESSURE_SOFT => _f('Soft'),
+            self::PRESSURE_HARD => _f('Hard'),
+        ];
+    }
 
     // tactics
     public const TACTIC_NONE = 'none';
@@ -69,22 +72,28 @@ class TeamLineup extends AbstractModel
     public const PASSING_LONG = 'long';
     public const PASSING_MIXED = 'mixed';
 
-    public const PASSING_STYLES = [
-        self::PASSING_SHORT,
-        self::PASSING_LONG,
-        self::PASSING_MIXED,
-    ];
+    public static function getAvailablePassingStyles(): array
+    {
+        return [
+            self::PASSING_MIXED => _f('Mixed'),
+            self::PASSING_SHORT => _f('Short'),
+            self::PASSING_LONG => _f('Long'),
+        ];
+    }
 
     // defensive lines
     public const DEFENSIVE_LINE_LOW = 'low';
     public const DEFENSIVE_LINE_HIGH = 'high';
     public const DEFENSIVE_LINE_NORMAL = 'normal';
 
-    public const DEFENSIVE_LINES = [
-        self::DEFENSIVE_LINE_LOW,
-        self::DEFENSIVE_LINE_NORMAL,
-        self::DEFENSIVE_LINE_HIGH,
-    ];
+    public static function getAvailableDefensiveLines(): array
+    {
+        return [
+            self::DEFENSIVE_LINE_NORMAL => _f('Normal'),
+            self::DEFENSIVE_LINE_LOW => _f('Low'),
+            self::DEFENSIVE_LINE_HIGH => _f('High'),
+        ];
+    }
 
     public int $teamId;
     public string $name;

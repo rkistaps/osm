@@ -32,12 +32,25 @@ class LineupSaveTacticsService
             throw new TacticValidationException(_f('Invalid tactic'));
         }
 
+        if (!isset(TeamLineup::getAvailablePassingStyles()[$parameters->passingStyle])) {
+            throw new TacticValidationException(_f('Invalid passing style'));
+        }
+
+        if (!isset(TeamLineup::getAvailableDefensiveLines()[$parameters->defensiveLine])) {
+            throw new TacticValidationException(_f('Invalid defensive line'));
+        }
+
+        if (!isset(TeamLineup::getAvailablePressures()[$parameters->pressure])) {
+            throw new TacticValidationException(_f('Invalid pressure'));
+        }
+
         $lineup = $this->lineupSessionService->getOrSet($team);
 
         $lineup->tactic = $parameters->tactic;
         $lineup->passingStyle = $parameters->passingStyle;
         $lineup->defensiveLine = $parameters->defensiveLine;
         $lineup->pressure = $parameters->pressure;
+
         $this->teamLineupRepository->saveModel($lineup);
 
         return true;
