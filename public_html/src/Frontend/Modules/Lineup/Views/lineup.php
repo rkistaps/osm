@@ -9,6 +9,7 @@ use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Helpers\BoxHelper;
 use OSM\Frontend\Helpers\Html;
 use OSM\Frontend\Helpers\LinkHelper;
+use OSM\Frontend\Helpers\TemplateHelper;
 use OSM\Frontend\Templates\LayoutTypes;
 
 $this->layout(LayoutTypes::TYPE_DEFAULT);
@@ -53,3 +54,15 @@ $selectedPlayerIds = $postPlayerIds ?? $lineupPlayers->getPlayerIds();
 <?php echo Html::submitButton(_d(Domains::DOMAIN_FRONTEND, 'Save lineup'), 'save-lineup') ?>
 <?php echo Html::endForm() ?>
 <?php echo BoxHelper::end() ?>
+
+<div class="row">
+    <?php BoxHelper::start(_d(Domains::DOMAIN_FRONTEND, 'Tactic'), ['class' => 'box col-4']); ?>
+        <?php TemplateHelper::renderPartial( $this,"_tactics", ['lineup' => $lineup]) ?>
+    <?php echo BoxHelper::end() ?>
+
+    <?php BoxHelper::start(_d(Domains::DOMAIN_FRONTEND, 'Substitutes'), ['class' => 'box col-4']); ?>
+    <?php echo BoxHelper::end() ?>
+
+    <?php BoxHelper::start(_d(Domains::DOMAIN_FRONTEND, 'Saved Tactics'), ['class' => 'box col-4']); ?>
+    <?php echo BoxHelper::end() ?>
+</div>

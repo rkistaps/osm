@@ -23,7 +23,7 @@ class BoxHelper
         $entry = array_pop(self::$items);
         $content = ob_get_clean();
 
-        $boxOptions = ['class' => 'box'] + ($entry['options'] ?? []);
+        $boxOptions = ($entry['options'] ?? []) + ['class' => 'box'];
 
         return Html::tag(
             'div',
