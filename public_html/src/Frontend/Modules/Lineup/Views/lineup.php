@@ -11,6 +11,7 @@ use OSM\Frontend\Helpers\BoxHelper;
 use OSM\Frontend\Helpers\FlagHelper;
 use OSM\Frontend\Helpers\Html;
 use OSM\Frontend\Helpers\LinkHelper;
+use OSM\Frontend\Helpers\PlayerHelper;
 use OSM\Frontend\Helpers\TemplateHelper;
 use OSM\Frontend\Templates\LayoutTypes;
 
@@ -54,7 +55,7 @@ $selectedPlayerIds = $postPlayerIds ?? $lineupPlayers->getPlayerIds();
             <td><?php echo LinkHelper::player($player) ?></td>
             <td class="center"><?php echo $player->age ?></td>
             <td class="center skill"><div><?php echo $player->skill ?></div></td>
-            <td class="center"><?php echo $player->talent ?></td>
+            <td class="center"><?php echo PlayerHelper::getTalentStars($player) ?></td>
             <td>
                 <div class='energyCont'>
                     <div class='energyFill' style='width:<?=$player->energy?>%'></div>
