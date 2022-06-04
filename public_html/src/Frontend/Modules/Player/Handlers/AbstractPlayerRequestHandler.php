@@ -20,6 +20,9 @@ abstract class AbstractPlayerRequestHandler extends AbstractRequestHandler imple
 
     abstract public function handle(ServerRequestInterface $request): ResponseInterface;
 
+    /**
+     * @throws HttpNotFoundException
+     */
     protected function getPlayer(ServerRequestInterface $request): ?Player
     {
         if ($this->player) {
