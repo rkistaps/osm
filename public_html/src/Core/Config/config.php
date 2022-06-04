@@ -10,6 +10,7 @@ use OSM\Console\Commands\TeamsCommandConfigurator;
 use OSM\Console\Commands\UserCommandConfigurator;
 use OSM\Frontend\Modules\Site\Handlers\ErrorHandler;
 use OSM\Frontend\Routes\LineupRouteConfigurator;
+use OSM\Frontend\Routes\PlayerRouteConfigurator;
 use OSM\Frontend\Routes\SiteRouteConfigurator;
 use OSM\Frontend\Routes\TeamRouteConfigurator;
 
@@ -28,6 +29,7 @@ return [
             SiteRouteConfigurator::class,
             TeamRouteConfigurator::class,
             LineupRouteConfigurator::class,
+            PlayerRouteConfigurator::class,
         ],
     ],
     'command' => [
