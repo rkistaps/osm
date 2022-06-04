@@ -23,7 +23,7 @@ use OSM\Frontend\Components\LoginForm\LoginForm;
     <meta property="og:image" content="/assets/image/dark_logo.png"/>
 </head>
 <body>
-<div id='logo_wrap'>
+<div class='width_wrap' id="logo_wrap">
     <div id='topMenu'></div>
     <a href='/'>
         <img src='/assets/images/html/logo.png' alt=''/>
@@ -62,19 +62,10 @@ use OSM\Frontend\Components\LoginForm\LoginForm;
         </div>
     </div>
     <div id='footer'>
-        <a href='?page=terms'>Terms and Conditions</a> - <a href='?page=privacy'>Privacy</a> - <a href='?page=rules'>Rules</a> - <a href='?page=osmstaff'>Staff</a> - <a class='fancybox' href='?page=main&method=fancy&show=contact_form'>Contact</a><a href='?page=bugs'> - Bug reports</a><br/>Copyright &copy; 2011 - 2019 OneSkill Manager<br/>
+        <?php $this->insert('Partials/_footer') ?>
     </div>
 </div>
 
-<script src="https://kit.fontawesome.com/0466ae457f.js" crossorigin="anonymous"></script>
-<script src="/assets/js/index.min.js"></script>
-<!--<script type="text/javascript" src="/assets/new-src/javascripts/jquery.js"></script>-->
-<!--<script type="text/javascript" src="/assets/new-src/javascripts/jquery-ui.js"></script>-->
-<!--<script type="text/javascript" src="/assets/new-src/javascripts/checkboxes.js"></script>-->
-<!--<script type="text/javascript" src="/assets/new-src/javascripts/main.js?1"></script>-->
-<!--<script type="text/javascript" src="/assets/new-src/javascripts/sortable.js"></script>-->
-<!--<script type="text/javascript" src="/assets/new-src/javascripts/fancybox.js"></script>-->
-<!--<script type="text/javascript" src="/assets/new-src/javascripts/scripts.js"></script>-->
-
+<script src="/dist/js/main.min.js"></script>
 </body>
 </html>

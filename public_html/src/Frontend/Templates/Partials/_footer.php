@@ -34,7 +34,7 @@ foreach ($links as $link) {
     $linkHtmls[] = Html::a($link['text'], $link['href']);
 }
 
-echo implode(' - ', $linkHtmls);
+echo Html::tag('div', implode(' - ', $linkHtmls), ['class' => 'links']);
 
 ?>
 <div class="copyrights">

@@ -20,7 +20,7 @@ $vueApp = VueApp::get();
 </head>
 <body>
 <div id="app">
-    <div id='logo_wrap'>
+    <div class="width_wrap" id="logo_wrap">
         <div id='topMenu'></div>
         <a href='/news'><img src='/assets/images/html/logo.png' alt=''/></a>
     </div>

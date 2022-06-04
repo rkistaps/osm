@@ -7,7 +7,6 @@ html {
 }
 
 body {
-    background-color: #f0f0f0;
     background: url("/assets/images/html/fons.png") no-repeat center top #f0f0f0;
     margin: 0px;
     padding: 0px;
@@ -272,21 +271,29 @@ div.sep {
 
 .width_wrap {
     margin: auto;
-    width: 990px;
+    width: 95%;
 }
-
-#fb .width_wrap > .top {
-    width: 735px;
-    background: url("/assets/images/html/fb/fb_shadow_top.png");
-    height: 20px;
-}
-
 
 .width_wrap > .top {
-    background: url("/assets/images/html/shadow_top.png");
+    /*background: url("/assets/images/html/shadow_top.png");*/
+    background-color: rgba(255, 255, 255, 0.35);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     width: 100%;
     height: 20px;
     position: relative;
+}
+
+.width_wrap > .bottom {
+    background-color: rgba(255, 255, 255, 0.35);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 990px;
+    height: 20px;
+}
+.width_wrap > .middle {
+    background-color: rgba(255, 255, 255, 0.35);
+    padding: 0 20px;
 }
 
 #newMessages {
@@ -312,38 +319,10 @@ div.sep {
     border-top-right-radius: 10px;
 }
 
-.width_wrap > .bottom {
-    background: url("/assets/images/html/shadow_bottom.png");
-    width: 990px;
-    height: 20px;
-}
-
-#fb .width_wrap > .middle {
-    width: 744px;
-    background: url("/assets/images/html/fb/fb_shadow.png");
-    padding: 0px 8px;
-}
-
-#fb #footer {
-    width: 760px;
-}
-
-
-body#fb {
-    overflow-x: hidden;
-}
-
-
-.width_wrap > .middle {
-    background: url("/assets/images/html/shadow.png");
-    padding: 0 20px;
-}
-
 #logo_wrap {
-    width: 990px;
-    margin: auto;
     height: 167px;
     position: relative;
+    padding: 10px 0px;
 }
 
 #logo_wrap > a {
@@ -354,22 +333,22 @@ body#fb {
 #head {
     background: white;
     height: 258px;
-    width: 950px;
+    width: 100%;
     position: relative;
-    background: url("/assets/images/html/headbg.png");
+    /*background: url("/assets/images/html/headbg.png") no-repeat center center;*/
+    border: 8px solid white;
+    background: radial-gradient(circle at center, #5cac04, #4c9404, #438004);
 }
 
 #head .tools {
     position: absolute;
     left: 245px;
-    top: 9px;
     z-index: 5;
 }
 
 #head .overlay {
     position: absolute;
     left: 200px;
-    top: 9px;
     z-index: 3;
 }
 
@@ -377,7 +356,7 @@ body#fb {
     position: absolute;
     z-index: 3;
     right: 40px;
-    top: 25px;
+    top: 15px;
     width: 352px;
 }
 
@@ -959,14 +938,8 @@ body#fb {
     float: left;
 }
 
-
-#fb #footer {
-    background: url("/assets/images/html/fb/fb_footer.png");
-}
-
-
 #footer {
-    background: url("/assets/images/html/footer.png");
+    background: radial-gradient(circle at center, #5cac04, #4c9404, #438004);
     height: 60px;
     width: 100%;
     margin-bottom: 35px;
@@ -974,6 +947,8 @@ body#fb {
     color: white;
     font: 14px Arial;
     padding: 10px 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 #footer a {
@@ -1754,8 +1729,6 @@ ul.menu li:hover {
     height: 240px;
     background-repeat: no-repeat;
     position: absolute;
-    left: 9px;
-    top: 9px;
     z-index: 4;
 }
 
