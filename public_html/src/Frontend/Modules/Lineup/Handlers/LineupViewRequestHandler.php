@@ -6,6 +6,7 @@ namespace OSM\Frontend\Modules\Lineup\Handlers;
 
 use OSM\Core\Handlers\AbstractRequestHandler;
 use OSM\Core\Helpers\ArrayHelper;
+use OSM\Core\Repositories\CountryRepository;
 use OSM\Core\Repositories\PlayerRepository;
 use OSM\Core\Repositories\TeamLineupPlayerRepository;
 use OSM\Core\Translations\Structures\Domains;
@@ -62,6 +63,7 @@ class LineupViewRequestHandler extends AbstractRequestHandler implements Request
 
         return $this->render('lineup', [
             'lineup' => $lineup,
+            'countries' => $this->genericFactory->get(CountryRepository::class)->findForPlayers($players),
             'lineupPlayers' => $lineupPlayers,
             'team' => $team,
             'players' => $players,

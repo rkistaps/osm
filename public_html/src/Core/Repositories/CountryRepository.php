@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace OSM\Core\Repositories;
 
 use OSM\Core\Collections\CountryCollection;
+use OSM\Core\Collections\PlayerCollection;
 use OSM\Core\Models\Country;
 
 /**
  * @method Country findOne(array $condition = [])
+ * @method CountryCollection findAll(array $condition = [])
  * @method Country findById(int $id)
  */
 class CountryRepository extends AbstractModelRepository
@@ -31,5 +33,12 @@ class CountryRepository extends AbstractModelRepository
     public function findByName(string $name): ?Country
     {
         return $this->findOne(['name' => $name]);
+    }
+
+    public function findForPlayers(PlayerCollection $playerCollection): CountryCollection
+    {
+        $countryIds = $playerCollection->getCountryIds();
+
+        return $this->findAll(['id' => $countryIds]);
     }
 }

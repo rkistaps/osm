@@ -12,9 +12,19 @@ use OSM\Core\Models\User;
 
 class LinkHelper
 {
+    public static function getCountryLink(Country $country): string
+    {
+        return '/countries/' . $country->id;
+    }
+
+    public static function countryWithContent(Country $country, string $content, array $options = []): string
+    {
+        return Html::a($content, self::getCountryLink($country), $options);
+    }
+
     public static function country(Country $country, array $options = []): string
     {
-        return Html::a($country->name, '/countries/' . $country->id, $options);
+        return Html::a($country->name, self::getCountryLink($country), $options);
     }
 
     public static function user(User $user, array $options = []): string

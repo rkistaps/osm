@@ -86,4 +86,9 @@ class Player extends AbstractModel
     {
         return $this->position === $position;
     }
+
+    public function isInjured(): bool
+    {
+        return $this->injuryDays > 0;
+    }
 }

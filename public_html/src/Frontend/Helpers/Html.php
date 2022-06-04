@@ -4,7 +4,7 @@ namespace OSM\Frontend\Helpers;
 
 class Html
 {
-    protected static array $selfClosingTags = ['input'];
+    protected static array $selfClosingTags = ['input', 'img'];
 
     public static function openTag(string $tag, array $options = []): string
     {
@@ -16,7 +16,7 @@ class Html
         return '</' . $tag . '>';
     }
 
-    public static function tag(string $tag, string $content = '', array $options = []): string
+    public static function tag(string $tag, ?string $content = '', array $options = []): string
     {
         $result = self::openTag($tag, $options);
 
@@ -109,6 +109,13 @@ class Html
     {
         $options['href'] = $options['href'] ?? $href;
         return self::tag('a', $name, $options);
+    }
+
+    public static function img(string $source, array $options = []): string
+    {
+        $options['src'] = $source;
+
+        return self::tag('img', null, $options);
     }
 
     public static function buildAttributes(array $options): string

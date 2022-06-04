@@ -8,6 +8,7 @@ use OSM\Core\Models\TeamLineup;
 use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Helpers\AssetManager;
 use OSM\Frontend\Helpers\BoxHelper;
+use OSM\Frontend\Helpers\FlagHelper;
 use OSM\Frontend\Helpers\Html;
 use OSM\Frontend\Helpers\LinkHelper;
 use OSM\Frontend\Helpers\TemplateHelper;
@@ -23,6 +24,7 @@ $assetManager->registerCssFile('/assets/new-src/css/players.css');
 /** @var TeamLineup $lineup */
 /** @var TeamLineupPlayerCollection $lineupPlayers */
 /** @var \OSM\Core\Collections\PlayerCollection $players */
+/** @var \OSM\Core\Collections\CountryCollection $countries */
 /** @var \OSM\Core\Factories\GenericFactory $factory */
 
 $selectedPlayerIds = $postPlayerIds ?? $lineupPlayers->getPlayerIds();
@@ -44,6 +46,7 @@ $selectedPlayerIds = $postPlayerIds ?? $lineupPlayers->getPlayerIds();
     <?php foreach ($players->all() as $player) { ?>
         <?php
             $isInLineup = in_array($player->id, $selectedPlayerIds);
+            $country = $countries->getForPlayer($player);
         ?>
         <tr class="<?= $isInLineup ? 'lineup' : '' ?> player">
             <td class="center"><?php echo Html::checkbox('players[]', $player->id, $isInLineup) ?></td>
@@ -58,7 +61,7 @@ $selectedPlayerIds = $postPlayerIds ?? $lineupPlayers->getPlayerIds();
                     <div class='text'><?=$player->energy?>%</div>
                 </div>
             </td>
-            <td><?php echo $player->countryId ?></td>
+            <td class="center"><?php echo FlagHelper::countryFlagLinkSmall($country, ['flagOptions' => ['class' => 'country']]) ?></td>
         </tr>
     <?php } ?>
 </table>
