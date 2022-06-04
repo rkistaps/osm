@@ -66,7 +66,10 @@ $selectedPlayerIds = $postPlayerIds ?? $lineupPlayers->getPlayerIds();
         </tr>
     <?php } ?>
 </table>
-<?php echo Html::submitButton(_d(Domains::DOMAIN_FRONTEND, 'Save lineup'), 'save-lineup') ?>
+<?php echo Html::div(
+    Html::submitButton(_d(Domains::DOMAIN_FRONTEND, 'Save lineup'), 'save-lineup'),
+    ['class' => 'center save-lineup']
+) ?>
 <?php echo Html::endForm() ?>
 <?php echo BoxHelper::end() ?>
 

@@ -88,7 +88,6 @@ input.narrow {
     font-weight: bold;
 }
 
-
 input[type='submit'], .button {
     display: inline-block;
     outline: none;
@@ -96,7 +95,7 @@ input[type='submit'], .button {
     text-align: center;
     text-decoration: none;
     font: 16px/38px "OpenSansRegular";
-    padding: 0 26px;
+    padding: 0 20px;
     border-radius: 2px;
     background: #59a200;
     color: #D9EEF7;

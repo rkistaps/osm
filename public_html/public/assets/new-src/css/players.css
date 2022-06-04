@@ -20,6 +20,10 @@
     /*font-size: 18px;*/
 }
 
+.save-lineup{
+    margin: 10px 0px;
+}
+
 #LineupTable .position > div
 {
     text-align: center;

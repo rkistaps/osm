@@ -111,6 +111,11 @@ class Html
         return self::tag('a', $name, $options);
     }
 
+    public static function div(string $content, array $options = []): string
+    {
+        return self::tag('div', $content, $options);
+    }
+
     public static function img(string $source, array $options = []): string
     {
         $options['src'] = $source;
