@@ -1,10 +1,57 @@
-#lineup_table{
+#LineupTable{
   width: 100%;
 }
 
-#lineup_table td{
+#LineupTable td{
   padding: 4px 0px;
 }
+
+#LineupTable .skill > div
+{
+    height: 35px;
+    width: 35px;
+    background-color: #59a200;
+    border-radius: 50%;
+    display: inline-block;
+    color: white;
+    margin: auto;
+    font-weight: bold;
+    line-height: 35px;
+    /*font-size: 18px;*/
+}
+
+.save-lineup{
+    margin: 10px 0px;
+}
+
+#LineupTable .position > div
+{
+    text-align: center;
+    height: 25px;
+    width: 25px;
+    background-color: #59a200;
+    border-radius: 50%;
+    display: inline-block;
+    color: white;
+    margin: auto;
+    line-height: 25px;
+}
+
+#LineupTable .position.pos-F > div
+{
+    background-color: #8b0000;
+}
+
+#LineupTable .position.pos-M > div
+{
+    background-color: #008000;
+}
+
+#LineupTable .position.pos-D > div
+{
+    background-color: #0000FF;
+}
+
 
 th.viewplayer,th a{
 	font-size:15px;

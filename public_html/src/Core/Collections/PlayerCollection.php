@@ -44,4 +44,9 @@ class PlayerCollection extends AbstractModelCollection
 
         return $collection;
     }
+
+    public function getCountryIds(): array
+    {
+        return $this->map(fn(Player $player) => $player->countryId)->unique()->all();
+    }
 }
