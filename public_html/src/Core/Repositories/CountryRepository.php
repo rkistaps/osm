@@ -39,6 +39,10 @@ class CountryRepository extends AbstractModelRepository
     {
         $countryIds = $playerCollection->getCountryIds();
 
+        if (empty($countryIds)) {
+            return new CountryCollection();
+        }
+
         return $this->findAll(['id' => $countryIds]);
     }
 }
