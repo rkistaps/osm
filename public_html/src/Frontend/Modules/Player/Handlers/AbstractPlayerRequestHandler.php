@@ -31,7 +31,7 @@ abstract class AbstractPlayerRequestHandler extends AbstractRequestHandler imple
         $player = $this->genericFactory->get(PlayerRepository::class)->findById($playerId);
 
         if (!$player) {
-            throw new HttpNotFoundException(_d(Domains::DOMAIN_FRONTEND, 'Team not found'));
+            throw new HttpNotFoundException(_d(Domains::DOMAIN_FRONTEND, 'Player not found'));
         }
 
         $this->player = $player;
