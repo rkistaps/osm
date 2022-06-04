@@ -42,8 +42,8 @@ abstract class AbstractPlayerRequestHandler extends AbstractRequestHandler imple
         return $player;
     }
 
-    public function isOwner(ServerRequestInterface $request): bool
+    public function isOwner(Player $player, ServerRequestInterface $request): bool
     {
-        return $this->getPlayer($request)->teamId === $request->getAttribute('active-team-id');
+        return $player->teamId === $request->getAttribute('active-team-id');
     }
 }
