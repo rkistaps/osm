@@ -14,7 +14,7 @@ class PlayerViewRequestHandler extends AbstractPlayerRequestHandler implements R
     {
         $player = $this->getPlayer($request);
 
-        return $this->render('/Players/index', [
+        return $this->render('index', [
             'player' => $player,
             'isOwner' => $this->isOwner($player, $request),
         ]);
