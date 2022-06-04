@@ -16,7 +16,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 abstract class AbstractPlayerRequestHandler extends AbstractRequestHandler implements
     RequestHandlerInterface
 {
-    protected const TEMPLATE_PATH = '/Players';
+    protected const TEMPLATE_PATH = '/Player';
 
     abstract public function handle(ServerRequestInterface $request): ResponseInterface;
 

@@ -90,7 +90,7 @@ We decided to place National and U18 team players from bot or inactive teams in 
 
 <p>We had a discussion about those things too. As result we decided to decrease Cup prizes for first season. Detailed information will be later in our <a target='_blank' href='/forum/'>forum</a>.</p>
 
-<h2>Players speciality</h2>
+<h2>Player speciality</h2>
 <p>After this weeks Weekly updates, you will be able to pull five more youths. The new thing is that there is possibility, that they will have speciality. This is new feature and will take effect in game engine only after this season. The specialities will be: tackling, passing, finishing. More information you will find in our <a href='http://www.oneskillmanager.com/forum/index.php?a=vtopic&t=210'>forum</a>.</p>
 
 <h2>Upcoming Season</h2>
