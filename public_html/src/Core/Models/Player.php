@@ -61,4 +61,29 @@ class Player extends AbstractModel
     {
         return $this->name . ' ' . $this->surname;
     }
+
+    public function isGoalkeeper(): bool
+    {
+        return $this->isPosition(self::POSITION_G);
+    }
+
+    public function isDefender(): bool
+    {
+        return $this->isPosition(self::POSITION_D);
+    }
+
+    public function isMidfielder(): bool
+    {
+        return $this->isPosition(self::POSITION_M);
+    }
+
+    public function isForward(): bool
+    {
+        return $this->isPosition(self::POSITION_F);
+    }
+
+    public function isPosition(string $position): bool
+    {
+        return $this->position === $position;
+    }
 }

@@ -10,6 +10,7 @@ use OSM\Core\Repositories\PlayerRepository;
 use OSM\Core\Repositories\TeamLineupPlayerRepository;
 use OSM\Core\Translations\Structures\Domains;
 use OSM\Frontend\Modules\Lineup\Exceptions\LineupValidationException;
+use OSM\Frontend\Modules\Lineup\Helpers\LineupHelper;
 use OSM\Frontend\Modules\Lineup\Services\LineupSavingService;
 use OSM\Frontend\Modules\Lineup\Services\TeamLineupSessionService;
 use Psr\Http\Message\ResponseInterface;
@@ -39,7 +40,11 @@ class LineupViewRequestHandler extends AbstractRequestHandler implements Request
         $team = $this->getActiveTeam($request);
         $lineup = $this->lineupSessionService->getOrSet($team);
         $lineupPlayers = $this->lineupPlayerRepository->findByLineupId($lineup->id);
-        $players = $this->playerRepository->findSquadPlayersByTeam($team->id);
+        $players = $this
+            ->playerRepository
+            ->findSquadPlayersByTeam($team->id);
+
+        $players = LineupHelper::sortPlayerCollection($players);
 
         if ($this->hasPostParam('save-lineup', $request)) {
             try {
