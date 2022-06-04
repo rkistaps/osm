@@ -16,8 +16,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 abstract class AbstractPlayerRequestHandler extends AbstractRequestHandler implements
     RequestHandlerInterface
 {
-    private ?Player $player = null;
-
     abstract public function handle(ServerRequestInterface $request): ResponseInterface;
 
     /**
@@ -25,10 +23,6 @@ abstract class AbstractPlayerRequestHandler extends AbstractRequestHandler imple
      */
     protected function getPlayer(ServerRequestInterface $request): ?Player
     {
-        if ($this->player) {
-            return $this->player;
-        }
-
         $playerId = (int)$request->getAttribute('id');
 
         $player = $this->genericFactory->get(PlayerRepository::class)->findById($playerId);
@@ -36,8 +30,6 @@ abstract class AbstractPlayerRequestHandler extends AbstractRequestHandler imple
         if (!$player) {
             throw new HttpNotFoundException(_d(Domains::DOMAIN_FRONTEND, 'Player not found'));
         }
-
-        $this->player = $player;
 
         return $player;
     }
