@@ -79,13 +79,13 @@ th.viewplayer,th a{
 }
 
 div.skill{
-	width:103px;
-  height: 103px;
-	text-align:center;
-	margin: 20px auto 10px;
-  font: bold 38px/103px "Open Sans";
-	color: white;
-  background: url("../img/html/skill_bg.png");
+    width: 103px;
+    height: 103px;
+    text-align: center;
+    margin: 20px auto 10px;
+    font: bold 38px/103px "Open Sans";
+    color: white;
+  background: url("/assets/images/html/skill_bg.png");
 }
 
 .logo{

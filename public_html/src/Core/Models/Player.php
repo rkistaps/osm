@@ -25,21 +25,6 @@ class Player extends AbstractModel
     public const SPECIALITY_WEAK = 'weak';
     public const SPECIALITY_IRONMAN = 'ironman';
 
-    public const AVAILABLE_CHARACTERS = [
-        self::CHARACTER_NONE,
-        self::CHARACTER_HARD_WORKING,
-        self::CHARACTER_LAZY_WORKING,
-        self::SPECIALITY_IRONMAN,
-        self::SPECIALITY_WEAK,
-    ];
-
-    public const AVAILABLE_SPECIALITIES = [
-        self::SPECIALITY_NONE,
-        self::SPECIALITY_PASSING,
-        self::SPECIALITY_SHOOTING,
-        self::SPECIALITY_TACKLING,
-    ];
-
     public string $name;
     public string $surname;
     public int $age;
@@ -60,6 +45,52 @@ class Player extends AbstractModel
     public function getFullName(): string
     {
         return $this->name . ' ' . $this->surname;
+    }
+
+    public static function getAvailableSpecialities(): array
+    {
+        return [
+            self::SPECIALITY_NONE => _f('None'),
+            self::SPECIALITY_PASSING => _f('Passing'),
+            self::SPECIALITY_SHOOTING => _f('Shooting'),
+            self::SPECIALITY_TACKLING => _f('Tackling'),
+            self::SPECIALITY_IRONMAN => _f('Ironman'),
+            self::SPECIALITY_WEAK => _f('Weak'),
+         ];
+    }
+
+    public function getSpecialityLabel(): string
+    {
+        return self::getAvailableSpecialities()[$this->speciality] ?? _f('None');
+    }
+
+    public static function getAvailableCharacters(): array
+    {
+        return [
+            self::CHARACTER_NONE => _f('None'),
+            self::CHARACTER_HARD_WORKING => _f('Hard working'),
+            self::CHARACTER_LAZY_WORKING => _f('Lazy working'),
+        ];
+    }
+
+    public static function getAvailablePositions(): array
+    {
+        return [
+            self::POSITION_G => _f('Goalkeeper'),
+            self::POSITION_D => _f('Defender'),
+            self::POSITION_M => _f('Midfielder'),
+            self::POSITION_F => _f('Forward'),
+        ];
+    }
+
+    public function getPositionLabel(): string
+    {
+        return self::getAvailablePositions()[$this->position];
+    }
+
+    public function getCharacterLabel():string
+    {
+        return self::getAvailableCharacters()[$this->character] ?? _f('None');
     }
 
     public function isGoalkeeper(): bool

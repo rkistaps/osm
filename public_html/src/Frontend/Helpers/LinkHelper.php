@@ -27,6 +27,23 @@ class LinkHelper
         return Html::a($country->name, self::getCountryLink($country), $options);
     }
 
+    public static function countryFlag(Country $country, array $options = []): string
+    {
+        $flag = FlagHelper::countryFlagSmall($country, $options);
+
+        return self::countryWithContent($country, $flag, $options);
+    }
+
+    public static function countryBoth(Country $country, array $options = []): string
+    {
+        $flagOptions = $options['flag_options'] ?? [];
+        if ($flagOptions) {
+            unset($options['flag_options']);
+        }
+
+        return self::countryFlag($country, $flagOptions) . ' ' . self::country($country, $options);
+    }
+
     public static function user(User $user, array $options = []): string
     {
         return Html::a($user->username, '/users/' . $user->id, $options);
