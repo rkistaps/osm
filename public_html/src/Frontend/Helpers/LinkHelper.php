@@ -34,13 +34,8 @@ class LinkHelper
         return self::countryWithContent($country, $flag, $options);
     }
 
-    public static function countryBoth(Country $country, array $options = []): string
+    public static function countryBoth(Country $country, array $options = [], array $flagOptions = []): string
     {
-        $flagOptions = $options['flag_options'] ?? [];
-        if ($flagOptions) {
-            unset($options['flag_options']);
-        }
-
         return self::countryFlag($country, $flagOptions) . ' ' . self::country($country, $options);
     }
 

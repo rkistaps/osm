@@ -16,4 +16,19 @@ class PlayerFace extends AbstractModel
     public int $mouthType;
     public int $mouthColor;
     public int $shirtColor;
+
+    public function getHash(): string
+    {
+        $parts = [];
+        $parts[] = $this->skinTone;
+        $parts[] = $this->facialHairType;
+        $parts[] = $this->hairType;
+        $parts[] = $this->hairColor;
+        $parts[] = $this->eyeType;
+        $parts[] = $this->eyeColor;
+        $parts[] = $this->mouthType;
+        $parts[] = $this->shirtColor;
+
+        return md5(implode("|", $parts));
+    }
 }

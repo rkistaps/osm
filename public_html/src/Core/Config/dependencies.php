@@ -1,6 +1,7 @@
 <?php
 
 use AutoMapperPlus\AutoMapper;
+use Intervention\Image\ImageManager;
 use League\Flysystem\Filesystem;
 use League\Plates\Engine;
 use Opis\Database\Database;
@@ -38,4 +39,5 @@ return [
     ModelDataHydratorInterface::class => fn(ContainerInterface $container) => $container->get(ModelDataHydratorService::class),
     OSMState::class => fn(OSMStateFactory $factory) => $factory->build(),
     Filesystem::class => fn(FilesystemFactory $factory) => $factory->build(),
+    ImageManager::class => fn() => new ImageManager(['driver' => 'imagick']),
 ];
