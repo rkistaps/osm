@@ -37,7 +37,7 @@ $title = $player->getFullName() . ' (#' . $player->id . ')';
         BoxHelper::start($title, ['id' => 'player']); ?>
         <div class="row">
             <div class="col-5">
-                <?= Html::img($face->imageUrl)?>
+                <?= Html::img($face->imageUrl, ['class' => 'face'])?>
             </div>
             <div class="col-7">
                 <div class="row">
