@@ -7,6 +7,7 @@ namespace OSM\Core\Repositories;
 use OSM\Core\Collections\CountryCollection;
 use OSM\Core\Collections\PlayerCollection;
 use OSM\Core\Models\Country;
+use OSM\Core\Models\Player;
 
 /**
  * @method Country findOne(array $condition = [])
@@ -44,5 +45,10 @@ class CountryRepository extends AbstractModelRepository
         }
 
         return $this->findAll(['id' => $countryIds]);
+    }
+
+    public function findForPlayer(Player $player): ?Country
+    {
+        return $this->findById($player->countryId);
     }
 }

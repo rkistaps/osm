@@ -208,19 +208,6 @@ blockquote {
     right: -160px;
 }
 
-.face {
-    position: relative;
-    width: 200px;
-    height: 200px;
-}
-
-.face img {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 100%;
-}
-
 table {
     border-collapse: collapse;
 }

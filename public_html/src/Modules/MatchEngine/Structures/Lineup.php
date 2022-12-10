@@ -51,9 +51,40 @@ class Lineup
         return $this->passingStyle === $passingStyle;
     }
 
+    public function isPassingLong(): bool
+    {
+        return $this->isPassingStyle(self::PASSING_LONG);
+    }
+
+    public function isPassingShort(): bool
+    {
+        return $this->isPassingStyle(self::PASSING_SHORT);
+    }
+
+    public function isPassingMixed():bool
+    {
+        $this->isPassingStyle = $this->isPassingStyle(self::PASSING_MIXED);
+        return $this->isPassingStyle;
+    }
+
     public function isDefensiveLine(string $defensiveLine): bool
     {
         return $this->defensiveLine === $defensiveLine;
+    }
+
+    public function isDefensiveLineLow(): bool
+    {
+        return $this->defensiveLine === self::DEFENSIVE_LINE_LOW;
+    }
+
+    public function isDefensiveLineHigh(): bool
+    {
+        return $this->defensiveLine === self::DEFENSIVE_LINE_HIGH;
+    }
+
+    public function isDefensiveLineNormal(): bool
+    {
+        return $this->defensiveLine === self::DEFENSIVE_LINE_NORMAL;
     }
 
     /**

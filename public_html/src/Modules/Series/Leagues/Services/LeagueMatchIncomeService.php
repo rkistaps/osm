@@ -44,7 +44,7 @@ class LeagueMatchIncomeService
             $homeTeam = $homeTeams->getById($match->homeTeamId);
 
             // do not exceed stadium size
-            $attendance = $attendance > $homeTeam->stadiumSize ? $homeTeam->stadiumSize : $attendance;
+            $attendance = min($attendance, $homeTeam->stadiumSize);
             $income = $attendance * $this->getTicketPriceForMatch($match);
 
             $this->financialService->depositFunds($income, FinanceLog::EVENT_MATCH_INCOME, $homeTeam, true);

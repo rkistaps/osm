@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace OSM\Frontend\Modules\Teams\Handlers;
 
 use OSM\Core\Handlers\AbstractRequestHandler;
-use OSM\Core\Models\Team;
-use OSM\Core\Repositories\TeamRepository;
-use OSM\Frontend\Exceptions\Http\HttpNotFoundException;
 use OSM\Frontend\Modules\Teams\Factories\TeamViewModelFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

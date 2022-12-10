@@ -79,13 +79,14 @@ th.viewplayer,th a{
 }
 
 div.skill{
-	width:103px;
-  height: 103px;
-	text-align:center;
-	margin: 20px auto 10px;
-  font: bold 38px/103px "Open Sans";
-	color: white;
-  background: url("../img/html/skill_bg.png");
+    text-align: center;
+    margin: 20px auto 10px;
+    font: bold 64px/200px "OpenSansBold";
+    color: white;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
 }
 
 .logo{
@@ -121,4 +122,8 @@ tr.lineup{
 .tactics select{
   width: 75px;
   overflow: hidden;
+}
+
+img.face{
+    width: 100%;
 }

@@ -11,13 +11,13 @@ class ArrayCacheFactory
     /**
      * @var ArrayCache[]
      */
-    private array $caches = [];
+    private static array $caches = [];
 
-    public function getForClass(string $classname): ArrayCache
+    public static function getForClass(string $classname): ArrayCache
     {
-        $cache = $this->caches[$classname] ?? new ArrayCache();
+        $cache = self::$caches[$classname] ?? new ArrayCache();
 
-        $this->caches[$classname] = $cache;
+        self::$caches[$classname] = $cache;
 
         return $cache;
     }

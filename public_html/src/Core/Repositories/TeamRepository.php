@@ -6,6 +6,7 @@ namespace OSM\Core\Repositories;
 
 use OSM\Core\Collections\TeamCollection;
 use OSM\Core\Models\AbstractModel;
+use OSM\Core\Models\Player;
 use OSM\Core\Models\Team;
 use OSM\Core\Models\User;
 
@@ -66,5 +67,10 @@ class TeamRepository extends AbstractModelRepository
             'user_id' => $user->id,
             'is_default' => true,
         ]);
+    }
+
+    public function findForPlayer(Player $player): ?Team
+    {
+        return $this->findById($player->teamId);
     }
 }
