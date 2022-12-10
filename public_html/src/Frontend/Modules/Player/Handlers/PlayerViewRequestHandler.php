@@ -26,7 +26,6 @@ class PlayerViewRequestHandler extends AbstractPlayerRequestHandler implements R
         $team = $this->genericFactory->get(TeamRepository::class)->findForPlayer($player);
 
         $playerFace = $this->genericFactory->get(PlayerFaceRepository::class)->findForPlayer($player);
-
         $faceImage = $this->genericFactory->get(PlayerFaceImageCreationService::class)->getFaceImage($playerFace);
 
         return $this->render('index', [
