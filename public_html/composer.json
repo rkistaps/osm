@@ -15,7 +15,8 @@
     "nesbot/carbon": "^2.44",
     "mnito/round-robin": "^2.0",
     "league/flysystem": "^2.0",
-    "fakerphp/faker": "^1.19"
+    "fakerphp/faker": "^1.19",
+    "intervention/image": "^2.7"
   },
   "autoload": {
     "psr-4": {

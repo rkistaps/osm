@@ -8,9 +8,11 @@ use OSM\Core\Models\Player;
 use OSM\Core\Models\Team;
 use OSM\Frontend\Helpers\AssetManager;
 use OSM\Frontend\Helpers\BoxHelper;
+use OSM\Frontend\Helpers\Html;
 use OSM\Frontend\Helpers\LinkHelper;
 use OSM\Frontend\Helpers\PlayerHelper;
 use OSM\Frontend\Templates\LayoutTypes;
+use OSM\Modules\Players\Structures\PlayerFaceImage;
 
 $this->layout(LayoutTypes::TYPE_DEFAULT);
 
@@ -20,6 +22,7 @@ $assetManager->registerCssFile('/assets/new-src/css/players.css');
 
 /**
  * @var Player $player ;
+ * @var PlayerFaceImage $face
  * @var Team $team ;
  * @var Country $country ;
  * @var bool $isOwner ;
@@ -34,7 +37,7 @@ $title = $player->getFullName() . ' (#' . $player->id . ')';
         BoxHelper::start($title, ['id' => 'player']); ?>
         <div class="row">
             <div class="col-5">
-                <?= $this->fetch('/Player/_partials/face', ['player' => $player]); ?>
+                <?= Html::img($face->imageUrl, ['class' => 'face'])?>
             </div>
             <div class="col-7">
                 <div class="row">
@@ -54,7 +57,7 @@ $title = $player->getFullName() . ' (#' . $player->id . ')';
         <div class="row">
             <div class="col-6"><?= _f('Nationality') ?></div>
             <div class="col-6 right">
-                <?= LinkHelper::countryBoth($country, ['flag_options' => ['class' => 'country']]) ?>
+                <?= LinkHelper::countryBoth($country, [], ['class' => 'country']) ?>
             </div>
         </div>
         <div class="row">
