@@ -171,23 +171,23 @@ class MatchEngine implements MatchEngineInterface
 
     protected function getAdditionalAttacks(Lineup $at, Lineup $dt): int
     {
-        if ($at->isPassingStyle(Lineup::PASSING_MIXED) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_NORMAL)) {
+        if ($at->isPassingMixed() && $dt->isDefensiveLineNormal()) {
             return rand(0, 1);
-        } elseif ($at->isPassingStyle(Lineup::PASSING_LONG) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_NORMAL)) {
+        } elseif ($at->isPassingLong() && $dt->isDefensiveLineNormal()) {
             return rand(0, 2);
-        } elseif ($at->isPassingStyle(Lineup::PASSING_SHORT) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_NORMAL)) {
+        } elseif ($at->isPassingShort() && $dt->isDefensiveLineNormal()) {
             return rand(0, 2);
-        } elseif ($at->isPassingStyle(Lineup::PASSING_MIXED) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_HIGH)) {
+        } elseif ($at->isPassingMixed() && $dt->isDefensiveLineHigh()) {
             return rand(0, 2);
-        } elseif ($at->isPassingStyle(Lineup::PASSING_LONG) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_HIGH)) {
+        } elseif ($at->isPassingLong() && $dt->isDefensiveLineHigh()) {
             return rand(2, 4);
-        } elseif ($at->isPassingStyle(Lineup::PASSING_SHORT) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_HIGH)) {
+        } elseif ($at->isPassingShort() && $dt->isDefensiveLineHigh()) {
             return rand(0, 1);
-        } elseif ($at->isPassingStyle(Lineup::PASSING_MIXED) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_LOW)) {
+        } elseif ($at->isPassingMixed() && $dt->isDefensiveLineLow()) {
             return rand(0, 2);
-        } elseif ($at->isPassingStyle(Lineup::PASSING_LONG) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_LOW)) {
+        } elseif ($at->isPassingLong() && $dt->isDefensiveLineLow()) {
             return rand(0, 1);
-        } elseif ($at->isPassingStyle(Lineup::PASSING_SHORT) && $dt->isDefensiveLine(Lineup::DEFENSIVE_LINE_LOW)) {
+        } elseif ($at->isPassingShort() && $dt->isDefensiveLineLow()) {
             return rand(2, 4);
         }
 
@@ -248,9 +248,9 @@ class MatchEngine implements MatchEngineInterface
         $shootTypeHelperRand = rand(1, 100);
         if ($shootTypeHelperRand <= 10) { // 10% 2v1
             $config->attackHelper = $this->getAttackHelper($attackingTeam, $minute, $striker);
-        } elseif ($shootTypeHelperRand > 10 && $shootTypeHelperRand <= 20) { // 10% 1v2
+        } elseif ($shootTypeHelperRand <= 20) { // 10% 1v2
             $config->defenseHelper = $this->getDefenseHelper($attackingTeam, $minute);
-        } elseif ($shootTypeHelperRand > 20 && $shootTypeHelperRand <= 50) { // 30% 2v2
+        } elseif ($shootTypeHelperRand <= 50) { // 30% 2v2
             $config->attackHelper = $this->getAttackHelper($attackingTeam, $minute, $striker);
             $config->defenseHelper = $this->getDefenseHelper($attackingTeam, $minute);
         }
