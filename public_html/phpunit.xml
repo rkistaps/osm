@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpunit colors="true" bootstrap="tests/Bootstrap/bootstrap.php">
+    <php>
+        <ini name="xedbug.remote_enable" value="1" />
+        <ini name="xedbug.remote_autostart" value="1" />
+    </php>
     <testsuites>
         <testsuite name="Unit">
             <directory>tests</directory>
