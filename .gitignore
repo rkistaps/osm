@@ -6,3 +6,4 @@
 /public_html/public/dist/
 /public_html/src/Core/Config/config-local.php
 .idea
+/public_html/.phpunit.result.cache
