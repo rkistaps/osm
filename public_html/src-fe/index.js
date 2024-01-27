@@ -2,7 +2,14 @@
 
 import SimpleAjax from "./App/Core/SimpleAjax";
 
-const apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+const apiUrl = 'https://jsonplaceholder.typicode.com';
+
+const data = {
+    'some': 'cool',
+    'some2': 'coo2l',
+};
+
+console.log('coool');
 
 SimpleAjax.get(apiUrl)
     .then((data) => {
