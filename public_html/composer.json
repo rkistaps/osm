@@ -1,6 +1,6 @@
 {
   "require": {
-    "php": "^7.4",
+    "php": "^8.3",
     "ext-json": "*",
     "ext-gettext": "*",
     "rkistaps/the-app": "^v0.3.8.1",
