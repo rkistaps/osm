@@ -6,9 +6,6 @@ use OSM\Frontend\Components\SideMenu\SideMenuComponent;
 use OSM\Frontend\Components\SlideShow\SlideShowComponent;
 use OSM\Frontend\Components\System\System;
 use OSM\Frontend\Helpers\AssetManager;
-use OSM\Frontend\Helpers\Vue\VueApp;
-
-$vueApp = VueApp::get();
 
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
@@ -59,6 +56,6 @@ $vueApp = VueApp::get();
     const VueAppData = <?php echo json_encode($vueApp->getData())?>;
 </script>
 
-<script src="/dist/js/main.min.js"></script>
+<script src="/dist/js/index.bundle.js"></script>
 </body>
 </html>
