@@ -12,6 +12,7 @@ use OSM\Frontend\Modules\Site\Handlers\ErrorHandler;
 use OSM\Frontend\Routes\LineupRouteConfigurator;
 use OSM\Frontend\Routes\SiteRouteConfigurator;
 use OSM\Frontend\Routes\TeamRouteConfigurator;
+use OSM\Frontend\Routes\TrainingRouteConfigurator;
 
 return [
     'error_handler' => ErrorHandler::class,
@@ -28,6 +29,7 @@ return [
             SiteRouteConfigurator::class,
             TeamRouteConfigurator::class,
             LineupRouteConfigurator::class,
+            TrainingRouteConfigurator::class,
         ],
     ],
     'command' => [

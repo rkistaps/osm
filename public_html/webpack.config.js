@@ -1,59 +1,32 @@
+// webpack.config.js
 const path = require('path');
-const glob = require('glob');
-const {VueLoaderPlugin} = require('vue-loader');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    mode: 'production',
-    entry: glob.sync('./src-fe/entries/**.js').reduce(function (obj, el) {
-        obj[path.parse(el).name] = el;
-        return obj
-    }, {}),
-    output: {
-        path: path.resolve(__dirname, "public/dist/js/"),
-        filename: '[name].min.js',
-        publicPath: '/dist/js'
+    entry: {
+        index: './src-fe/index.js',
     },
-    devtool: 'source-map',
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'public/dist/js'),
+    },
     module: {
         rules: [
             {
-                test: /\.m?js$/,
-                exclude: /(node_modules|bower_components)/,
+                test: /\.js$/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            },
-            {
-                test: /\.(sa|sc|c)ss$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
+                        presets: ['@babel/preset-env'],
                     },
-                    'css-loader?url=false', 'sass-loader',
-                ],
+                },
             },
-            {
-                test: /\.vue$/,
-                use: 'vue-loader'
-            }
-        ]
+        ],
     },
-    resolve: {
-        extensions: ['.vue', '.js', '.scss'],
-        alias: {
-            'vue$': 'vue/dist/vue.esm.js'
-        }
+    devServer: {
+        static: path.resolve(__dirname, 'public/dist/js'),
+        compress: true,
+        hot: true,
+        port: 8080,
     },
-    plugins: [
-        // make sure to include the plugin for the magic
-        new VueLoaderPlugin(),
-        new MiniCssExtractPlugin({
-            filename: '[name].bundle.css',
-            chunkFilename: '[id].css',
-        }),
-    ]
 };

@@ -66,6 +66,6 @@ use OSM\Frontend\Components\LoginForm\LoginForm;
     </div>
 </div>
 
-<script src="/dist/js/main.min.js"></script>
+<script src="./dist/js/index.bundle.js"></script>
 </body>
 </html>
