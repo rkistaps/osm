@@ -52,10 +52,6 @@ use OSM\Frontend\Helpers\AssetManager;
 <?php echo AssetManager::get()->renderRegisteredAssets(); ?>
 <script src="https://kit.fontawesome.com/0466ae457f.js" crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-    const VueAppData = <?php echo json_encode($vueApp->getData())?>;
-</script>
-
 <script src="/dist/js/index.bundle.js"></script>
 </body>
 </html>
