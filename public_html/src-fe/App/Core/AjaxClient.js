@@ -1,4 +1,4 @@
-export default class SimpleAjax {
+export default class AjaxClient {
     static get(url) {
         return new Promise((resolve, reject) => {
             this.makeRequest(url, 'GET', null, resolve, reject);
